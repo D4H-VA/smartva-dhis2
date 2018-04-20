@@ -1,0 +1,698 @@
+{
+    "date": "2018-04-20T09:35:53.376",
+    "programStageDataElements": [
+        {
+            "allowFutureDate": false,
+            "allowProvidedElsewhere": false,
+            "compulsory": false,
+            "created": "2018-04-19T12:05:57.227",
+            "dataElement": {
+                "id": "NsmhGfGhFRO"
+            },
+            "displayInReports": false,
+            "id": "hGHimNEVl0B",
+            "lastUpdated": "2018-04-19T13:38:20.167",
+            "programStage": {
+                "id": "pQ8gaWKD3pi"
+            },
+            "renderOptionsAsRadio": false,
+            "sortOrder": 15
+        },
+        {
+            "allowFutureDate": false,
+            "allowProvidedElsewhere": false,
+            "compulsory": false,
+            "created": "2018-03-07T19:31:51.062",
+            "dataElement": {
+                "id": "NM9CFZmYq9S"
+            },
+            "displayInReports": false,
+            "id": "Z06nEMh81QI",
+            "lastUpdated": "2018-04-19T13:38:20.131",
+            "programStage": {
+                "id": "pQ8gaWKD3pi"
+            },
+            "renderOptionsAsRadio": false,
+            "sortOrder": 10
+        },
+        {
+            "allowFutureDate": false,
+            "allowProvidedElsewhere": false,
+            "compulsory": false,
+            "created": "2018-03-07T19:31:51.061",
+            "dataElement": {
+                "id": "EGuQ4jmbsjc"
+            },
+            "displayInReports": false,
+            "id": "FpqxQM7omwi",
+            "lastUpdated": "2018-04-19T13:38:20.106",
+            "programStage": {
+                "id": "pQ8gaWKD3pi"
+            },
+            "renderOptionsAsRadio": false,
+            "sortOrder": 8
+        },
+        {
+            "allowFutureDate": false,
+            "allowProvidedElsewhere": false,
+            "compulsory": false,
+            "created": "2018-04-19T12:05:57.202",
+            "dataElement": {
+                "id": "lFKqfDj9Rhk"
+            },
+            "displayInReports": false,
+            "id": "ZpZqAM6auxt",
+            "lastUpdated": "2018-04-19T13:38:20.146",
+            "programStage": {
+                "id": "pQ8gaWKD3pi"
+            },
+            "renderOptionsAsRadio": false,
+            "sortOrder": 14
+        },
+        {
+            "allowFutureDate": false,
+            "allowProvidedElsewhere": false,
+            "compulsory": false,
+            "created": "2018-04-13T18:28:19.538",
+            "dataElement": {
+                "id": "qQuck3LgWeY"
+            },
+            "displayInReports": false,
+            "id": "SJDYOgeOcd0",
+            "lastUpdated": "2018-04-19T13:38:20.143",
+            "programStage": {
+                "id": "pQ8gaWKD3pi"
+            },
+            "renderOptionsAsRadio": false,
+            "sortOrder": 13
+        },
+        {
+            "allowFutureDate": false,
+            "allowProvidedElsewhere": false,
+            "compulsory": false,
+            "created": "2018-03-07T19:31:51.062",
+            "dataElement": {
+                "id": "GVVDthqI2Sz"
+            },
+            "displayInReports": false,
+            "id": "n0OuHKb16je",
+            "lastUpdated": "2018-04-19T13:38:20.110",
+            "programStage": {
+                "id": "pQ8gaWKD3pi"
+            },
+            "renderOptionsAsRadio": false,
+            "sortOrder": 9
+        },
+        {
+            "allowFutureDate": false,
+            "allowProvidedElsewhere": false,
+            "compulsory": false,
+            "created": "2018-03-07T19:31:51.061",
+            "dataElement": {
+                "id": "uWGd9pUSgBK"
+            },
+            "displayInReports": false,
+            "id": "hdVaTMJvU7G",
+            "lastUpdated": "2018-04-19T13:38:20.103",
+            "programStage": {
+                "id": "pQ8gaWKD3pi"
+            },
+            "renderOptionsAsRadio": false,
+            "sortOrder": 7
+        },
+        {
+            "allowFutureDate": false,
+            "allowProvidedElsewhere": false,
+            "compulsory": false,
+            "created": "2018-03-07T19:31:51.061",
+            "dataElement": {
+                "id": "TSljgUq6Xfd"
+            },
+            "displayInReports": false,
+            "id": "gSwN8WmvLhe",
+            "lastUpdated": "2018-04-19T13:38:20.070",
+            "programStage": {
+                "id": "pQ8gaWKD3pi"
+            },
+            "renderOptionsAsRadio": false,
+            "sortOrder": 3
+        },
+        {
+            "allowFutureDate": false,
+            "allowProvidedElsewhere": false,
+            "compulsory": false,
+            "created": "2018-04-13T16:51:15.768",
+            "dataElement": {
+                "id": "iJzYZN4MIjD"
+            },
+            "displayInReports": false,
+            "id": "fhVIqHp8NlC",
+            "lastUpdated": "2018-04-19T13:38:20.092",
+            "programStage": {
+                "id": "pQ8gaWKD3pi"
+            },
+            "renderOptionsAsRadio": false,
+            "sortOrder": 5
+        },
+        {
+            "allowFutureDate": false,
+            "allowProvidedElsewhere": false,
+            "compulsory": false,
+            "created": "2018-03-07T19:31:51.062",
+            "dataElement": {
+                "id": "d52GkmmpLMM"
+            },
+            "displayInReports": false,
+            "id": "Tsmvqpdh9k7",
+            "lastUpdated": "2018-04-19T13:38:20.135",
+            "programStage": {
+                "id": "pQ8gaWKD3pi"
+            },
+            "renderOptionsAsRadio": false,
+            "sortOrder": 11
+        },
+        {
+            "allowFutureDate": false,
+            "allowProvidedElsewhere": false,
+            "compulsory": false,
+            "created": "2018-04-13T16:51:15.761",
+            "dataElement": {
+                "id": "ePYyHl0VfmB"
+            },
+            "displayInReports": false,
+            "id": "aSL24bcUgGP",
+            "lastUpdated": "2018-04-19T13:38:20.139",
+            "programStage": {
+                "id": "pQ8gaWKD3pi"
+            },
+            "renderOptionsAsRadio": false,
+            "sortOrder": 12
+        },
+        {
+            "allowFutureDate": false,
+            "allowProvidedElsewhere": false,
+            "compulsory": false,
+            "created": "2018-03-07T19:31:51.061",
+            "dataElement": {
+                "id": "VEGzj76HCEN"
+            },
+            "displayInReports": false,
+            "id": "pO3WWNxU6NN",
+            "lastUpdated": "2018-04-19T13:38:20.096",
+            "programStage": {
+                "id": "pQ8gaWKD3pi"
+            },
+            "renderOptionsAsRadio": false,
+            "sortOrder": 6
+        },
+        {
+            "allowFutureDate": false,
+            "allowProvidedElsewhere": false,
+            "compulsory": false,
+            "created": "2018-03-07T19:31:51.061",
+            "dataElement": {
+                "id": "t6O2A1gou0g"
+            },
+            "displayInReports": false,
+            "id": "mxZzEsvsdcF",
+            "lastUpdated": "2018-04-19T13:38:20.049",
+            "programStage": {
+                "id": "pQ8gaWKD3pi"
+            },
+            "renderOptionsAsRadio": false,
+            "sortOrder": 1
+        },
+        {
+            "allowFutureDate": false,
+            "allowProvidedElsewhere": false,
+            "compulsory": false,
+            "created": "2018-03-07T19:31:51.061",
+            "dataElement": {
+                "id": "L370gG5pb3P"
+            },
+            "displayInReports": false,
+            "id": "BHsFt3ZEb4K",
+            "lastUpdated": "2018-04-19T13:38:20.074",
+            "programStage": {
+                "id": "pQ8gaWKD3pi"
+            },
+            "renderOptionsAsRadio": false,
+            "sortOrder": 4
+        },
+        {
+            "allowFutureDate": false,
+            "allowProvidedElsewhere": false,
+            "compulsory": false,
+            "created": "2018-03-07T19:31:51.060",
+            "dataElement": {
+                "id": "C2OT4YktNGX"
+            },
+            "displayInReports": false,
+            "id": "kI1px9KVtbz",
+            "lastUpdated": "2018-04-19T13:38:20.042",
+            "programStage": {
+                "id": "pQ8gaWKD3pi"
+            },
+            "renderOptionsAsRadio": false,
+            "sortOrder": 0
+        },
+        {
+            "allowFutureDate": false,
+            "allowProvidedElsewhere": false,
+            "compulsory": false,
+            "created": "2018-03-07T19:31:51.061",
+            "dataElement": {
+                "id": "ih4W8j2jDAS"
+            },
+            "displayInReports": false,
+            "id": "rEzXh70gXju",
+            "lastUpdated": "2018-04-19T13:38:20.065",
+            "programStage": {
+                "id": "pQ8gaWKD3pi"
+            },
+            "renderOptionsAsRadio": false,
+            "sortOrder": 2
+        }
+    ],
+    "programStages": [
+        {
+            "allowGenerateNextVisit": false,
+            "attributeValues": [],
+            "autoGenerateEvent": true,
+            "blockEntryForm": false,
+            "captureCoordinates": false,
+            "created": "2018-03-07T19:31:51.060",
+            "displayGenerateEventBox": false,
+            "executionDateLabel": "Date of death",
+            "generatedByEnrollmentDate": false,
+            "hideDueDate": false,
+            "id": "pQ8gaWKD3pi",
+            "lastUpdated": "2018-04-19T13:38:20.185",
+            "minDaysFromStart": 0,
+            "name": "Verbal Autopsy",
+            "notificationTemplates": [],
+            "openAfterEnrollment": false,
+            "preGenerateUID": false,
+            "program": {
+                "id": "HPrJOsYuM1K"
+            },
+            "programStageDataElements": [
+                {
+                    "allowFutureDate": false,
+                    "allowProvidedElsewhere": false,
+                    "attributeValues": [],
+                    "compulsory": false,
+                    "created": "2018-03-07T19:31:51.060",
+                    "dataElement": {
+                        "id": "C2OT4YktNGX"
+                    },
+                    "displayInReports": false,
+                    "externalAccess": false,
+                    "id": "kI1px9KVtbz",
+                    "lastUpdated": "2018-04-19T13:38:20.042",
+                    "programStage": {
+                        "id": "pQ8gaWKD3pi"
+                    },
+                    "renderOptionsAsRadio": false,
+                    "sortOrder": 0,
+                    "translations": [],
+                    "userAccesses": [],
+                    "userGroupAccesses": []
+                },
+                {
+                    "allowFutureDate": false,
+                    "allowProvidedElsewhere": false,
+                    "attributeValues": [],
+                    "compulsory": false,
+                    "created": "2018-03-07T19:31:51.061",
+                    "dataElement": {
+                        "id": "t6O2A1gou0g"
+                    },
+                    "displayInReports": false,
+                    "externalAccess": false,
+                    "id": "mxZzEsvsdcF",
+                    "lastUpdated": "2018-04-19T13:38:20.049",
+                    "programStage": {
+                        "id": "pQ8gaWKD3pi"
+                    },
+                    "renderOptionsAsRadio": false,
+                    "sortOrder": 1,
+                    "translations": [],
+                    "userAccesses": [],
+                    "userGroupAccesses": []
+                },
+                {
+                    "allowFutureDate": false,
+                    "allowProvidedElsewhere": false,
+                    "attributeValues": [],
+                    "compulsory": false,
+                    "created": "2018-03-07T19:31:51.061",
+                    "dataElement": {
+                        "id": "ih4W8j2jDAS"
+                    },
+                    "displayInReports": false,
+                    "externalAccess": false,
+                    "id": "rEzXh70gXju",
+                    "lastUpdated": "2018-04-19T13:38:20.065",
+                    "programStage": {
+                        "id": "pQ8gaWKD3pi"
+                    },
+                    "renderOptionsAsRadio": false,
+                    "sortOrder": 2,
+                    "translations": [],
+                    "userAccesses": [],
+                    "userGroupAccesses": []
+                },
+                {
+                    "allowFutureDate": false,
+                    "allowProvidedElsewhere": false,
+                    "attributeValues": [],
+                    "compulsory": false,
+                    "created": "2018-03-07T19:31:51.061",
+                    "dataElement": {
+                        "id": "TSljgUq6Xfd"
+                    },
+                    "displayInReports": false,
+                    "externalAccess": false,
+                    "id": "gSwN8WmvLhe",
+                    "lastUpdated": "2018-04-19T13:38:20.070",
+                    "programStage": {
+                        "id": "pQ8gaWKD3pi"
+                    },
+                    "renderOptionsAsRadio": false,
+                    "sortOrder": 3,
+                    "translations": [],
+                    "userAccesses": [],
+                    "userGroupAccesses": []
+                },
+                {
+                    "allowFutureDate": false,
+                    "allowProvidedElsewhere": false,
+                    "attributeValues": [],
+                    "compulsory": false,
+                    "created": "2018-03-07T19:31:51.061",
+                    "dataElement": {
+                        "id": "L370gG5pb3P"
+                    },
+                    "displayInReports": false,
+                    "externalAccess": false,
+                    "id": "BHsFt3ZEb4K",
+                    "lastUpdated": "2018-04-19T13:38:20.074",
+                    "programStage": {
+                        "id": "pQ8gaWKD3pi"
+                    },
+                    "renderOptionsAsRadio": false,
+                    "sortOrder": 4,
+                    "translations": [],
+                    "userAccesses": [],
+                    "userGroupAccesses": []
+                },
+                {
+                    "allowFutureDate": false,
+                    "allowProvidedElsewhere": false,
+                    "attributeValues": [],
+                    "compulsory": false,
+                    "created": "2018-04-13T16:51:15.768",
+                    "dataElement": {
+                        "id": "iJzYZN4MIjD"
+                    },
+                    "displayInReports": false,
+                    "externalAccess": false,
+                    "id": "fhVIqHp8NlC",
+                    "lastUpdated": "2018-04-19T13:38:20.092",
+                    "programStage": {
+                        "id": "pQ8gaWKD3pi"
+                    },
+                    "renderOptionsAsRadio": false,
+                    "sortOrder": 5,
+                    "translations": [],
+                    "userAccesses": [],
+                    "userGroupAccesses": []
+                },
+                {
+                    "allowFutureDate": false,
+                    "allowProvidedElsewhere": false,
+                    "attributeValues": [],
+                    "compulsory": false,
+                    "created": "2018-03-07T19:31:51.061",
+                    "dataElement": {
+                        "id": "VEGzj76HCEN"
+                    },
+                    "displayInReports": false,
+                    "externalAccess": false,
+                    "id": "pO3WWNxU6NN",
+                    "lastUpdated": "2018-04-19T13:38:20.096",
+                    "programStage": {
+                        "id": "pQ8gaWKD3pi"
+                    },
+                    "renderOptionsAsRadio": false,
+                    "sortOrder": 6,
+                    "translations": [],
+                    "userAccesses": [],
+                    "userGroupAccesses": []
+                },
+                {
+                    "allowFutureDate": false,
+                    "allowProvidedElsewhere": false,
+                    "attributeValues": [],
+                    "compulsory": false,
+                    "created": "2018-03-07T19:31:51.061",
+                    "dataElement": {
+                        "id": "uWGd9pUSgBK"
+                    },
+                    "displayInReports": false,
+                    "externalAccess": false,
+                    "id": "hdVaTMJvU7G",
+                    "lastUpdated": "2018-04-19T13:38:20.103",
+                    "programStage": {
+                        "id": "pQ8gaWKD3pi"
+                    },
+                    "renderOptionsAsRadio": false,
+                    "sortOrder": 7,
+                    "translations": [],
+                    "userAccesses": [],
+                    "userGroupAccesses": []
+                },
+                {
+                    "allowFutureDate": false,
+                    "allowProvidedElsewhere": false,
+                    "attributeValues": [],
+                    "compulsory": false,
+                    "created": "2018-03-07T19:31:51.061",
+                    "dataElement": {
+                        "id": "EGuQ4jmbsjc"
+                    },
+                    "displayInReports": false,
+                    "externalAccess": false,
+                    "id": "FpqxQM7omwi",
+                    "lastUpdated": "2018-04-19T13:38:20.106",
+                    "programStage": {
+                        "id": "pQ8gaWKD3pi"
+                    },
+                    "renderOptionsAsRadio": false,
+                    "sortOrder": 8,
+                    "translations": [],
+                    "userAccesses": [],
+                    "userGroupAccesses": []
+                },
+                {
+                    "allowFutureDate": false,
+                    "allowProvidedElsewhere": false,
+                    "attributeValues": [],
+                    "compulsory": false,
+                    "created": "2018-03-07T19:31:51.062",
+                    "dataElement": {
+                        "id": "GVVDthqI2Sz"
+                    },
+                    "displayInReports": false,
+                    "externalAccess": false,
+                    "id": "n0OuHKb16je",
+                    "lastUpdated": "2018-04-19T13:38:20.110",
+                    "programStage": {
+                        "id": "pQ8gaWKD3pi"
+                    },
+                    "renderOptionsAsRadio": false,
+                    "sortOrder": 9,
+                    "translations": [],
+                    "userAccesses": [],
+                    "userGroupAccesses": []
+                },
+                {
+                    "allowFutureDate": false,
+                    "allowProvidedElsewhere": false,
+                    "attributeValues": [],
+                    "compulsory": false,
+                    "created": "2018-03-07T19:31:51.062",
+                    "dataElement": {
+                        "id": "NM9CFZmYq9S"
+                    },
+                    "displayInReports": false,
+                    "externalAccess": false,
+                    "id": "Z06nEMh81QI",
+                    "lastUpdated": "2018-04-19T13:38:20.131",
+                    "programStage": {
+                        "id": "pQ8gaWKD3pi"
+                    },
+                    "renderOptionsAsRadio": false,
+                    "sortOrder": 10,
+                    "translations": [],
+                    "userAccesses": [],
+                    "userGroupAccesses": []
+                },
+                {
+                    "allowFutureDate": false,
+                    "allowProvidedElsewhere": false,
+                    "attributeValues": [],
+                    "compulsory": false,
+                    "created": "2018-03-07T19:31:51.062",
+                    "dataElement": {
+                        "id": "d52GkmmpLMM"
+                    },
+                    "displayInReports": false,
+                    "externalAccess": false,
+                    "id": "Tsmvqpdh9k7",
+                    "lastUpdated": "2018-04-19T13:38:20.135",
+                    "programStage": {
+                        "id": "pQ8gaWKD3pi"
+                    },
+                    "renderOptionsAsRadio": false,
+                    "sortOrder": 11,
+                    "translations": [],
+                    "userAccesses": [],
+                    "userGroupAccesses": []
+                },
+                {
+                    "allowFutureDate": false,
+                    "allowProvidedElsewhere": false,
+                    "attributeValues": [],
+                    "compulsory": false,
+                    "created": "2018-04-13T16:51:15.761",
+                    "dataElement": {
+                        "id": "ePYyHl0VfmB"
+                    },
+                    "displayInReports": false,
+                    "externalAccess": false,
+                    "id": "aSL24bcUgGP",
+                    "lastUpdated": "2018-04-19T13:38:20.139",
+                    "programStage": {
+                        "id": "pQ8gaWKD3pi"
+                    },
+                    "renderOptionsAsRadio": false,
+                    "sortOrder": 12,
+                    "translations": [],
+                    "userAccesses": [],
+                    "userGroupAccesses": []
+                },
+                {
+                    "allowFutureDate": false,
+                    "allowProvidedElsewhere": false,
+                    "attributeValues": [],
+                    "compulsory": false,
+                    "created": "2018-04-13T18:28:19.538",
+                    "dataElement": {
+                        "id": "qQuck3LgWeY"
+                    },
+                    "displayInReports": false,
+                    "externalAccess": false,
+                    "id": "SJDYOgeOcd0",
+                    "lastUpdated": "2018-04-19T13:38:20.143",
+                    "programStage": {
+                        "id": "pQ8gaWKD3pi"
+                    },
+                    "renderOptionsAsRadio": false,
+                    "sortOrder": 13,
+                    "translations": [],
+                    "userAccesses": [],
+                    "userGroupAccesses": []
+                },
+                {
+                    "allowFutureDate": false,
+                    "allowProvidedElsewhere": false,
+                    "attributeValues": [],
+                    "compulsory": false,
+                    "created": "2018-04-19T12:05:57.202",
+                    "dataElement": {
+                        "id": "lFKqfDj9Rhk"
+                    },
+                    "displayInReports": false,
+                    "externalAccess": false,
+                    "id": "ZpZqAM6auxt",
+                    "lastUpdated": "2018-04-19T13:38:20.146",
+                    "programStage": {
+                        "id": "pQ8gaWKD3pi"
+                    },
+                    "renderOptionsAsRadio": false,
+                    "sortOrder": 14,
+                    "translations": [],
+                    "userAccesses": [],
+                    "userGroupAccesses": []
+                },
+                {
+                    "allowFutureDate": false,
+                    "allowProvidedElsewhere": false,
+                    "attributeValues": [],
+                    "compulsory": false,
+                    "created": "2018-04-19T12:05:57.227",
+                    "dataElement": {
+                        "id": "NsmhGfGhFRO"
+                    },
+                    "displayInReports": false,
+                    "externalAccess": false,
+                    "id": "hGHimNEVl0B",
+                    "lastUpdated": "2018-04-19T13:38:20.167",
+                    "programStage": {
+                        "id": "pQ8gaWKD3pi"
+                    },
+                    "renderOptionsAsRadio": false,
+                    "sortOrder": 15,
+                    "translations": [],
+                    "userAccesses": [],
+                    "userGroupAccesses": []
+                }
+            ],
+            "programStageSections": [],
+            "remindCompleted": false,
+            "repeatable": false,
+            "sortOrder": 1,
+            "translations": [],
+            "validCompleteOnly": false
+        }
+    ],
+    "programs": [
+        {
+            "attributeValues": [],
+            "captureCoordinates": false,
+            "completeEventsExpiryDays": 0,
+            "created": "2018-03-07T19:31:51.129",
+            "description": "Data integration program from smartvadhis2",
+            "displayFrontPageList": false,
+            "displayIncidentDate": false,
+            "expiryDays": 0,
+            "id": "HPrJOsYuM1K",
+            "ignoreOverdueEvents": false,
+            "lastUpdated": "2018-04-19T13:20:49.440",
+            "name": "Verbal Autopsy",
+            "notificationTemplates": [],
+            "onlyEnrollOnce": false,
+            "organisationUnits": [],
+            "programStages": [
+                {
+                    "id": "pQ8gaWKD3pi"
+                }
+            ],
+            "programTrackedEntityAttributes": [],
+            "programType": "WITHOUT_REGISTRATION",
+            "publicAccess": "rw------",
+            "selectEnrollmentDatesInFuture": false,
+            "selectIncidentDatesInFuture": false,
+            "shortName": "VA",
+            "skipOffline": false,
+            "translations": [],
+            "useFirstStageDuringRegistration": false,
+            "userAccesses": [],
+            "userGroupAccesses": [],
+            "validationCriterias": [],
+            "version": 0
+        }
+    ]
+}

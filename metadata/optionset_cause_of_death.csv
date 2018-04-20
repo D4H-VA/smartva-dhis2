@@ -1,0 +1,65 @@
+optionsetname,optionsetuid,optionsetcode,optionname,optionuid,optioncode
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - AIDS (B24),cjrgMGLMwbu,101
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Bite of Venomous Animal (X27),bmRKdpETuMW,103
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Breast Cancer (C50),uYopI93hQM0,104
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Cervical Cancer (C53),dzZn5kjgGvX,105
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Cirrhosis (K74),OgaeGdeFdca,106
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Colorectal Cancer (C18),U3gJ2b6mW1k,107
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Diabetes (E14),x2OYGQkX5am,109
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Diarrhea/Dysentery (A09),JyFR6WFw3SI,110
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Drowning (W74),qzfSuU0BYjT,111
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Epilepsy (G40),m7T7Q86SbwU,112
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Esophageal Cancer (C15),elYfRI5yVYa,113
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Falls (W19),oKeSDDhGowf,114
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Fires (X09),fVT8O9em5q3,115
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Homicide (Y09),GrAdZB9vbm9,116
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Leukemia/Lymphomas (C96),mhxTft2Q6Hw,118
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Lung Cancer (C34),AuszBVk13fg,119
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Malaria (B54),aOpfw2cXmzH,120
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Maternal (O95),rIcuXqaJP2O,121
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Other Cardiovascular Diseases (I99),jlNMjuyGMG1,122
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Other Infectious Diseases (B99),F9mwofa4lLR,123
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Other Injuries (X58),P6Cj17ujIJU,124
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Other Non-communicable Diseases (R100),bRBRmXm6MxK,125
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Pneumonia (J22),dhYYGVBDN4r,126
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Poisonings (X49),zlTD3OTPmdX,127
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Prostate Cancer (C61),ehNOnzShYei,128
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Chronic Renal Failure (N18),xkFxYKSFklU,129
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Road Traffic (V89),C4wNfzOMrAq,130
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Stomach Cancer (C16),EZyjl9l353Y,131
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Stroke (I64),hcgeeec71Ei,132
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Suicide (X84),oMExfShPO5D,133
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - TB (A16),OMhPvbZe9Yp,134
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Chronic Respiratory (J44),UgfoWoGUBO5,135
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Ischemic Heart Disease (I24),BSEpjD6VPg4,136
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Other Cancers (C76),SAzKsIQBCou,137
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Adult - Undetermined (R99),hpv6GohGgka,199
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Child - AIDS (B24),h03gWFNDtfW,201
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Child - Bite of Venomous Animal (X27),Jgk8SvuaZVN,202
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Child - Diarrhea/Dysentery (A09),NtXnUUwk0AU,203
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Child - Drowning (W74),reLr0Av0zz5,204
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Child - Encephalitis (G04),TxgclpkegWn,205
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Child - Falls (W19),bA1FdsvjGqV,206
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Child - Fires (X09),VXy5pXPnChj,207
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Child - Hemorrhagic fever (A99),jDJjSWHJ7TV,208
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Child - Malaria (B54),L1hZLYd0Lvz,209
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Child - Measles (B05),iz3lrTNfvgE,210
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Child - Meningitis (G03),W7jyJj0Yz8u,211
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Child - Childhood Cancer (C76),VOdoZvq79x1,212
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Child - Childhood Cardiovascular Diseases (I99),eq695jk8lat,213
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Child - Other Defined Causes of Child Deaths (R101),k28hLWeMYQD,214
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Child - Digestive Diseases (K92),jTnuoaVes1o,215
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Child - Other Infectious Diseases (B99),aH27y0qyTuT,216
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Child - Pneumonia (J22),f5LWvaqueMd,217
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Child - Poisonings (X49),UfW8SQtPg7h,218
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Child - Road Traffic (V89),mntvu7IVyZP,219
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Child - Sepsis (A41),W1YLbzKnJk9,220
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Child - Violent Death (Y09),JkVXTbhGUIB,221
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Child - Undetermined (R99),yAFwKwmEYss,299
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Neonate - Birth asphyxia (P21),Itx7vdBnDKV,301
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Neonate - Congenital malformation (Q89),ufTF0TdwPyg,302
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Neonate - Neonatal Meningitis/Sepsis (P36),ABCq0NgsExQ,303
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Neonate - Neonatal Pneumonia (P23),pqeqcBuZYfH,304
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Neonate - Preterm Delivery (P07),fb3DJL9tjZ7,305
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Neonate - Stillbirth (P95),o8aAs4mz5hd,306
+VA- Cause of Death,tMkHCKkuxpD,VA-CoD,Neonate - Undetermined (R99),nlhfXI4FSP6,399

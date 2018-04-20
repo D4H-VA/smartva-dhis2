@@ -1,0 +1,11 @@
+after_success: coveralls
+language: python
+python:
+  include:
+  - '3.5'
+  - '3.6'
+install: "make"
+script:
+  - "make test"
+notifications:
+  email: false
