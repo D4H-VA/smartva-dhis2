@@ -7,7 +7,7 @@ Any data validation errors or DHIS2 import errors are written to a local SQLite 
 Documentation: `smartva-dhis2.readthedocs.io <https://smartva-dhis2.readthedocs.io>`_
 
 Licence
-=============
+--------
 
 MIT
 
