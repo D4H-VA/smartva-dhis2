@@ -1,12 +1,33 @@
+
+"""
+Module that defines the mappings for CSV rows, variable names in code and DHIS2 UIDs
+
+set_order: used to set certain Verbal Autopsy properties before others (dependants).
+needs to be an integer.
+
+csv_name: CSV column name
+if none => there is no column in the CSV for this property
+example: Age in Days
+
+dhis_uid: DHIS2 metadata Unique Identifier (UID)
+if none => we don't import it into DHIS2
+example: Death Date (it's the Event date that we're using)
+
+options: mapping to DHIS2 optionSet.options
+"""
+
+
 class Mapping(object):
     """ Base class for Mappings"""
 
     @classmethod
     def properties(cls):
+        """Return subclasses of Mapping class"""
         return cls.__subclasses__()
 
     @classmethod
     def set_order_range(cls):
+        """Return a set of `set_order` for all sub classes"""
         return set([c.set_order for c in cls.__subclasses__()])
 
 
@@ -130,6 +151,7 @@ class CauseOfDeath(Mapping):
         }
     }
 
+
 class BirthDate(Mapping):
     set_order = 0
     csv_name = 'birth_date'
@@ -236,6 +258,9 @@ class Icd10(Mapping):
         "W19": 48,
     }
 
+    # reverse options dict
+    # {key: value} becomes
+    # {value: key}
     reverse = {v: k for k, v in options.items()}
 
 
@@ -290,8 +315,11 @@ class QuestionnaireVersion(Mapping):
 
 
 def cause_of_death_option_code(age_category, icd10):
+    """Determine the Cause of Death option code depending on Age Category and ICD10"""
     if icd10 in Icd10.options.keys():
+        # if ICD-10 is the original code (e.g. C50)
         return CauseOfDeath.options[age_category][icd10]
     else:
+        # if ICD-10 is the option (e.g. 35)
         original_code_lookup = Icd10.reverse[icd10]
         return CauseOfDeath.options[age_category][original_code_lookup]

@@ -18,9 +18,13 @@ from .exceptions.errors import (
     OrgUnitNotAssignedError
 )
 
+"""
+Module for DHIS2 access and Import Status
+"""
 
-class ImportStatus(object):
 
+class RaiseImportFailure(object):
+    """Raise exception if import failed"""
     def __init__(self, response):
 
         try:
@@ -29,13 +33,14 @@ class ImportStatus(object):
             self.updated = int(response['response']['updated'])
             self.ignored = int(response['response']['ignored'])
             self.deleted = int(response['response']['deleted'])
-        except (ValueError, KeyError) as e:
+        except (ValueError, KeyError):
             logger.debug(response)
             raise GenericImportError("Error parsing response: {}".format(response))
 
         else:
             if self.status_code not in {200, 201} or self.imported == 0:
                 try:
+                    # check if all response state are SUCCESS
                     self.description = set([
                         r['description'] for r in response['response']['importSummaries']
                         if r['status'] != 'SUCCESS'])
@@ -59,17 +64,17 @@ class ImportStatus(object):
                     raise GenericImportError(response)
 
 
-class RaiseIfDuplicate(object):
-
-    def __init__(self, response, sid):
-        event_count = int(response.get('height', 0))
-        if event_count > 0:
-            event_uids = ','.join([e[1] for e in response['rows']])
-            message = '{} events already exist for SID {} in events {}'.format(event_count, sid, event_uids)
-            raise DuplicateEventImportError(message)
+def raise_if_duplicate(response, sid):
+    """Check response and raise if there is already an event"""
+    event_count = int(response.get('height', 0))
+    if event_count > 0:
+        event_uids = ','.join([e[1] for e in response['rows']])
+        message = '{} events already exist for SID {} in events {}'.format(event_count, sid, event_uids)
+        raise DuplicateEventImportError(message)
 
 
 class Dhis(object):
+    """Class for accessing DHIS2"""
     def __init__(self):
 
         url = DhisConfig.baseurl
@@ -90,25 +95,28 @@ class Dhis(object):
         self.headers = {'User-Agent': 'smartvadhis2_v.{}'.format(SMARTVADHIS2_VERSION)}
 
     def get(self, endpoint, params=None):
+        """DHIS2 HTTP GET, returns requests.Response object"""
         url = '{}/{}.json'.format(self.api_url, endpoint)
         logger.debug('GET: {} - Params: {}'.format(url, params))
         return self.api.get(url, params=params, auth=self.auth, headers=self.headers)
 
     def post(self, endpoint, data, params=None):
+        """DHIS2 HTTP POST, returns requests.Response object"""
         url = '{}/{}'.format(self.api_url, endpoint)
         logger.debug('POST: {} - Params: {} - Data: {}'.format(url, params, json.dumps(data)))
         return self.api.post(url, params=params, auth=self.auth, headers=self.headers, json=data)
 
     def delete(self, endpoint):
+        """DHIS2 HTTP DELETE, returns requests.Response object"""
         url = '{}/{}'.format(self.api_url, endpoint)
         return self.api.delete(url, auth=self.auth, headers=self.headers)
 
     def post_event(self, data):
-
+        """POST DHIS2 Event"""
         r = self.post(endpoint='events', data=data)
         try:
             logger.debug(r.text)
-            ImportStatus(r.json())
+            RaiseImportFailure(r.json())
             r.raise_for_status()
         except OrgUnitNotAssignedError:
             self.assign_orgunit_to_program(data)
@@ -117,6 +125,7 @@ class Dhis(object):
             raise DhisApiException("POST failed - {} {}".format(r.url, r.text))
 
     def is_duplicate(self, sid):
+        """Check DHIS2 for a duplicate event by SID across all OrgUnits"""
         params = {
             'programStage': DhisConfig.programstage_uid,
             'orgUnit': DhisConfig.root_orgunit,
@@ -124,9 +133,10 @@ class Dhis(object):
             'filter': '{}:EQ:{}'.format(Sid.dhis_uid, sid)
         }
         r = self.get(endpoint='events/query', params=params)
-        RaiseIfDuplicate(r.json(), sid)
+        raise_if_duplicate(r.json(), sid)
 
     def assign_orgunit_to_program(self, data):
+        """Assign OrgUnit to program"""
         params = {
             'fields': ':owner'
         }

@@ -31,13 +31,22 @@ from .exceptions.warnings import (
     InterviewDateMissingWarning
 )
 from .helpers import sanitize, is_uid, days_to_years, years_to_days, DAYS_IN_YEAR
-from .mapping import Mapping, Sex, AgeCategory, CauseOfDeath, Icd10, cause_of_death_option_code
+from .mapping import Mapping, Sex, AgeCategory, Icd10, cause_of_death_option_code
 from ..__version__ import __version__
 
 
+"""
+Module for Verbal Autopsy
+"""
+
+
 def process_row_data(data):
+    """
+    Process row data
+    first get the one we need to add those properties whose `set_order` (see mapping.py) start with 0, then 1, ...
+    and sort it alphabetically by key
+    """
     row_data = OrderedDict()
-    # loop through all possible priorities (e.g. 0, 1)
     for i in Mapping.set_order_range():
         # get row based on mapping properties and sort it alphabetically
         row_data.update(sorted({
@@ -49,6 +58,11 @@ def process_row_data(data):
 
 
 def verbal_autopsy_factory(data):
+    """
+    Factory method to set VerbalAutopsy instance attributes
+    and collect all validation exceptions and warnings
+    return VerbalAutopsy, its exceptions and its warnings as a tuple
+    """
     row_data = process_row_data(data)
 
     va = VerbalAutopsy()
@@ -79,11 +93,17 @@ def verbal_autopsy_factory(data):
 
 
 class VerbalAutopsy(object):
+    """
+    Base class for Verbal Autopsy that utilizes Python's @property decorators
+    implemented as class whose attributes can be accessed both as keys and attributes.
+    """
 
     def __getitem__(self, item):
+        """If va.attribute is set, va['attribute'] should return the same"""
         return self.__getattribute__(item)
 
     def __setitem__(self, key, value):
+        """If va['attribute'] is set, va.attribute should return the same"""
         return self.__setattr__(key, value)
 
     def __getattr__(self, _):
@@ -95,6 +115,7 @@ class VerbalAutopsy(object):
         return [k for k in dir(self) if not k.startswith('_') and not callable(self[k])]
 
     def __str__(self):
+        """Print VerbalAutopsy instance as JSON"""
         return json.dumps(dict(self))
 
     @property
@@ -354,6 +375,7 @@ class VerbalAutopsy(object):
 
 
 class Event(object):
+    """Class that transforms a VerbalAutopsy Instance to a DHIS2 Event"""
 
     def __init__(self, va):
         if not isinstance(va, VerbalAutopsy):
@@ -385,6 +407,11 @@ class Event(object):
 
     @datavalues.setter
     def datavalues(self, va):
+        """Set Event.datavalues if...
+        - mapping.code_name is not None, and
+        - mapping.dhis_uid is not None, and
+        - VA attribute is not None
+        """
         self._datavalues = [
             {
                 "dataElement": mapping.dhis_uid,
@@ -396,4 +423,5 @@ class Event(object):
         ]
 
     def __str__(self):
+        """Print Event instance as JSON"""
         return json.dumps(self.payload)

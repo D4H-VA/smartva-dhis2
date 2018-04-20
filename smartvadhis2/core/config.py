@@ -1,25 +1,32 @@
-import os
 import json
-import sys
+import os
 import platform
 import logging  # keep for LoggingConfig.setup()
 import stat
+import sys
 from configparser import ConfigParser
 
 import logzero
 from logzero import logger
 
 from .exceptions import SmartVADHIS2Exception, FileException
+
 try:
     from __version__ import __version__
 except ImportError:
     from ..__version__ import __version__
 
+"""
+Module to configure the application, load the ConfigParser file (config.ini) and set up necessary folders
+"""
+
 SMARTVADHIS2_VERSION = __version__
 
 
 def load_auth(alt_path, parser=None):
-
+    """Load the authentication file as specified in config.ini and return a Python object
+    alt_path is used for testing purposes to load a different file
+    """
     path = alt_path if alt_path else parser.get('auth', 'auth_file')
 
     try:
@@ -30,7 +37,7 @@ def load_auth(alt_path, parser=None):
 
 
 class Config(object):
-
+    """Base class for all configuration classes"""
     ROOT_DIR = os.path.abspath('.')
     _parser = ConfigParser()
     _parser.read(os.path.join(ROOT_DIR, 'config.ini'))
@@ -39,81 +46,11 @@ class Config(object):
 
     @staticmethod
     def create_dir(path, created_message=False):
+        """Create folders and optionally log a info message"""
         if not os.path.exists(path):
             os.mkdir(path)
             if created_message:
                 logger.info("Created folder {}".format(created_message))
-
-
-class DataDirConfig(Config):
-    data_dir = os.path.join(Config.ROOT_DIR, 'data')
-
-    def setup(self):
-        self.create_dir(self.data_dir)
-
-
-class ODKConfig(Config):
-    __section__ = 'odk'
-    briefcases_dir = os.path.join(Config.ROOT_DIR, 'data', 'briefcases')
-    briefcase_executable = os.path.join(Config.ROOT_DIR, 'smartvadhis2', 'lib')  # download JAR first
-    jar_url = Config._parser.get(__section__, 'dl_url')
-    jar_sig = Config._parser.get(__section__, 'dl_sig')
-    form_id = Config._parser.get(__section__, 'form_id')
-    sid_regex = Config._parser.get(__section__, 'sid_regex')
-
-    baseurl = Config.dish[__section__]['baseurl']
-    username = Config.dish[__section__]['username']
-    password = Config.dish[__section__]['password']
-
-    if not all([baseurl, username, password]):
-        raise FileNotFoundError("[{}] Empty baseurl, username or password."
-                                "Check docs for proper format.".format(__section__))
-
-    def setup(self):
-        self.create_dir(self.briefcases_dir)
-
-
-class SmartVAConfig(Config):
-    __section__ = 'smartva'
-    smartva_dir = os.path.join(Config.ROOT_DIR, 'data', 'smartvas')
-    smartva_executable = os.path.join(Config.ROOT_DIR, 'smartvadhis2', 'lib', 'smartva')
-    ignore_columns = Config._parser.get(__section__, 'ignore_columns').split(',')
-    algorithm_version = Config._parser.get(__section__, 'algorithm_version')
-
-    def setup(self):
-        self.create_dir(self.smartva_dir)
-        self.create_dir(os.path.join(self.smartva_dir, 'output'))
-        self.make_executable()
-
-    def make_executable(self):
-        st = os.stat(self.smartva_executable)
-        os.chmod(self.smartva_executable, st.st_mode | stat.S_IEXEC)
-
-
-class DatabaseConfig(Config):
-    __section__ = 'database'
-    database_dir = os.path.join(Config.ROOT_DIR, 'db')
-    db_name = Config._parser.get(__section__, 'db_name')
-    db_queries_log = Config._parser.getboolean(__section__, 'db_queries_log')
-
-    def setup(self):
-        self.create_dir(self.database_dir, created_message=True)
-
-
-class DhisConfig(Config):
-    __section__ = 'dhis'
-    program_uid = Config._parser.get(__section__, 'program')
-    programstage_uid = Config._parser.get(__section__, 'program_stage')
-    root_orgunit = Config._parser.get(__section__, 'root_orgunit')
-
-    baseurl = Config.dish[__section__]['baseurl']
-    username = Config.dish[__section__]['username']
-    password = Config.dish[__section__]['password']
-
-    api_version = Config._parser.getint(__section__, 'api_version')
-
-    if not all([baseurl, username, password]):
-        raise FileException("[{}] Empty baseurl, username or password. Check docs for proper format.".format(__section__))
 
 
 class LoggingConfig(Config):
@@ -136,7 +73,86 @@ class LoggingConfig(Config):
         )
 
 
+class DataDirConfig(Config):
+    """Class to set up the `data` directory containing both Briefcases and SmartVA files"""
+    data_dir = os.path.join(Config.ROOT_DIR, 'data')
+
+    def setup(self):
+        self.create_dir(self.data_dir)
+
+
+class ODKConfig(Config):
+    """Class to set up ODK Briefcase"""
+    __section__ = 'odk'
+    briefcases_dir = os.path.join(Config.ROOT_DIR, 'data', 'briefcases')
+    briefcase_executable = os.path.join(Config.ROOT_DIR, 'smartvadhis2', 'lib')  # download JAR first
+    jar_url = Config._parser.get(__section__, 'dl_url')
+    jar_sig = Config._parser.get(__section__, 'dl_sig')
+    form_id = Config._parser.get(__section__, 'form_id')
+    sid_regex = Config._parser.get(__section__, 'sid_regex')
+
+    baseurl = Config.dish[__section__]['baseurl']
+    username = Config.dish[__section__]['username']
+    password = Config.dish[__section__]['password']
+
+    if not all([baseurl, username, password]):
+        raise FileNotFoundError("[{}] Empty baseurl, username or password."
+                                "Check docs for proper format.".format(__section__))
+
+    def setup(self):
+        self.create_dir(self.briefcases_dir)
+
+
+class SmartVAConfig(Config):
+    """Class to set up SmartVA"""
+    __section__ = 'smartva'
+    smartva_dir = os.path.join(Config.ROOT_DIR, 'data', 'smartvas')
+    smartva_executable = os.path.join(Config.ROOT_DIR, 'smartvadhis2', 'lib', 'smartva')
+    ignore_columns = Config._parser.get(__section__, 'ignore_columns').split(',')
+    algorithm_version = Config._parser.get(__section__, 'algorithm_version')
+
+    def setup(self):
+        self.create_dir(self.smartva_dir)
+        self.create_dir(os.path.join(self.smartva_dir, 'output'))
+        self.make_executable()
+
+    def make_executable(self):
+        """Make the smartva binary executable (for Linux systems)"""
+        st = os.stat(self.smartva_executable)
+        os.chmod(self.smartva_executable, st.st_mode | stat.S_IEXEC)
+
+
+class DatabaseConfig(Config):
+    """Class to set up the local database"""
+    __section__ = 'database'
+    database_dir = os.path.join(Config.ROOT_DIR, 'db')
+    db_name = Config._parser.get(__section__, 'db_name')
+    db_queries_log = Config._parser.getboolean(__section__, 'db_queries_log')
+
+    def setup(self):
+        self.create_dir(self.database_dir, created_message=True)
+
+
+class DhisConfig(Config):
+    """Class to set up DHIS2"""
+    __section__ = 'dhis'
+    program_uid = Config._parser.get(__section__, 'program')
+    programstage_uid = Config._parser.get(__section__, 'program_stage')
+    root_orgunit = Config._parser.get(__section__, 'root_orgunit')
+
+    baseurl = Config.dish[__section__]['baseurl']
+    username = Config.dish[__section__]['username']
+    password = Config.dish[__section__]['password']
+
+    api_version = Config._parser.getint(__section__, 'api_version')
+
+    if not all([baseurl, username, password]):
+        raise FileException(
+            "[{}] Empty baseurl, username or password. Check docs for proper format.".format(__section__))
+
+
 def check_python_version():
+    """Verify that we're on Python 3.5+"""
     required_major = 3
     required_minor = 5
     if sys.version_info < (required_major, required_minor):
@@ -149,10 +165,7 @@ def check_python_version():
 
 
 def check_operating_system():
-    """
-    Get the operating system the application is running on
-    :rtype: Operating System string (Linux, Windows)
-    """
+    """Get the operating system the application is running on"""
     opsys = platform.system()
     logger.debug("Running on {}".format(opsys))
     if opsys in {'Linux', 'Windows'}:
@@ -162,6 +175,7 @@ def check_operating_system():
 
 
 def setup():
+    """Method to set everything up and return instances of the respective module classes"""
     LoggingConfig().setup()
 
     check_python_version()
@@ -173,6 +187,7 @@ def setup():
     SmartVAConfig().setup()
     DhisConfig()
 
+    # import here to avoid circular dependencies
     from .briefcase import ODKBriefcase
     from .smartva import SmartVA
     from .dhis import Dhis

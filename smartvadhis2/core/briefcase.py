@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import math
 import os
 import subprocess
@@ -10,6 +12,10 @@ from tqdm import tqdm
 from .config import ODKConfig
 from .exceptions.base import FileException
 from .helpers import sha256_checksum, log_subprocess_output, get_timewindow, is_non_zero_file
+
+"""
+Module to connect to ODK via ODK Briefcase (JAR)
+"""
 
 
 class ODKBriefcase(object):
@@ -26,6 +32,7 @@ class ODKBriefcase(object):
         self.filename = "briefcase_{}.csv".format(self.timestamp)
 
     def _download_jar(self):
+        """Download Briefcase JAR as specified in config.ini - provides a progress bar"""
         logger.info("Downloading {} ...".format(self.jar_filename))
         r = requests.get(ODKConfig.jar_url, stream=True)
         total_size = int(r.headers.get('content-length', 0))
@@ -41,10 +48,12 @@ class ODKBriefcase(object):
                     f.write(chunk)
 
     def _verify_jar(self):
+        """Verify JAR with a checksum as specified in config.ini"""
         if sha256_checksum(self.jar_path) != ODKConfig.jar_sig:
             raise FileException("Verification failed for {} and hash set in config.ini".format(self.jar_filename))
 
     def _get_arguments(self, all_briefcases):
+        """Create the argument list to provide to the Briefcase JAR"""
         arguments = [
             'java', '-jar', self.jar_path,
             '--storage_directory', ODKConfig.briefcases_dir,
@@ -71,7 +80,7 @@ class ODKBriefcase(object):
         return arguments
 
     def download_briefcases(self, all_briefcases):
-
+        """Do the actual call to the JAR file and log output messages"""
         args = self._get_arguments(all_briefcases)
 
         try:

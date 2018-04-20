@@ -14,6 +14,10 @@ except ImportError:
     from smartvadhis2.core.dhis import Dhis
     from smartvadhis2.core.helpers import Color
 
+"""
+Module to provide various ad-hoc commands not to be run regularly
+"""
+
 
 def parse_args():
     parser = argparse.ArgumentParser(usage='%(prog)s', description="CLI helpers for smartvadhis2")
@@ -42,6 +46,7 @@ def parse_args():
 
 
 def remove_keys(obj, rubbish):
+    """Recursively remove keys whose are in `rubbish` and return cleaned object"""
     if isinstance(obj, dict):
         obj = {
             key: remove_keys(value, rubbish)
@@ -55,6 +60,7 @@ def remove_keys(obj, rubbish):
 
 
 def delete_events():
+    """Delete ALL Verbal Autopsy Program Events from DHIS2"""
     confirm = input('You are about to {}delete{} ALL Verbal Autopsy DHIS2 Program Events from {}{}. '
                     'Are you really sure? Type yes / no'.format(Color.RED, Color.BOLD, DhisConfig.baseurl, Color.END))
     if confirm.lower() == 'yes':
@@ -87,6 +93,11 @@ def delete_events():
 
 
 def download_program_metadata(skip_csv_metadata=True):
+    """
+    Download metadata from server and clean up some properties that might create problems in another DHIS2 instance
+    If skip_csv_metadata is false, additional properties are returned that are already provided
+    in the metadata folder
+    """
     api = Dhis()
 
     metadata = api.get(endpoint='programs/{}/metadata.json'.format(DhisConfig.program_uid)).json()

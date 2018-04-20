@@ -64,9 +64,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-# TODO: File Watcher
-# TODO: Metadata: program JSON
-# TODO: Docs
-# TODO: pyinstaller

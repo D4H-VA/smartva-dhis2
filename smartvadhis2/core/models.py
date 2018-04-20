@@ -5,8 +5,13 @@ from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
+"""
+Module for SQLALchemy model declaration (used by local database)
+"""
+
 
 class Person(Base):
+    """Person Model"""
     __tablename__ = "person"
     personid = Column(Integer, primary_key=True, autoincrement=True)
     sid = Column(String, unique=True)
@@ -30,6 +35,7 @@ class Person(Base):
 
 
 class Failure(Base):
+    """Failure model, storing Exception categories, e.g. Import Errors, Validation Errors"""
     __tablename__ = "failure"
     failureid = Column(Integer, primary_key=True, autoincrement=True)
     failuretype = Column(Integer)
@@ -38,6 +44,7 @@ class Failure(Base):
 
 
 class PersonFailure(Base):
+    """PersonFailure model, linking Persons to Failure"""
     __tablename__ = "person_failure"
     personid = Column(Integer, ForeignKey(Person.personid), primary_key=True)
     failureid = Column(Integer, ForeignKey(Failure.failureid), primary_key=True)

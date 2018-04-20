@@ -2,9 +2,8 @@ import os
 
 from logzero import logger
 from sqlalchemy import create_engine
-from sqlalchemy.exc import SQLAlchemyError, IntegrityError
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
-import sqlite3
 
 from .exceptions.base import (
     SmartVADHIS2Exception,
@@ -18,7 +17,7 @@ from .mapping import Mapping
 
 
 class Database(object):
-
+    """Local database"""
     def __init__(self, db_url=None):
         self.db_queries_log = DatabaseConfig.db_queries_log
         if not db_url:
@@ -33,10 +32,11 @@ class Database(object):
             self._insert_failure_categories()
         else:
             logger.info("Using database: {}".format(self.db_filename))
-
+        # create database
         self.engine = create_engine(self.db_url, echo=self.db_queries_log)
 
     def _create_db(self):
+        """Insert SQLAlchemy model (create tables). Removes the file if it fails"""
         try:
             engine = create_engine(self.db_url, echo=self.db_queries_log)
             logger.info("Creating database schema...")
@@ -54,6 +54,7 @@ class Database(object):
             sys.exit(1)
 
     def _insert_failure_categories(self):
+        """Insert Exception categories into `failure` sourced from core.exceptions.__init__"""
         logger.info("Adding exceptions to database...")
         logger.info("Parsing exception to insert into database...")
         all_exceptions = db_exceptions
@@ -85,8 +86,9 @@ class Database(object):
             session.close()
 
     def write_errors(self, data, errors):
-
+        """Entry method to write any errors sourced from the application"""
         if not isinstance(errors, list):
+            # we need a list to iterate even if it's just one item
             errors = [errors]
         values = self._to_sql_rows(data)
 
@@ -113,8 +115,11 @@ class Database(object):
 
     @staticmethod
     def _write_person(session, values):
+        """Write a Person instance to the database
+        but re-use the record if it's already existing
+        and return the personid
+        """
         p = Person(**values)
-        assert p.sid
         person = session.query(Person).filter(Person.sid == p.sid).one_or_none()
         if not person:
             person = p
@@ -126,9 +131,9 @@ class Database(object):
                 raise SmartVADHIS2Exception(e)
         return person.personid
 
-
     @staticmethod
     def _to_sql_rows(data):
+        """Convert data rows to a dict ready for insertion"""
         try:
             d = {
                 mapping.code_name: data[mapping.code_name]
@@ -144,6 +149,7 @@ class Database(object):
         Session = sessionmaker(bind=self.engine)
         session = Session()
         return session.query(query)
+
 
 # "singleton" for db connection
 database = Database()

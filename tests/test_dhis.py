@@ -1,6 +1,6 @@
 import pytest
 
-from smartvadhis2.core.dhis import ImportStatus, RaiseIfDuplicate
+from smartvadhis2.core.dhis import RaiseImportFailure, raise_if_duplicate
 from smartvadhis2.core.exceptions.errors import *
 
 
@@ -70,7 +70,7 @@ def test_import_orgunit_invalid():
     }
 
     with pytest.raises(OrgunitNotValidImportError):
-        ImportStatus(response)
+        RaiseImportFailure(response)
 
 
 def test_import_program_invalid():
@@ -139,7 +139,7 @@ def test_import_program_invalid():
     }
 
     with pytest.raises(ProgramNotValidError):
-        ImportStatus(response)
+        RaiseImportFailure(response)
 
 
 def test_import_success():
@@ -213,7 +213,7 @@ def test_import_success():
             ]
         }
     }
-    import_status = ImportStatus(response)
+    import_status = RaiseImportFailure(response)
     assert import_status.status_code == 200
     assert import_status.imported == 2
     assert import_status.deleted == 0
@@ -301,7 +301,7 @@ def test_import_conflict_dataelement_invalid():
     }
 
     with pytest.raises(GenericImportError):
-        ImportStatus(response)
+        RaiseImportFailure(response)
 
 
 def test_empty_post_throws():
@@ -339,7 +339,7 @@ def test_empty_post_throws():
     }
 
     with pytest.raises(GenericImportError):
-        ImportStatus(response)
+        RaiseImportFailure(response)
 
 
 def test_event_duplicate_found():
@@ -492,7 +492,7 @@ def test_event_duplicate_found():
     }
 
     with pytest.raises(DuplicateEventImportError):
-        RaiseIfDuplicate(response, sid)
+        raise_if_duplicate(response, sid)
 
 
 def test_event_no_duplicate():
@@ -624,7 +624,7 @@ def test_event_no_duplicate():
         "height": 0
     }
 
-    RaiseIfDuplicate(response, sid)
+    raise_if_duplicate(response, sid)
 
 
 def test_orgunit_not_assigned():
@@ -693,4 +693,4 @@ def test_orgunit_not_assigned():
     }
 
     with pytest.raises(OrgUnitNotAssignedError):
-        ImportStatus(response)
+        RaiseImportFailure(response)

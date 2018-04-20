@@ -11,8 +11,12 @@ from .config import SmartVAConfig
 from .exceptions import FileException
 from .mapping import Mapping
 
+"""
+Module that provides various helper methods cross all other modules
+"""
 
 class Color:
+    """Color class to be used for Terminal print formatting"""
     GREEN = '\033[92m'
     YELLOW = '\033[93m'
     RED = '\033[91m'
@@ -22,6 +26,7 @@ class Color:
 
 
 def parse_args(args):
+    """Parse arguments"""
     parser = argparse.ArgumentParser(usage='%(prog)s', description="Run SmartVA and import to DHIS2")
 
     group = parser.add_mutually_exclusive_group()
@@ -48,6 +53,7 @@ def parse_args(args):
 
 
 def log_subprocess_output(process):
+    """Log output from subprocess (e.g. smartva, Briefcase)"""
     [
         logger.info(str(line).replace('\n', ''))
         for line in process.stdout
@@ -56,6 +62,7 @@ def log_subprocess_output(process):
 
 
 def read_csv(path):
+    """Generator to read a smartva CSV file"""
     allowed_fields = [m.csv_name for m in Mapping.properties() if m.csv_name is not None]
     with open(path, 'r') as f:
         reader = csv.DictReader(f, delimiter=',')
@@ -70,6 +77,7 @@ def read_csv(path):
 
 
 def sha256_checksum(filename, block_size=65536):
+    """Calculate checksum on file"""
     sha256 = hashlib.sha256()
     with open(filename, 'rb') as f:
         for block in iter(lambda: f.read(block_size), b''):
@@ -78,6 +86,7 @@ def sha256_checksum(filename, block_size=65536):
 
 
 def is_non_zero_file(fpath):
+    """Return true if file is existing AND file has content, false otherwise"""
     logger.debug(fpath)
     if fpath:
         exists = os.path.exists(fpath)
@@ -88,15 +97,23 @@ def is_non_zero_file(fpath):
 
 
 def sanitize(data, some_property):
+    """Strip whitespace from a dict value"""
     value = data.get(some_property, '')
     return value.strip() if value else None
 
 
 def is_uid(string):
+    """Return true if string is a valid DHIS2 Unique Identifier (UID)"""
     return re.compile('^[A-Za-z][A-Za-z0-9]{10}$').match(string)
 
 
 def get_timewindow(weeks=-1, days=1, fmt='%Y/%m/%d'):
+    """Return tuple of datetime strings
+    start = today minus 1 week
+    end = start + 1 day
+    e.g. if today is Tuesday, 2018-04-08, return
+    (2018-04-01, 2018-04-02)
+    """
     now = datetime.datetime.now()
     start = (now + datetime.timedelta(weeks=weeks))
     end = (start + datetime.timedelta(days=days))
@@ -108,8 +125,10 @@ DAYS_IN_YEAR = 365.2425
 
 
 def days_to_years(days):
+    """Convert days to years"""
     return int(round((days / DAYS_IN_YEAR)))
 
 
 def years_to_days(years):
+    """Convert years to days"""
     return int(round((years * DAYS_IN_YEAR)))
