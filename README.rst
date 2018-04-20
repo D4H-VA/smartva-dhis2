@@ -2,14 +2,14 @@ smartva-dhis2
 =============
 
 .. image:: https://readthedocs.org/projects/smartva-dhis2/badge/?version=latest
-   :target: http://smartva-dhis2.readthedocs.io/en/latest/?badge=latest
-   :alt: Documentation Status
+    :target: http://smartva-dhis2.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
 
 .. image:: https://img.shields.io/pypi/v/smartva-dhis2.svg
-   :alt: PyPI - Package Version
+    :alt: PyPI - Package Version
 
 .. image:: https://img.shields.io/pypi/pyversions/smartva-dhis2.svg
-   :alt: PyPI - Python Versions
+    :alt: PyPI - Python Versions
 
 
 A Python package to integrate Verbal Autopsy data into DHIS2.
