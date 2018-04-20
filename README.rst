@@ -20,11 +20,11 @@ a closed-source binary packaged by *The Institute for Health Metrics and Evaluat
 See `here <http://www.healthdata.org/verbal-autopsy/tools>`_ for more details.
 
 
-.. |ReadTheDocs| image:: image:: https://img.shields.io/readthedocs/smartva-dhis2.svg
+.. |ReadTheDocs| image:: https://img.shields.io/readthedocs/smartva-dhis2.svg
    :target: https://smartva-dhis2.readthedocs.io
 
-.. |PyPIVersion| image:: image:: https://img.shields.io/pypi/v/smartva-dhis2.svg
+.. |PyPIVersion| image:: https://img.shields.io/pypi/v/smartva-dhis2.svg
    :target: https://pypi.org/project/smartva-dhis2
 
-.. |PyVersion| image:: image:: https://img.shields.io/pypi/pyversions/smartva-dhis2.svg
+.. |PyVersion| image:: https://img.shields.io/pypi/pyversions/smartva-dhis2.svg
    :target: https://pypi.org/project/smartva-dhis2
