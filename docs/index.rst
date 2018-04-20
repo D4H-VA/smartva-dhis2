@@ -8,16 +8,6 @@ smartva-dhis2
 
 |ReadTheDocs| |PyPIVersion| |PyVersion|
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
-   Installation Guide <installation>
-   Configuration <configuration>
-   Local Database <local_database>
-   Components <components>
-
-
 A Python package for the integration of Verbal Autopsy Data into DHIS2.
 
 It downloads `ODK <https://opendatakit.org>`_ Briefcases,
@@ -27,6 +17,17 @@ Any data validation errors or DHIS2 import errors are written to a local SQLite 
 the command line.
 
 The code is hosted on Github: https://github.com/D4H-VA/smartva-dhis2
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   Installation Guide <installation>
+   Configuration <configuration>
+   Local Database <local_database>
+   Components <components>
+
 
 Links
 ------
