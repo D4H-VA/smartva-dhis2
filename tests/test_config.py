@@ -1,4 +1,3 @@
-"""
 import os
 import logging
 
@@ -12,10 +11,13 @@ from smartvadhis2.core.config import (
     DhisConfig,
     LoggingConfig,
     check_python_version,
-    load_auth
+    load_auth,
+    setup as setup_with_config
 )
 
 from smartvadhis2.core.helpers import is_uid
+
+setup_with_config()
 
 
 def test_create_file(tmpdir):
@@ -27,7 +29,7 @@ def test_create_file(tmpdir):
 
 def test_load_auth():
     dish = load_auth(alt_path='dish.json')
-    assert dish['dhis']['baseurl'] == 'https://dev-dhis2va.baosystems.com'
+    assert dish['dhis']['baseurl'] == 'https://play.dhis2.org/2.28'
     assert dish['dhis']['username'] == 'admin'
     assert dish['dhis']['password'] == 'district'
 
@@ -93,4 +95,3 @@ def test_logging_config():
 
 def test_python_version():
     check_python_version()
-"""
