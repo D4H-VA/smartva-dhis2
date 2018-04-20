@@ -6,6 +6,7 @@ data/
 
 # ODK Briefcase
 fontconfig
+smartvadhis2/lib/ODK Briefcase*Production.jar
 
 # database
 db/*.db
@@ -29,7 +30,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+# lib/
 lib64/
 parts/
 sdist/
