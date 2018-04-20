@@ -22,11 +22,10 @@ Optional arguments (can't use both at the same time)::
     --briefcase           Skip download of briefcase file, provide local file path instead
     --all                 Pull ALL briefcases instead of relative time window (e.g. yesterday's)
 
-
 Test
 -----
 
-It is advised to run test before installation on your server.
+It is advised to run test before running on your server.
 
 To run tests:
 

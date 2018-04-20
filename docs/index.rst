@@ -6,6 +6,17 @@
 smartva-dhis2
 ==============
 
+.. image:: https://readthedocs.org/projects/smartva-dhis2/badge/?version=latest
+   :target: http://smartva-dhis2.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status
+
+.. image:: https://img.shields.io/pypi/v/smartva-dhis2.svg
+   :alt: PyPI - Package Version
+
+.. image:: https://img.shields.io/pypi/pyversions/smartva-dhis2.svg
+   :alt: PyPI - Python Versions
+
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
@@ -32,3 +43,5 @@ Links
 - `crvsgateway.info <https://crvsgateway.info/learningcentre/cause-of-death-in-crvs>`_
 - `dhis2.org <https://www.dhis2.org>`_
 - `IHME <http://www.healthdata.org/verbal-autopsy/tools>`_
+
+

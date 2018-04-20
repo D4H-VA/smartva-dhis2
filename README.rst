@@ -1,7 +1,19 @@
-smartvadhis2
+smartva-dhis2
 =============
 
-A Python package that downloads ODK Briefcases, runs the SmartVA / Tariff 2.0 algorithm to find the most probable Cause of Death, transforms it to a DHIS2-compatible Program Event and posts it to DHIS2.
+.. image:: https://readthedocs.org/projects/smartva-dhis2/badge/?version=latest
+   :target: http://smartva-dhis2.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status
+
+.. image:: https://img.shields.io/pypi/v/smartva-dhis2.svg
+   :alt: PyPI - Package Version
+
+.. image:: https://img.shields.io/pypi/pyversions/smartva-dhis2.svg
+   :alt: PyPI - Python Versions
+
+
+A Python package to integrate Verbal Autopsy data into DHIS2.
+It downloads ODK Briefcases, runs the SmartVA / Tariff 2.0 algorithm to find the most probable Cause of Death, transforms it to a DHIS2-compatible Program Event and posts it to DHIS2.
 Any data validation errors or DHIS2 import errors are written to a local SQLite database.
 
 Documentation: `smartva-dhis2.readthedocs.io <https://smartva-dhis2.readthedocs.io>`_
