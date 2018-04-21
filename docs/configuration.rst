@@ -6,18 +6,21 @@ DHIS2 metadata
 --------------
 
 All metadata in DHIS2 is required to be configured before running this application.
-In order to install metadata, import the standard CSV metadata files with DHIS2's Import/Export app.
 
-1. Align the Organisation Unit hierarchy in DHIS2 with the VA Questionnaire. This application assumes it is set up correctly.
-2. Import ``metadata/optionset_age_category.csv``
-3. Import ``metadata/optionset_cause_of_death.csv``
-4. Import ``metadata/optionset_ICD10.csv``
-5. Import ``metadata/optionset_sex.csv``
-6. Import ``metadata/dataelements.csv``
-7. Import ``metadata/program.json``
-8. Import ``metadata/dashboard.json``
+*Note:* the Organisation Unit hierarchy in DHIS2 should be aligned with the VA Questionnaire.
+This application assumes it is set up correctly (however it auto-assigns the Organisation Unit to the program if not already assigned).
 
-It is *highly recommended* to install this on a cloned production server / test server / development server first **before** running it in production!
+In order to install metadata, import the the following metadata files with DHIS2's Import/Export app.
+Always do a "Dry run" first.
+
+
+1. Import ``metadata/optionset_age_category.csv``
+2. Import ``metadata/optionset_cause_of_death.csv``
+3. Import ``metadata/optionset_ICD10.csv``
+4. Import ``metadata/optionset_sex.csv``
+5. Import ``metadata/dataelements.csv``
+6. Import ``metadata/program.json``
+7. Import ``metadata/dashboard.json`` TODO
 
 Application
 ------------

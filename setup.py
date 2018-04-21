@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import io
 import os
 import sys
 from shutil import rmtree
@@ -67,15 +66,14 @@ class TestCommand(Command):
         os.system('python -m pytest --cov=smartvadhis2 --cov-report term-missing tests -vv')
 
 
-# Import the README and use it as the long-description.
-# Note: this will only work if 'README.rst' is present in your MANIFEST.in file!
-with io.open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
-    long_description = '\n' + f.read()
+with open('README.rst', 'r') as f:
+    readme = f.read()
 
 setup(
     name='smartva-dhis2',
     version=__version__,
-    description='Command-line SmartVA to DHIS2',
+    description='Integration of Verbal Autopsy data into DHIS2.',
+    long_description=readme,
     author='David Huser',
     author_email='dhuser@baosystems.com',
     url='https://github.com/D4H-VA/smartva-dhis2',
@@ -91,7 +89,6 @@ setup(
     classifiers=[
         # Trove classifiers
         # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
-        'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: MIT License',
         'License :: Other/Proprietary License',
         'Programming Language :: Python',
