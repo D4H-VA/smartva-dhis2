@@ -8,18 +8,21 @@ smartva-dhis2
 
 A Python package for the integration of Verbal Autopsy data into DHIS2.
 
-It downloads `ODK <https://opendatakit.org>`_ Briefcases,
-runs the `SmartVA / Tariff 2.0 <http://www.healthdata.org/verbal-autopsy/tools>`_ algorithm to find the most probable Cause of Death,
+It downloads `ODK <https://opendatakit.org>`_ Aggregate records via ODK Briefcase,
+runs the `SmartVA / Tariff 2.0 <http://www.healthdata.org/verbal-autopsy/tools>`_ algorithm to determine the most probable Cause of Death,
 transforms it to a DHIS2-compatible Program Event and posts it to DHIS2.
 Any data validation errors or DHIS2 import errors are written to a local SQLite database
-which can be queried and exported via the command line.
+which can be queried via the command line and exported to various formats.
 
-The code is hosted on Github: https://github.com/D4H-VA/smartva-dhis2
+It also checks DHIS2 for duplicate events (by Study ID Number) and auto-assigns organisation units to the program.
+
+- Documentation: `smartva-dhis2.readthedocs.io <https://smartva-dhis2.readthedocs.io>`_
+- Github: `github.com/D4H-VA/smartva-dhis2 <github.com/D4H-VA/smartva-dhis2>`_
 
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Contents
 
    Installation <installation>
    Configuration <configuration>

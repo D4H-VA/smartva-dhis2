@@ -40,21 +40,24 @@ Keep it on a secure place with correct access rights (e.g. ``chmod 0600 dish.jso
 If there is no path (e.g. ``smartvadhis2.log``) it logs within the code repository.
 
 **level**: Minimum Log level - e.g. ``INFO`` logs all info messages, warnings, errors.
-Must be uppercase and one of: ``DEBUG``, ``INFO``, ``WARNINGS``
+Must be one of: ``DEBUG``, ``INFO``, ``WARNINGS``
 
 [database]
 ^^^^^^^^^^
 
 **db_queries_log**: Whether to log all local database queries as well. Either ``true`` or ``false``.
 
-**db_name**: Name of the local database file, e.g. ``smartvadhis2.db``
+**db_name**: Name of the local database file, e.g. ``smartva-dhis2.db``
 
 [odk]
 ^^^^^^
 
-**dl_url**: ODK Briefcase JAR download URL, e.g. ``https://s3.amazonaws.com/opendatakit.downloads/ODK Briefcase v1.9.0 Production.jar``
+**dl_url**: ODK Briefcase JAR download URL,
+ e.g. ``https://s3.amazonaws.com/opendatakit.downloads/ODK Briefcase v1.9.0 Production.jar``
 
-**dl_sig**: Signature of the Briefcase JAR download (to verify the integrity of the JAR). If the Briefcase version changes, get the new signature from `opendatakit.org <https://opendatakit.org/wp-content/uploads/sha256_signatures.txt>`_.
+**dl_sig**: Signature of the Briefcase JAR download (to verify the integrity of the JAR).
+If the Briefcase version changes, get the new signature
+from `opendatakit.org <https://opendatakit.org/wp-content/uploads/sha256_signatures.txt>`_.
 
 **form_id**: Verbal Autopsy ODK Form ID, e.g. ``SmartVA_Bangla_v7``
 
@@ -67,7 +70,8 @@ Check regex with online tools, e.g. `regex101.com <https://regex101.com>`_.
 **ignore_columns**: Which CSV columns in the SmartVA CSV output to ignore for further processing.
 Must be delimited by commas ``,`` and without space, e.g. ``geography1,geography2,geography4,geography5,cause34``
 
-**algorithm_version**: With which version the CoD was obtained, e.g. ``Tariff 2.0``. This is sent as a text attached to the DHIS2 Event.
+**algorithm_version**: With which version the CoD was obtained, e.g. ``Tariff 2.0``.
+This is sent as a text attached to the DHIS2 Event.
 
 
 [dhis]
