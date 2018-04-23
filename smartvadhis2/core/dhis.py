@@ -97,13 +97,13 @@ class Dhis(object):
     def get(self, endpoint, params=None):
         """DHIS2 HTTP GET, returns requests.Response object"""
         url = '{}/{}.json'.format(self.api_url, endpoint)
-        logger.debug('GET: {} - Params: {}'.format(url, params))
+        # logger.debug('GET: {} - Params: {}'.format(url, params))
         return self.api.get(url, params=params, auth=self.auth, headers=self.headers)
 
     def post(self, endpoint, data, params=None):
         """DHIS2 HTTP POST, returns requests.Response object"""
         url = '{}/{}'.format(self.api_url, endpoint)
-        logger.debug('POST: {} - Params: {} - Data: {}'.format(url, params, json.dumps(data)))
+        # logger.debug('POST: {} - Params: {} - Data: {}'.format(url, params, json.dumps(data)))
         return self.api.post(url, params=params, auth=self.auth, headers=self.headers, json=data)
 
     def delete(self, endpoint):

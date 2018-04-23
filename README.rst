@@ -28,7 +28,7 @@ See `here <http://www.healthdata.org/verbal-autopsy/tools>`_ for more details.
    :target: https://travis-ci.org/D4H-VA/smartva-dhis2
 
 .. |BuildWin| image:: https://ci.appveyor.com/api/projects/status/jn7ydwsd7ndq4e57/branch/master?svg=true
-   :target: https://ci.appveyor.com/project/davidhuser/smartva-dhis2
+   :target: https://ci.appveyor.com/project/d4h-va/smartva-dhis2
 
 .. |PyPIVersion| image:: https://img.shields.io/pypi/v/smartva-dhis2.svg
    :target: https://pypi.org/project/smartva-dhis2
