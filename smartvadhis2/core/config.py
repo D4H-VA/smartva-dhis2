@@ -86,8 +86,12 @@ class ODKConfig(Config):
     __section__ = 'odk'
     briefcases_dir = os.path.join(Config.ROOT_DIR, 'data', 'briefcases')
     briefcase_executable = os.path.join(Config.ROOT_DIR, 'smartvadhis2', 'lib')  # download JAR first
-    jar_url = Config._parser.get(__section__, 'dl_url')
-    jar_sig = Config._parser.get(__section__, 'dl_sig')
+    briefcase_version = "v1.9.0"
+
+    jar_url = "https://s3.amazonaws.com/opendatakit.downloads/ODK Briefcase {} Production.jar".format(briefcase_version)
+    # https://opendatakit.org/wp-content/uploads/sha256_signatures.txt
+    jar_sig = "b9c2259b63ae87ef4cfbb16c752b806fc95acf49ff2cb96171f93a2f39fd5995"
+
     form_id = Config._parser.get(__section__, 'form_id')
     sid_regex = Config._parser.get(__section__, 'sid_regex')
 

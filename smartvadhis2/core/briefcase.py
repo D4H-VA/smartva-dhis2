@@ -28,6 +28,7 @@ class ODKBriefcase(object):
             self._download_jar()
         self._verify_jar()
 
+        self._log_version()
         self.timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         self.filename = "briefcase_{}.csv".format(self.timestamp)
 
@@ -53,7 +54,10 @@ class ODKBriefcase(object):
             raise FileException("Verification failed for {} and hash set in config.ini".format(self.jar_filename))
 
     def _get_arguments(self, all_briefcases):
-        """Create the argument list to provide to the Briefcase JAR"""
+        """Create the argument list to provide to the Briefcase JAR
+        see: https://docs.opendatakit.org/briefcase-using/#working-with-the-command-line
+        """
+
         arguments = [
             'java', '-jar', self.jar_path,
             '--storage_directory', ODKConfig.briefcases_dir,
@@ -78,6 +82,14 @@ class ODKBriefcase(object):
         else:
             logger.info("Fetching ALL briefcases...")
         return arguments
+
+    def _log_version(self):
+        with subprocess.Popen(['java', '-jar', self.jar_path, '-v'],
+                              bufsize=1,
+                              universal_newlines=True,
+                              stdout=subprocess.PIPE,
+                              stderr=subprocess.STDOUT) as process:
+            log_subprocess_output(process)
 
     def download_briefcases(self, all_briefcases):
         """Do the actual call to the JAR file and log output messages"""

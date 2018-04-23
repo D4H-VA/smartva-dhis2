@@ -15,6 +15,7 @@ from .mapping import Mapping
 Module that provides various helper methods cross all other modules
 """
 
+
 class Color:
     """Color class to be used for Terminal print formatting"""
     GREEN = '\033[92m'
@@ -43,7 +44,7 @@ def parse_args(args):
                        action='store_true',
                        default=False,
                        required=False,
-                       help="Pull all briefcases instead of relative time window (e.g. yesterday's)"
+                       help="Pull all briefcases instead of relative time window"
                        )
 
     arguments = parser.parse_args(args)
