@@ -27,7 +27,7 @@ install:
 
   # Upgrade to the latest version of pip to avoid it displaying warnings
   # about it being out of date.
-  - "pip install pip==9.0.3"
+  - "pip install pip==9.0.3 --user"
   - "pip install pipenv --user"
   - "C:\\MinGW\\bin\\mingw32-make"
 
