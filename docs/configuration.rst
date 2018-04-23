@@ -27,6 +27,65 @@ Application
 
 All configuration is defined in ``config.ini``. Note that there are no apostrophes (``"`` or ``'``) in this file.
 
-yyy
+[auth]
+^^^^^^
+
+auth_file
+	A file path to where authentication details for DHIS2 and ODK Aggregate are stored - see ``dish.json`` for structure of the file.
+	Keep it on a secure place and refer to its file path.
+
+[logging]
+^^^^^^^^^^
+
+logfile
+	Where the application should log to, e.g. ``/var/log/smartvadhis2.log``
+
+level
+	Minimum Log level - e.g. ``INFO`` logs all info messages, warnings, errors.
+	Must be one of: ``DEBUG``, ``INFO``, ``WARNINGS``
+
+[database]
+^^^^^^^^^^
+
+db_queries_log
+	Whether to log all local database queries as well. Either ``true`` or ``false``.
+
+db_name
+	Name of the local database file, e.g. ``smartva-dhis2.db``
+
+[odk]
+^^^^^^
+
+form_id
+	Verbal Autopsy ODK Form ID, e.g. ``SmartVA_Bangla_v7``
+
+sid_regex
+	Regular Expression that matches a to Verbal Autopsy Study ID number, e.g. ``^VA_[0-9]{17}$``.
+	Check regex with online tools, e.g. `regex101.com <https://regex101.com>`_.
+
+[smartva]
+^^^^^^^^^
+
+ignore_columns
+	Which CSV columns in the SmartVA CSV output to ignore for further processing.
+	Must be delimited by commas ``,`` and without space, e.g. ``geography1,geography2,geography4,geography5,cause34``
+
+algorithm_version
+	With which version the CoD was obtained, e.g. ``Tariff 2.0``.
+	This is sent as a text attached to the DHIS2 Event.
+
+
+[dhis]
+^^^^^^
+program
+	The Unique Identifier (UID) of the Verbal Autopsy DHIS2 program.
+
+program_stage
+	The Unique Identifier (UID) of the Verbal Autopsy DHIS2 program *stage*.
+
+root_orgunit
+	The Unique Identifier (UID) of the Top-Level Root Organisation Unit.
+	This is used to determine if there is a duplicate.
+
 
 For further mapping details see also the ``smartva/core/mapping.py`` module.

@@ -30,4 +30,8 @@ def test_briefcase_args_all():
     assert len(actual) == 18
     assert '--export_start_date' not in actual
     assert '--export_end_date' not in actual
-    assert actual == expected
+    try:
+        assert actual == expected
+    except AssertionError:
+        # retry if seconds of filename do not match
+        assert actual == expected
