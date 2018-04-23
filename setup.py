@@ -83,7 +83,6 @@ setup(
         'requests',
         'records',
         'logzero',
-        'tqdm',
         'alembic'
     ],
     classifiers=[

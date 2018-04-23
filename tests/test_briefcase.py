@@ -1,10 +1,13 @@
 import datetime
 import os
 
-import pytest
-
 from smartvadhis2.core.briefcase import ODKBriefcase
 from smartvadhis2.core.config import ODKConfig
+
+
+def test_briefcase_jar_exists():
+    briefcase = ODKBriefcase()
+    assert os.path.exists(briefcase.jar_path)
 
 
 def test_briefcase_args_timewindows():

@@ -1,17 +1,13 @@
 # -*- coding: utf-8 -*-
 
-import math
 import os
 import subprocess
 from datetime import datetime
 
-import requests
 from logzero import logger
-from tqdm import tqdm
 
 from .config import ODKConfig
-from .exceptions.base import FileException
-from .helpers import sha256_checksum, log_subprocess_output, get_timewindow, is_non_zero_file
+from .helpers import log_subprocess_output, get_timewindow
 
 """
 Module to connect to ODK via ODK Briefcase (JAR)
@@ -22,36 +18,12 @@ class ODKBriefcase(object):
 
     def __init__(self):
 
-        self.jar_filename = ODKConfig.jar_url.split('/')[-1]
+        self.jar_filename = "ODK Briefcase v1.9.0 Production.jar"
         self.jar_path = os.path.join(ODKConfig.briefcase_executable, self.jar_filename)
-        if not os.path.exists(self.jar_path):
-            self._download_jar()
-        self._verify_jar()
 
         self._log_version()
         self.timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         self.filename = "briefcase_{}.csv".format(self.timestamp)
-
-    def _download_jar(self):
-        """Download Briefcase JAR as specified in config.ini - provides a progress bar"""
-        logger.info("Downloading {} ...".format(self.jar_filename))
-        r = requests.get(ODKConfig.jar_url, stream=True)
-        total_size = int(r.headers.get('content-length', 0))
-        block_size = 1024
-        wrote = 0
-        with open(self.jar_path, 'wb') as f:
-            for chunk in tqdm(r.iter_content(chunk_size=1024),
-                              total=math.ceil(total_size // block_size),
-                              unit='KB',
-                              unit_scale=True):
-                if chunk:
-                    wrote = wrote + len(chunk)
-                    f.write(chunk)
-
-    def _verify_jar(self):
-        """Verify JAR with a checksum as specified in config.ini"""
-        if sha256_checksum(self.jar_path) != ODKConfig.jar_sig:
-            raise FileException("Verification failed for {} and hash set in config.ini".format(self.jar_filename))
 
     def _get_arguments(self, all_briefcases):
         """Create the argument list to provide to the Briefcase JAR
