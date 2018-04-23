@@ -1,7 +1,7 @@
 smartva-dhis2
 =============
 
-|Build| |Coverage| |PyPIVersion| |PyVersion|
+|Build| |PyPIVersion| |PyVersion| |Coverage|
 
 A Python package for the integration of Verbal Autopsy data into DHIS2.
 
@@ -24,14 +24,14 @@ The library that creates the most probable Cause of Death based from Briefcase r
 a closed-source binary packaged by *The Institute for Health Metrics and Evaluation (IHME)* and is **excluded** from above licence.
 See `here <http://www.healthdata.org/verbal-autopsy/tools>`_ for more details.
 
-.. |Build| image:: https://img.shields.io/travis/USER/REPO.svg
+.. |Build| image:: https://travis-ci.org/D4H-VA/smartva-dhis2.svg?branch=master
    :target: https://travis-ci.org/D4H-VA/smartva-dhis2
-
-.. |Coverage| image:: https://coveralls.io/repos/github/D4H-VA/smartva-dhis2/badge.svg?branch=master
-   :target: https://coveralls.io/github/D4H-VA/smartva-dhis2?branch=master
 
 .. |PyPIVersion| image:: https://img.shields.io/pypi/v/smartva-dhis2.svg
    :target: https://pypi.org/project/smartva-dhis2
 
 .. |PyVersion| image:: https://img.shields.io/pypi/pyversions/smartva-dhis2.svg
    :target: https://pypi.org/project/smartva-dhis2
+
+.. |Coverage| image:: https://coveralls.io/repos/github/D4H-VA/smartva-dhis2/badge.svg?branch=master
+   :target: https://coveralls.io/github/D4H-VA/smartva-dhis2?branch=master

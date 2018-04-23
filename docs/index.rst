@@ -4,7 +4,7 @@
 smartva-dhis2
 ==============
 
-|ReadTheDocs| |PyPIVersion| |PyVersion|
+|Build| |PyPIVersion| |PyVersion| |Coverage|
 
 A Python package for the integration of Verbal Autopsy data into DHIS2.
 
@@ -40,13 +40,16 @@ Links
 - `IHME / SmartVA <http://www.healthdata.org/verbal-autopsy/tools>`_
 
 
-.. |ReadTheDocs| image:: https://img.shields.io/readthedocs/smartva-dhis2.svg
-   :target: https://smartva-dhis2.readthedocs.io
+.. |Build| image:: https://travis-ci.org/D4H-VA/smartva-dhis2.svg?branch=master
+   :target: https://travis-ci.org/D4H-VA/smartva-dhis2
 
 .. |PyPIVersion| image:: https://img.shields.io/pypi/v/smartva-dhis2.svg
    :target: https://pypi.org/project/smartva-dhis2
 
 .. |PyVersion| image:: https://img.shields.io/pypi/pyversions/smartva-dhis2.svg
    :target: https://pypi.org/project/smartva-dhis2
+
+.. |Coverage| image:: https://coveralls.io/repos/github/D4H-VA/smartva-dhis2/badge.svg?branch=master
+   :target: https://coveralls.io/github/D4H-VA/smartva-dhis2?branch=master
 
 
