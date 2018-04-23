@@ -78,26 +78,8 @@ class AgeMissingError(ValidationError):
         super(ValidationError, self).__init__(self.message, self.code)
 
 
-class CauseCodeMissingError(ValidationError):
-    code = 607
-    err_type = 'VALIDATION'
-    message = "[cause list #] missing but cause not Undetermined"
-
-    def __init__(self):
-        super(ValidationError, self).__init__(self.message, self.code)
-
-
-class CauseCodeParseError(ValidationError):
-    code = 608
-    err_type = 'VALIDATION'
-    message = "Could not parse [cause list #] as Integer"
-
-    def __init__(self):
-        super(ValidationError, self).__init__(self.message, self.code)
-
-
 class CauseOfDeathMissingError(ValidationError):
-    code = 609
+    code = 607
     err_type = 'VALIDATION'
     message = "[cause34] (cause of death) is missing"
 
@@ -106,7 +88,7 @@ class CauseOfDeathMissingError(ValidationError):
 
 
 class Icd10ParseError(ValidationError):
-    code = 610
+    code = 608
     err_type = 'VALIDATION'
     message = "[icd10] does not match mapping"
 
@@ -115,7 +97,7 @@ class Icd10ParseError(ValidationError):
 
 
 class Icd10MissingError(ValidationError):
-    code = 611
+    code = 609
     err_type = 'VALIDATION'
     message = "[icd10] missing"
 
@@ -124,16 +106,16 @@ class Icd10MissingError(ValidationError):
 
 
 class SexParseError(ValidationError):
-    code = 612
+    code = 610
     err_type = 'VALIDATION'
-    message = "[sex] is not an Integer in (1, 2, 3)"
+    message = "[sex] is not an Integer in (1, 2, 3, 8, 9)"
 
     def __init__(self):
         super(ValidationError, self).__init__(self.message, self.code)
 
 
 class SexMissingError(ValidationError):
-    code = 613
+    code = 611
     err_type = 'VALIDATION'
     message = "[sex] is missing"
 
@@ -142,7 +124,7 @@ class SexMissingError(ValidationError):
 
 
 class SidParseError(ValidationError):
-    code = 614
+    code = 612
     err_type = 'VALIDATION'
     message = "[sid] does not match regex expression"
 
@@ -151,7 +133,7 @@ class SidParseError(ValidationError):
 
 
 class SidMissingError(ValidationError):
-    code = 615
+    code = 613
     err_type = 'VALIDATION'
     message = "[sid] is missing"
 
@@ -160,7 +142,7 @@ class SidMissingError(ValidationError):
 
 
 class OrgunitMissingError(ValidationError):
-    code = 616
+    code = 614
     err_type = 'VALIDATION'
     message = "orgunit is missing"
 
@@ -169,7 +151,7 @@ class OrgunitMissingError(ValidationError):
 
 
 class OrgunitNotValidError(ValidationError):
-    code = 617
+    code = 615
     err_type = 'VALIDATION'
     message = "orgunit UID is not a valid UID"
 
@@ -191,7 +173,7 @@ class ImportException(SmartVADHIS2Exception):
 
 
 class OrgunitNotValidImportError(ImportException):
-    message = "OrgUnit is not assigned to program"
+    message = "OrgUnit is not a valid UID"
     code = 700
     err_type = 'IMPORT'
 
@@ -244,8 +226,6 @@ __all__ = [
     'AgeParseError',
     'AgeOutOfBoundsError',
     'AgeMissingError',
-    'CauseCodeMissingError',
-    'CauseCodeParseError',
     'CauseOfDeathMissingError',
     'Icd10ParseError',
     'Icd10MissingError',

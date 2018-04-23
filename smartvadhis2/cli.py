@@ -9,10 +9,16 @@ try:
     from core.config import DhisConfig
     from core.dhis import Dhis
     from core.helpers import Color
+    from core.exceptions.__init__ import db_exceptions
+    from core.exceptions.warnings import ValidationWarning
+    from core.exceptions.errors import ValidationError, ImportException
 except ImportError:
     from smartvadhis2.core.config import DhisConfig
     from smartvadhis2.core.dhis import Dhis
     from smartvadhis2.core.helpers import Color
+    from smartvadhis2.core.exceptions.__init__ import db_exceptions
+    from smartvadhis2.core.exceptions.warnings import ValidationWarning
+    from smartvadhis2.core.exceptions.errors import ValidationError, ImportException
 
 """
 Module to provide various ad-hoc commands not to be run regularly
@@ -38,9 +44,15 @@ def parse_args():
                        help="Download DHIS2 program metadata"
                        )
 
+    group.add_argument('--print_error_categories',
+                       dest='error_categories',
+                       action='store_true',
+                       required=False,
+                       help="Print error categories inserted into the database"
+                       )
+
     arguments = parser.parse_args()
-    print(arguments)
-    if not any([arguments.delete_events, arguments.program_metadata]):
+    if not any([arguments.delete_events, arguments.program_metadata, arguments.error_categories]):
         parser.error('Must provide an argument. see --help')
     return arguments
 
@@ -124,12 +136,34 @@ def download_program_metadata(skip_csv_metadata=True):
     print("Exported {} to {}{}{}".format(descriptor, Color.BOLD, filename, Color.END))
 
 
+def print_error_categories():
+    """
+    Print exception categories that are inserted into the local database
+    """
+
+    def print_tuple(data, msg):
+        """Sort by code and print"""
+        print(msg)
+        [print('- ID:{} - {}'.format(tup[0], tup[1])) for tup in sorted(data, key=lambda tup: tup[0])]
+
+    val_err = [(e.code, e.message) for e in db_exceptions if e.code in range(600, 700)]
+    print_tuple(val_err, 'Validation Errors (600-699)')
+
+    import_err = [(e.code, e.message) for e in db_exceptions if e.code in range(700, 800)]
+    print_tuple(import_err, 'Import Errors (700-799)')
+
+    var_warn = [(w.code, w.message) for w in db_exceptions if w.code in range(800, 900)]
+    print_tuple(var_warn, 'Validation Warnings (800-899)')
+
+
 def main():
     args = parse_args()
     if args.delete_events:
         delete_events()
     if args.program_metadata:
         download_program_metadata()
+    if args.error_categories:
+        print_error_categories()
 
 
 if __name__ == '__main__':
