@@ -20,6 +20,7 @@ records = "*"
 logzero = "*"
 tqdm = "*"
 alembic = "*"
+colorama = {markers = "sys_platform == 'win32'"}
 
 
 [requires]

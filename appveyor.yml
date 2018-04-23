@@ -6,12 +6,10 @@ environment:
     - PYTHON: "C:\\Python35-x64"
       PYTHON_VERSION: "3.5.x"
       PYTHON_ARCH: "64"
-      TOXENV: "py35"
 
     - PYTHON: "C:\\Python36-x64"
       PYTHON_VERSION: "3.6.x"
       PYTHON_ARCH: "64"
-      TOXENV: "py36"
 
 install:
   # Install Python (from the official .msi of http://python.org) and pip when
@@ -27,13 +25,10 @@ install:
   - "python --version"
   - "python -c \"import struct; print(struct.calcsize('P') * 8)\""
 
-  # Upgrade to the latest version of pip to avoid it displaying warnings
-  # about it being out of date.
-  - "pip install --disable-pip-version-check --user --upgrade pip"
-  - "C:\\MinGW\\bin\\mingw32-make"
+  # install pip 9 (10.1.0) has a bug
+  - "pip install pip==9.0.3 --user --disable-pip-version-check"
+  - "pip install pipenv --user --disable-pip-version-check"
+  - "python -m pipenv install --dev"
 
 test_script:
-  - "C:\\MinGW\\bin\\mingw32-make coverage"
-
-on_success:
-  - "pipenv run python setup.py test"
+  - "python -m pipenv run python -m pytest tests"
