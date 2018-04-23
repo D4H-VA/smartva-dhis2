@@ -27,9 +27,9 @@ install:
 
   # Upgrade to the latest version of pip to avoid it displaying warnings
   # about it being out of date.
-  - "pip install pip==9.0.3 --user"
+  - "pip install pip==9.0.3 --user --disable-pip-version-check"
   - "pip install pipenv --user"
-  - "%PYTHON%\python.exe -m pipenv install --dev"
+  - "python -m pipenv install --dev"
 
 test_script:
-  - "%PYTHON%\\python.exe setup.py test"
+  - "python setup.py test"
