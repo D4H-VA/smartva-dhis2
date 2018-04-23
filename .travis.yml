@@ -3,7 +3,10 @@ language: python
 python:
   - '3.5'
   - '3.6'
-install: "make"
+cache: pip
+install:
+  - pip install coveralls
+  - "make"
 script:
   - "make test"
 notifications:
