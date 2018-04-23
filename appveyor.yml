@@ -29,7 +29,7 @@ install:
   # about it being out of date.
   - "pip install pip==9.0.3 --user"
   - "pip install pipenv --user"
-  - "C:\\MinGW\\bin\\mingw32-make"
+  - "%PYTHON%\python.exe -m pipenv install --dev"
 
 test_script:
   - "%PYTHON%\\python.exe setup.py test"
