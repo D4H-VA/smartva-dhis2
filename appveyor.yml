@@ -25,11 +25,10 @@ install:
   - "python --version"
   - "python -c \"import struct; print(struct.calcsize('P') * 8)\""
 
-  # Upgrade to the latest version of pip to avoid it displaying warnings
-  # about it being out of date.
+  # install pip 9 (10.1.0) has a bug
   - "pip install pip==9.0.3 --user --disable-pip-version-check"
-  - "pip install pipenv --user"
+  - "pip install pipenv --user --disable-pip-version-check"
   - "python -m pipenv install --dev"
 
 test_script:
-  - "python setup.py test"
+  - "pipenv run python setup.py test"
