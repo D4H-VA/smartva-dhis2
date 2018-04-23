@@ -32,6 +32,7 @@ Commandline interface
 
 - delete ALL events (asks first)
 - export program metadata w/ dependencies
+- print error categories (exceptions)
 
 
 ::
@@ -39,9 +40,11 @@ Commandline interface
     pipenv run python smartvadhis2/cli.py --help
     usage:
 
-    arguments:
-      --delete_events               Delete all events
-      --download_program_metadata   Download DHIS2 program metadata
+    --delete_events       Delete all events
+    --download_program_metadata
+                          Download DHIS2 program metadata
+    --print_error_categories
+                          Print error categories inserted into the database
 
 
 Updating Documentation
