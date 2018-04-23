@@ -10,13 +10,13 @@ from smartvadhis2.core.models import *
 db_url = os.path.join(Config.ROOT_DIR, 'tests', DatabaseConfig.db_name.replace('.db', '') + '_test.db')
 
 
-@pytest.yield_fixture(scope='session')
+@pytest.fixture(scope='session')
 def engine():
     yield create_engine('sqlite:///' + db_url)
     os.remove(db_url)
 
 
-@pytest.yield_fixture(scope='session')
+@pytest.fixture(scope='session')
 def tables(engine):
     Person.__table__.create(bind=engine, checkfirst=True)
     Failure.__table__.create(bind=engine, checkfirst=True)
@@ -24,7 +24,7 @@ def tables(engine):
     yield
 
 
-@pytest.yield_fixture
+@pytest.fixture
 def dbsession(engine, tables):
     connection = engine.connect()
     # begin the nested transaction

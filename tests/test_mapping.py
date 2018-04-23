@@ -1,5 +1,6 @@
 import csv
 import os
+import json
 import re
 
 from smartvadhis2.core.config import Config
@@ -34,16 +35,21 @@ def test_set_order():
     assert set(numbers) == {0, 1, 2}
 
 
+def open_json(filename):
+    with open(os.path.join(Config.ROOT_DIR, 'metadata', filename)) as f:
+        return json.load(f)
+
+
+def open_csv(filename):
+    with open(os.path.join(Config.ROOT_DIR, 'metadata', filename)) as f:
+        reader = csv.DictReader(f, delimiter=',')
+        return [row for row in reader]
+
+
 class TestMetadataMapping(object):
 
-    @staticmethod
-    def open_csv(filename):
-        with open(os.path.join(Config.ROOT_DIR, 'metadata', filename)) as f:
-            reader = csv.DictReader(f, delimiter=',')
-            return [row for row in reader]
-
     def test_data_elements(self):
-        data = self.open_csv('dataelements.csv')
+        data = open_csv('dataelements.csv')
         try:
             csv_uids = [de['UID'] for de in data]
         except KeyError:
@@ -54,7 +60,7 @@ class TestMetadataMapping(object):
         assert set(csv_uids) == set(mapping_uids)
 
     def test_cause_of_death_optionset(self):
-        data = self.open_csv('optionset_cause_of_death.csv')
+        data = open_csv('optionset_cause_of_death.csv')
         rows = [row for row in data if row.get('optionsetname').startswith('VA- Cause of Death')]
 
         ICD10_REGEX = '(?<=\()(.*?)(?=\))'  # to get ICD10 between (brackets)
@@ -87,7 +93,7 @@ class TestMetadataMapping(object):
         assert all([301 <= v <= 399 for v in options_neonate])
 
     def test_icd10_optionset(self):
-        data = self.open_csv('optionset_ICD10.csv')
+        data = open_csv('optionset_ICD10.csv')
         rows = [row for row in data if row.get('optionsetname').startswith('VA- ICD10')]
 
         option_names = [o.get('optionname') for o in rows]
@@ -98,7 +104,7 @@ class TestMetadataMapping(object):
         assert all([1 <= int(o) <= len(option_codes) for o in option_codes])
 
     def test_sex_optionset(self):
-        data = self.open_csv('optionset_sex.csv')
+        data = open_csv('optionset_sex.csv')
         rows = [row for row in data if row.get('optionsetname').startswith('VA- Sex')]
 
         options = [v.get('optioncode') for v in rows]
@@ -107,7 +113,7 @@ class TestMetadataMapping(object):
         assert set([int(o) for o in options]) == Sex.options
 
     def test_age_category_optionset(self):
-        data = self.open_csv('optionset_age_category.csv')
+        data = open_csv('optionset_age_category.csv')
         rows = [row for row in data if row.get('optionsetname').startswith('VA- Age Category')]
 
         options = [v.get('optioncode') for v in rows]
@@ -129,3 +135,21 @@ class TestMetadataMapping(object):
 
         assert set(icd10_original) == set(age_category_icd10)
 
+
+class TestProgramJSONMapping(object):
+
+    def test_program_json_matches_dataelements(self):
+        json_data = open_json('program.json')
+        csv_data = open_csv('dataelements.csv')
+
+        psde_de = set([psde['dataElement']['id'] for psde in json_data['programStageDataElements']])
+        csv_de = set([de['UID'] for de in csv_data])
+
+        assert psde_de == csv_de
+
+    def test_program_stage_in_all_psde(self):
+        json_data = open_json('program.json')
+
+        ps_uid = {json_data['programStages'][0]['id']}
+        psde_ps = set([psde['programStage']['id'] for psde in json_data['programStageDataElements']])
+        assert ps_uid == psde_ps
