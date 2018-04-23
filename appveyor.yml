@@ -6,12 +6,10 @@ environment:
     - PYTHON: "C:\\Python35-x64"
       PYTHON_VERSION: "3.5.x"
       PYTHON_ARCH: "64"
-      TOXENV: "py35"
 
     - PYTHON: "C:\\Python36-x64"
       PYTHON_VERSION: "3.6.x"
       PYTHON_ARCH: "64"
-      TOXENV: "py36"
 
 install:
   # Install Python (from the official .msi of http://python.org) and pip when
@@ -30,10 +28,8 @@ install:
   # Upgrade to the latest version of pip to avoid it displaying warnings
   # about it being out of date.
   - "pip install --disable-pip-version-check --user --upgrade pip"
+  - "pip install pipenv --user"
   - "C:\\MinGW\\bin\\mingw32-make"
 
 test_script:
-  - "C:\\MinGW\\bin\\mingw32-make coverage"
-
-on_success:
-  - "pipenv run python setup.py test"
+  - "%PYTHON%\\python.exe setup.py test"
