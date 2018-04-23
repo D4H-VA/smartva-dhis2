@@ -142,7 +142,6 @@ class DhisConfig(Config):
     __section__ = 'dhis'
     program_uid = Config._parser.get(__section__, 'program')
     programstage_uid = Config._parser.get(__section__, 'program_stage')
-    root_orgunit = Config._parser.get(__section__, 'root_orgunit')
 
     baseurl = Config.dish[__section__]['baseurl']
     username = Config.dish[__section__]['username']

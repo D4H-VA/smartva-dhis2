@@ -81,7 +81,6 @@ def test_dhis_config():
     assert cfg.baseurl is not None
     assert cfg.username is not None
     assert cfg.password is not None
-    assert is_uid(cfg.root_orgunit)
     assert is_uid(cfg.programstage_uid)
     assert is_uid(cfg.program_uid)
     assert cfg.api_version >= 28

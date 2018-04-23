@@ -94,6 +94,8 @@ class Dhis(object):
         self.auth = (DhisConfig.username, DhisConfig.password)
         self.headers = {'User-Agent': 'smartvadhis2_v.{}'.format(SMARTVADHIS2_VERSION)}
 
+        self.root_orgunit = self.root_orgunit()
+
     def get(self, endpoint, params=None):
         """DHIS2 HTTP GET, returns requests.Response object"""
         url = '{}/{}.json'.format(self.api_url, endpoint)
@@ -128,12 +130,24 @@ class Dhis(object):
         """Check DHIS2 for a duplicate event by SID across all OrgUnits"""
         params = {
             'programStage': DhisConfig.programstage_uid,
-            'orgUnit': DhisConfig.root_orgunit,
+            'orgUnit': self.root_orgunit,
             'ouMode': 'DESCENDANTS',
             'filter': '{}:EQ:{}'.format(Sid.dhis_uid, sid)
         }
         r = self.get(endpoint='events/query', params=params)
         raise_if_duplicate(r.json(), sid)
+
+    def root_orgunit(self):
+        params = {
+            'fields': 'id',
+            'filter': 'level:eq:1'
+        }
+        req = self.get(endpoint='organisationUnits', params=params).json()
+        if len(req['organisationUnits']) > 1:
+            raise DhisApiException("More than one Organisation Units found. Can not proceed.")
+        if len(req['organisationUnits']) == 0:
+            raise DhisApiException("No Organisation Unit found. Can not proceed.")
+        return req['organisationUnits'][0]['id']
 
     def assign_orgunit_to_program(self, data):
         """Assign OrgUnit to program"""

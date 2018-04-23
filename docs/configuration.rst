@@ -20,7 +20,7 @@ Always do a "Dry run" first.
 4. Import ``metadata/optionset_sex.csv``
 5. Import ``metadata/dataelements.csv``
 6. Import ``metadata/program.json``
-7. Import ``metadata/dashboard.json`` TODO
+7. (Import ``metadata/dashboard.json`` - TODO)
 
 Application
 ------------
@@ -72,7 +72,6 @@ ignore_columns
 
 algorithm_version
 	With which version the CoD was obtained, e.g. ``Tariff 2.0``.
-	This is sent as a text attached to the DHIS2 Event.
 
 
 [dhis]
@@ -83,9 +82,17 @@ program
 program_stage
 	The Unique Identifier (UID) of the Verbal Autopsy DHIS2 program *stage*.
 
-root_orgunit
-	The Unique Identifier (UID) of the Top-Level Root Organisation Unit.
-	This is used to determine if there is a duplicate.
-
+api_version
+    DHIS2 API Version (e.g. ``28``)
 
 For further mapping details see also the ``smartva/core/mapping.py`` module.
+
+
+Org Unit details
+-----------------
+
+In order to determine the location of the Verbal Autopsy, you need to define the following steps:
+
+1. Find out where the orgUnit is located in your aggregate CSV
+2. ignore certain columns in the smartva.ignore_columns section of ``config.ini`` (see above)
+3. In ``smartvadhis2/core/mapping.py``, update the csv_name property in the Orgunit class.
