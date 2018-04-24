@@ -245,8 +245,8 @@ class VerbalAutopsy(object):
                     d = datetime.strptime(interview_date, DATE_FMT_2)
                     self._interview_date = d.strftime(DATE_FMT_1)
                 except ValueError:
-                    #raise InterviewDateParseError()
-                    pass
+                    raise InterviewDateParseError()
+                    #pass
         else:
             raise InterviewDateMissingWarning()
 
