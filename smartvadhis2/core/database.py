@@ -134,9 +134,11 @@ class Database(object):
     @staticmethod
     def _to_sql_rows(data):
         """Convert data rows to a dict ready for insertion"""
+        import json
+        print(json.dumps(data))
         try:
             d = {
-                mapping.code_name: data[mapping.code_name]
+                mapping.code_name: data[mapping.csv_name]
                 for mapping in Mapping.properties()
                 if mapping.csv_name is not None
             }

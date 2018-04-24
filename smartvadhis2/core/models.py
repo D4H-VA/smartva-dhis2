@@ -29,8 +29,6 @@ class Person(Base):
     death_date = Column(String)
     interview_date = Column(String)
     national_id = Column(String)
-    algorithm_version = Column(String)
-    questionnaire_version = Column(String)
     created = Column(DateTime, default=datetime.now)
 
 

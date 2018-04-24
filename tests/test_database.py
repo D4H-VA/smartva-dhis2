@@ -67,9 +67,8 @@ def test_add_person_realdata(dbsession):
                     icd10='',
                     sex='',
                     sid='',
-                    national_id='',
-                    algorithm_version='',
-                    questionnaire_version='')
+                    national_id=''
+                    )
 
     dbsession.add(person)
     dbsession.commit()

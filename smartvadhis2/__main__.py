@@ -24,16 +24,16 @@ def smartva_to_dhis2(db, dhis, smartva_file):
                     dhis.is_duplicate(va.sid)
                 except DuplicateEventImportError as e:
                     logger.exception(e)
-                    db.write_errors(va, e)
+                    db.write_errors(record, e)
                 else:
                     try:
                         dhis.post_event(event.payload)
                     except ImportException as e:
                         logger.exception("{}\nfor payload {}".format(e, event.payload))
-                        db.write_errors(va, [e])
+                        db.write_errors(record, [e])
             else:
                 [logger.exception("{} for record {}".format(exception, record)) for exception in exceptions]
-                db.write_errors(va, exceptions)
+                db.write_errors(record, exceptions)
 
 
 def run(arguments):
