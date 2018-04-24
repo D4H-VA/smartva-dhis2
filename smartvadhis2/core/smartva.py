@@ -6,6 +6,7 @@ from logzero import logger
 
 from .config import SmartVAConfig, ODKConfig
 from .helpers import log_subprocess_output, is_non_zero_file
+from .exceptions import NoODKDataException
 
 """
 Module for running SmartVA / lib/smartva binary
@@ -21,7 +22,6 @@ class SmartVA(object):
         """Entry method to run smartva"""
         if is_non_zero_file(input_file):
             input_path = input_file if manual else os.path.join(self.briefcase_dir, input_file)
-            logger.debug(input_path)
 
             logger.info("Running SmartVA ...")
             self._execute([SmartVAConfig.smartva_executable, '--version'])
@@ -41,6 +41,8 @@ class SmartVA(object):
                                   stdout=subprocess.PIPE,
                                   stderr=subprocess.STDOUT) as print_info:
                 log_subprocess_output(print_info)
+        except NoODKDataException:
+            raise
         except subprocess.CalledProcessError as e:
             logger.exception(e)
 

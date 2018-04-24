@@ -23,7 +23,7 @@ class ODKBriefcase(object):
 
         self._log_version()
         self.timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        self.filename = "briefcase_{}.csv".format(self.timestamp)
+        self.filename = "briefcases.csv"
 
     def _get_arguments(self, all_briefcases):
         """Create the argument list to provide to the Briefcase JAR
@@ -75,6 +75,5 @@ class ODKBriefcase(object):
                                   stderr=subprocess.STDOUT) as process:
                 log_subprocess_output(process)
             return os.path.join(ODKConfig.briefcases_dir, self.filename)
-
         except subprocess.CalledProcessError as e:
             logger.exception(e)
