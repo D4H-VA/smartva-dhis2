@@ -42,8 +42,22 @@ To export it as a CSV file:
     pipenv run records 'select sid, surname, cause_of_death from person' csv --url=sqlite:///db/smartva-dhis2.db > export.csv
 
 
+SQL snippets
+^^^^^^^^^^^^^^^
+
+Get the different error code count since a certain date:
+
+.. code:: sql
+
+    select count(pf.failureid), f.failuredescription from person_failure pf
+    join failure f
+    on f.failureid = pf.failureid
+    where pf.created >= '2018-04-24'
+    group by pf.failureid;
+
+
 Supported export formats
--------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 csv, tsv, json, yaml, html, xls, xlsx, dbf, latex, ods
 
