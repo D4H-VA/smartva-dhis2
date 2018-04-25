@@ -106,7 +106,7 @@ class Dhis(object):
     def post(self, endpoint, data, params=None):
         """DHIS2 HTTP POST, returns requests.Response object"""
         url = '{}/{}'.format(self.api_url, endpoint)
-        logger.debug('POST: {} - Params: {} - Data: {}'.format(url, params, json.dumps(data)))
+        # logger.debug('POST: {} - Params: {} - Data: {}'.format(url, params, json.dumps(data)))
         return self.api.post(url, params=params, auth=self.auth, headers=self.headers, json=data)
 
     def delete(self, endpoint):
