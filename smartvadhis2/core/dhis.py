@@ -89,6 +89,7 @@ class Dhis(object):
         elif not url.startswith('https://'):
             url = 'https://{}'.format(url)
 
+        logger.info("Connecting to DHIS2 on {} ...".format(url))
         self.api_url = '{}/api/{}'.format(url, api_version)
         self.api = requests.Session()
         self.auth = (DhisConfig.username, DhisConfig.password)
@@ -99,7 +100,7 @@ class Dhis(object):
     def get(self, endpoint, params=None):
         """DHIS2 HTTP GET, returns requests.Response object"""
         url = '{}/{}.json'.format(self.api_url, endpoint)
-        logger.debug('GET: {} - Params: {}'.format(url, params))
+        # logger.debug('GET: {} - Params: {}'.format(url, params))
         return self.api.get(url, params=params, auth=self.auth, headers=self.headers)
 
     def post(self, endpoint, data, params=None):

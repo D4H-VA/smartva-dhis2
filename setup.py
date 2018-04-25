@@ -74,8 +74,7 @@ setup(
     version=__version__,
     description='Integration of Verbal Autopsy data into DHIS2.',
     long_description=readme,
-    author='David Huser',
-    author_email='dhuser@baosystems.com',
+    author='Data For Health Initiative - Verbal Autopsy',
     url='https://github.com/D4H-VA/smartva-dhis2',
     keywords='smartva verbal autopsy dhis2 tariff odk',
     license='MIT',
@@ -83,8 +82,16 @@ setup(
         'requests',
         'records',
         'logzero',
-        'alembic'
+        'alembic',
+        'apscheduler'
     ],
+    packages=['smartvadhis2'],
+    entry_points={
+        'console_scripts': [
+            'smartva-dhis2 = smartvadhis2.run:launch',
+            'smartva-dhis2-cli = smartvadhis2.cli:main'
+        ]
+    },
     classifiers=[
         # Trove classifiers
         # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -94,7 +101,6 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6'
     ],
-    packages=find_packages(exclude=['tests', 'db', 'data']),
     cmdclass={
         'publish': PublishCommand,
         'test': TestCommand

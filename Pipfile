@@ -1,27 +1,21 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
-
 [dev-packages]
-
 pytest = "*"
 pytest-coverage = "*"
 sphinx = "*"
 sphinx-rtd-theme = "*"
 
-
 [packages]
-
 requests = "*"
 records = "*"
 logzero = "*"
 alembic = "*"
 colorama = {markers = "sys_platform == 'win32'"}
-
+apscheduler = "*"
 
 [requires]
-
 python_version = "3.5"

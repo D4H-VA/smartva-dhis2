@@ -190,7 +190,6 @@ class VerbalAutopsy(object):
 
     @property
     def cause_of_death(self):
-        print(self._age_category, self._icd10)
         return cause_of_death_option_code(self._age_category, self._icd10)
 
     @property
@@ -247,6 +246,7 @@ class VerbalAutopsy(object):
                     self._interview_date = d.strftime(DATE_FMT_1)
                 except ValueError:
                     raise InterviewDateParseError()
+                    #pass
         else:
             raise InterviewDateMissingWarning()
 

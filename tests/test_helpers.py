@@ -6,7 +6,6 @@ import pytest
 from smartvadhis2.core.helpers import (
     sanitize,
     is_uid,
-    parse_args,
     get_timewindow,
     is_non_zero_file,
     days_to_years,
@@ -47,37 +46,6 @@ def test_is_uid():
     assert not is_uid(uid)
 
 
-@pytest.fixture
-def briefcase():
-    tmp_briefcase = 'briefcase_test.csv'
-    with open(tmp_briefcase, 'w') as f:
-        f.write("blub")
-    yield tmp_briefcase
-    os.remove(tmp_briefcase)
-
-
-def test_parse_args_briefcase(briefcase):
-    parser = parse_args(['--briefcase', briefcase])
-    assert parser.briefcase_file == briefcase
-    assert parser.all is False
-
-
-def test_parse_args_briefcase_does_not_exist():
-    with pytest.raises(FileNotFoundError):
-        parse_args(['--briefcase', 'not_here.csv'])
-
-
-def test_parse_args_all_windows():
-    parser = parse_args(['--all'])
-    assert parser.briefcase_file is None
-    assert parser.all is True
-
-
-def test_parse_args_no_args():
-    parser = parse_args([])
-    assert parser.briefcase_file is None
-
-
 FAKE_NOW = datetime.datetime(2018, 4, 16)
 
 
@@ -97,10 +65,6 @@ def test_get_timewindow(faked_now):
     start, end = get_timewindow()
     assert start == '2018/04/09'
     assert end == '2018/04/10'
-
-
-def test_is_non_zero_file_exists(briefcase):
-    assert is_non_zero_file(briefcase)
 
 
 def test_is_non_zero_file_not_exists():

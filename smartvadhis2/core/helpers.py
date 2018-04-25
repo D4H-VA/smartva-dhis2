@@ -1,4 +1,3 @@
-import argparse
 import csv
 import datetime
 import hashlib
@@ -24,42 +23,6 @@ class Color:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
     END = '\033[0m'
-
-
-def parse_args(args):
-    """Parse arguments"""
-    parser = argparse.ArgumentParser(usage='%(prog)s', description="Run SmartVA and import to DHIS2")
-
-    group = parser.add_mutually_exclusive_group()
-
-    group.add_argument('--briefcase',
-                       dest='briefcase_file',
-                       action='store',
-                       required=False,
-                       help="Skip download of briefcase file, provide local file path instead"
-                       )
-
-    group.add_argument('--all',
-                       dest='all',
-                       action='store_true',
-                       default=False,
-                       required=False,
-                       help="Pull all briefcases instead of relative time window"
-                       )
-
-    arguments = parser.parse_args(args)
-    if arguments.briefcase_file and not os.path.exists(arguments.briefcase_file):
-        raise FileNotFoundError("Briefcase file does not exist: {}".format(arguments.briefcase_file))
-    return arguments
-
-
-def log_subprocess_output(process):
-    """Log output from subprocess (e.g. smartva, Briefcase)"""
-    [
-        logger.info(str(line).replace('\n', ''))
-        for line in process.stdout
-        if not any(stop in line for stop in {'ETA: ', 'Time: '})  # don't log progress bars (smartva messages)
-    ]
 
 
 def read_csv(path):
@@ -88,12 +51,12 @@ def sha256_checksum(filename, block_size=65536):
 
 def is_non_zero_file(fpath):
     """Return true if file is existing AND file has content, false otherwise"""
-    logger.debug(fpath)
-    if fpath:
-        exists = os.path.exists(fpath)
-        logger.debug("File exists: {}".format(fpath))
-        if exists:
-            return os.stat(fpath).st_size > 0
+    if fpath and os.path.exists(fpath):
+        has_data = os.stat(fpath).st_size > 0
+        if not has_data:
+            logger.debug("File exists but does not contain data: {}".format(fpath))
+        else:
+            return True
     return False
 
 

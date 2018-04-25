@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
 
 import os
+import re
 import subprocess
 from datetime import datetime
 
 from logzero import logger
 
 from .config import ODKConfig
-from .helpers import log_subprocess_output, get_timewindow
+from .helpers import get_timewindow
+from .exceptions import BriefcaseException
+
 
 """
-Module to connect to ODK via ODK Briefcase (JAR)
+Module to connect to ODK by wrapping ODK Briefcase (JAR)
 """
 
 
@@ -23,7 +26,7 @@ class ODKBriefcase(object):
 
         self._log_version()
         self.timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        self.filename = "briefcase_{}.csv".format(self.timestamp)
+        self.filename = "briefcases.csv"
 
     def _get_arguments(self, all_briefcases):
         """Create the argument list to provide to the Briefcase JAR
@@ -61,20 +64,28 @@ class ODKBriefcase(object):
                               universal_newlines=True,
                               stdout=subprocess.PIPE,
                               stderr=subprocess.STDOUT) as process:
-            log_subprocess_output(process)
+            self._log_subprocess_output(process)
+
+    @staticmethod
+    def _log_subprocess_output(process):
+        """Log output from subprocess"""
+        for line in process.stdout:
+            if re.compile('^\[main] WARN .*$').match(line):
+                logger.warn(line)
+            if re.compile('^\[main] ERROR .*$').match(line):
+                logger.exception(line)
+                raise BriefcaseException(line)
+            else:
+                logger.info(str(line).replace('\n', ''))
 
     def download_briefcases(self, all_briefcases):
         """Do the actual call to the JAR file and log output messages"""
         args = self._get_arguments(all_briefcases)
+        with subprocess.Popen(args,
+                              bufsize=1,
+                              universal_newlines=True,
+                              stdout=subprocess.PIPE,
+                              stderr=subprocess.STDOUT) as process:
+            self._log_subprocess_output(process)
+        return os.path.join(ODKConfig.briefcases_dir, self.filename)
 
-        try:
-            with subprocess.Popen(args,
-                                  bufsize=1,
-                                  universal_newlines=True,
-                                  stdout=subprocess.PIPE,
-                                  stderr=subprocess.STDOUT) as process:
-                log_subprocess_output(process)
-            return os.path.join(ODKConfig.briefcases_dir, self.filename)
-
-        except subprocess.CalledProcessError as e:
-            logger.exception(e)

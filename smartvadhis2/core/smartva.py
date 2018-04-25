@@ -1,14 +1,16 @@
 import os
+import re
 import shutil
 import subprocess
 
 from logzero import logger
 
 from .config import SmartVAConfig, ODKConfig
-from .helpers import log_subprocess_output, is_non_zero_file
+from .helpers import is_non_zero_file
+from .exceptions import NoODKDataException
 
 """
-Module for running SmartVA / lib/smartva binary
+Module for wrapping smartva
 """
 
 
@@ -21,28 +23,22 @@ class SmartVA(object):
         """Entry method to run smartva"""
         if is_non_zero_file(input_file):
             input_path = input_file if manual else os.path.join(self.briefcase_dir, input_file)
-            logger.debug(input_path)
 
             logger.info("Running SmartVA ...")
             self._execute([SmartVAConfig.smartva_executable, '--version'])
             self._execute([SmartVAConfig.smartva_executable, input_path, SmartVAConfig.smartva_dir])
-
             return self._cleanup(input_file)
         else:
             logger.debug("Empty input file for smartva: {}".format(input_file))
 
-    @staticmethod
-    def _execute(arguments):
+    def _execute(self, arguments):
         """Call the smartva binary with provided arguments and log output messages"""
-        try:
-            with subprocess.Popen(arguments,
-                                  bufsize=1,
-                                  universal_newlines=True,
-                                  stdout=subprocess.PIPE,
-                                  stderr=subprocess.STDOUT) as print_info:
-                log_subprocess_output(print_info)
-        except subprocess.CalledProcessError as e:
-            logger.exception(e)
+        with subprocess.Popen(arguments,
+                              bufsize=1,
+                              universal_newlines=True,
+                              stdout=subprocess.PIPE,
+                              stderr=subprocess.STDOUT) as print_info:
+            self._log_subprocess_output(print_info)
 
     @staticmethod
     def _cleanup(filename):
@@ -62,3 +58,14 @@ class SmartVA(object):
         else:
             logger.info("Moved output file to {}".format(target_file))
             return target_file
+
+    @staticmethod
+    def _log_subprocess_output(process):
+        """
+        Log output from subprocess, does not log progress bars of smartva
+        """
+        for line in process.stdout:
+            if re.compile('^Source file \".*\" does not contain data').match(line):
+                raise NoODKDataException
+            if not any(stop in line for stop in {'ETA: ', 'Time: '}):
+                logger.info(str(line).replace('\n', ''))
