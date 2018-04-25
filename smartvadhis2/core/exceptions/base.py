@@ -22,3 +22,8 @@ class NoODKDataException(SmartVADHIS2Exception):
     """Exception when there is no new data downloaded"""
     pass
 
+
+class BriefcaseException(SmartVADHIS2Exception):
+    """Exception for Briefcase output"""
+    pass
+

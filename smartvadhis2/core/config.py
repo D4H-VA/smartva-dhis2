@@ -190,6 +190,8 @@ def setup():
     SmartVAConfig().setup()
     DhisConfig()
 
+
+def access():
     # import here to avoid circular dependencies
     from .briefcase import ODKBriefcase
     from .smartva import SmartVA

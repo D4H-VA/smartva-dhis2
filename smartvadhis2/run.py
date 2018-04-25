@@ -1,13 +1,13 @@
 import argparse
 import sys
-from datetime import datetime, timedelta
 import os
+from datetime import datetime
 
 from logzero import logger
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 
-from .core.config import setup as setup_with_config, DatabaseConfig
+from .core.config import setup, access, DatabaseConfig
 from .core.helpers import read_csv, is_non_zero_file, get_timewindow
 from .core.verbalautopsy import Event, verbal_autopsy_factory
 from .core.exceptions.base import SmartVADHIS2Exception, NoODKDataException
@@ -54,7 +54,8 @@ def _schedule():
                       seconds=SECONDS,
                       args=[False, False],
                       replace_existing=True,
-                      id='smartvadhis2runner')
+                      id='smartva-dhis2-runner',
+                      next_run_time=datetime.now())
     logger.info("Started scheduling every {} seconds".format(SECONDS))
     scheduler.start()
 
@@ -63,30 +64,35 @@ def _run(manual, download_all):
     """
     Method with the application logic.
     """
-    dhis, briefcase, smartva, db = setup_with_config()
+    dhis, briefcase, smartva, db = access()
 
     new_data = False
     if manual:
         smartva_file = smartva.run(manual, manual=True)
+
     else:
         briefcase_file = briefcase.download_briefcases(download_all)
         smartva_file = None
+
         if is_non_zero_file(briefcase_file):
             try:
                 smartva_file = smartva.run(briefcase_file)
             except NoODKDataException:
+                logger.warn("No new data to process in time window {} - {}".format(*get_timewindow()))
                 pass
             else:
                 new_data = True
         else:
-            logger.debug("briefcase file is empty: {}".format(briefcase_file))
+            logger.warn("Warning! Briefcase file is empty: {}".format(briefcase_file))
 
     if new_data:
         for i, record in enumerate(read_csv(smartva_file), 1):
             logger.info("{0} ROW NUMBER: {1} {0}".format('----------', i))
             va, exceptions, warnings = verbal_autopsy_factory(record)
+
             if warnings:
                 [logger.warn("{} for record {}".format(warning, record)) for warning in warnings]
+
             if not exceptions:
                 event = Event(va)
                 try:
@@ -100,16 +106,16 @@ def _run(manual, download_all):
                     except ImportException as e:
                         logger.exception("{}\nfor payload {}".format(e, event.payload))
                         db.write_errors(record, [e])
+
             else:
                 [logger.exception("{} for record {}".format(exception, record)) for exception in exceptions]
                 db.write_errors(record, exceptions)
-    else:
-        logger.warn("No new data to process in time window {} - {}".format(*get_timewindow()))
 
 
 def launch():
     try:
         opts = _parse_args()
+        setup()
         if not any([opts.manual, opts.all]):
             try:
                 _schedule()
@@ -120,4 +126,5 @@ def launch():
     except KeyboardInterrupt:
         logger.warning("Aborted!")
     except Exception as e:
+        logger.exception(e)
         raise SmartVADHIS2Exception(e)

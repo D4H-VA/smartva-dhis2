@@ -82,12 +82,14 @@ setup(
         'requests',
         'records',
         'logzero',
-        'alembic'
+        'alembic',
+        'apscheduler'
     ],
+    packages=['smartvadhis2'],
     entry_points={
         'console_scripts': [
-            'smartvadhis2 = smartvadhis2.run.smartvadhis2_run',
-            'smartvadhis2-cli = smartvadhis2.cli.main'
+            'smartva-dhis2 = smartvadhis2.run:launch',
+            'smartva-dhis2-cli = smartvadhis2.cli:main'
         ]
     },
     classifiers=[
@@ -99,7 +101,6 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6'
     ],
-    packages=find_packages(exclude=['tests', 'db', 'data']),
     cmdclass={
         'publish': PublishCommand,
         'test': TestCommand

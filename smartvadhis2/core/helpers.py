@@ -1,4 +1,3 @@
-import argparse
 import csv
 import datetime
 import hashlib
@@ -8,7 +7,7 @@ import re
 from logzero import logger
 
 from .config import SmartVAConfig
-from .exceptions import FileException, NoODKDataException
+from .exceptions import FileException
 from .mapping import Mapping
 
 """
@@ -24,19 +23,6 @@ class Color:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
     END = '\033[0m'
-
-
-def log_subprocess_output(process):
-    """
-    Log output from subprocess (e.g. smartva, Briefcase)
-    - Raises Exception if no new data was detected
-    - Does not log progress bars of smartva
-    """
-    for line in process.stdout:
-        if re.compile('^Source file \".*\" does not contain data').match(line):
-            raise NoODKDataException
-        if not any(stop in line for stop in {'ETA: ', 'Time: '}):
-            logger.info(str(line).replace('\n', ''))
 
 
 def read_csv(path):
