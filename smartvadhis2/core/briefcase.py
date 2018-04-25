@@ -9,7 +9,7 @@ from logzero import logger
 
 from .config import ODKConfig
 from .helpers import get_timewindow
-from .exceptions import NoODKDataException, BriefcaseException
+from .exceptions import BriefcaseException
 
 
 """
