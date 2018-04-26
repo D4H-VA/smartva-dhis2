@@ -77,15 +77,9 @@ def _run(manual, download_all):
         smartva_file = None
 
         if csv_with_content(briefcase_file):
-            try:
-                smartva_file = smartva.run(briefcase_file)
-            except NoODKDataException:
-                logger.warn("No new data to process in time window {} - {}".format(*get_timewindow()))
-                pass
-            else:
-                new_data = True
+            smartva_file = smartva.run(briefcase_file)
         else:
-            logger.warn("Warning! Briefcase file is empty: {}".format(briefcase_file))
+            logger.warn("No new ODK records to process for time window {} - {}".format(*get_timewindow()))
 
     if new_data:
         for i, record in enumerate(read_csv(smartva_file), 1):
