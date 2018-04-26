@@ -26,7 +26,13 @@ class SmartVA(object):
 
             logger.info("Running SmartVA ...")
             self._execute([SmartVAConfig.smartva_executable, '--version'])
-            self._execute([SmartVAConfig.smartva_executable, input_path, SmartVAConfig.smartva_dir])
+            self._execute([SmartVAConfig.smartva_executable,
+                           '--country', SmartVAConfig.country,
+                           '--hiv', SmartVAConfig.hiv,
+                           '--malaria', SmartVAConfig.malaria,
+                           '--hce', SmartVAConfig.hce,
+                           input_path,
+                           SmartVAConfig.smartva_dir])
             return self._cleanup(input_file)
         else:
             logger.debug("Empty input file for smartva: {}".format(input_file))

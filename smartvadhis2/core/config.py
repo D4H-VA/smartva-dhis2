@@ -115,6 +115,10 @@ class SmartVAConfig(Config):
     smartva_executable = os.path.join(Config.ROOT_DIR, 'smartvadhis2', 'lib', 'smartva')
     ignore_columns = Config._parser.get(__section__, 'ignore_columns').split(',')
     algorithm_version = Config._parser.get(__section__, 'algorithm_version')
+    country = Config._parser.getboolean(__section__, 'country')
+    hiv = Config._parser.getboolean(__section__, 'hiv')
+    malaria = Config._parser.getboolean(__section__, 'malaria')
+    hce = Config._parser.getboolean(__section__, 'hce')
 
     def setup(self):
         self.create_dir(self.smartva_dir)
