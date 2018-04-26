@@ -8,6 +8,14 @@ Development
 - ``pipenv install --dev -e .``
 - ``pipenv run python smartvadhis2`` to run it without installing it from ``pip`` or ``pipenv``
 
+Debugging
+----------
+
+In order to debug the module, you can create a file called ``debug.py`` next to ``__main__.py`` (with same code content)
+and create a debug profile like this:
+
+.. image:: _static/debug_config_pycharm.png
+
 Testing
 --------
 ``pytest`` is used for Unit testing.
