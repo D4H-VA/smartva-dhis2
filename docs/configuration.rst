@@ -21,6 +21,14 @@ Always do a "Dry run" first.
 6. Import ``metadata/program.json``
 7. (Import ``metadata/dashboard.json`` - TODO)
 
+Probably it is a good idea to create a dedicated ``verbal-autopsy-bot`` user account with at least the following access:
+
+- the whole Organisation Unit hierarchy
+- User Role authority to send Events
+- User Role authority to access the program (read and write)
+- User Role *read* authority for all imported metadata
+
+
 Application
 ------------
 
@@ -117,7 +125,8 @@ Country list
 See section [smartva] above.
 
 Country list:
-- Unknown
+
+- Unknown [default]
 - Afghanistan (AFG)
 - Albania (ALB)
 - Algeria (DZA)

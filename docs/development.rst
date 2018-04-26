@@ -1,32 +1,34 @@
 Development
 ===========
 
-- Install Python 3.5+
-- Install ``pip``
-- Install ``pipenv``
-- Clone repository
-- ``pipenv install --dev -e .``
-- ``pipenv run python smartvadhis2`` to run it without installing it from ``pip`` or ``pipenv``
+Follow instructions in :doc:`/installation`, but install it with ``--dev -e .`` flag:
 
-Debugging
-----------
+.. code:: bash
 
-In order to debug the module, you can create a file called ``debug.py`` next to ``__main__.py`` (with same code content)
-and create a debug profile like this:
+    pipenv install --ignore-pipfile --dev -e .
 
-.. image:: _static/debug_config_pycharm.png
+Entry point for the code is at ``__main__.py``.
 
 Testing
 --------
-``pytest`` is used for Unit testing.
+`pytest <https://docs.pytest.org/en/latest>`_ is used for Unit testing.
 
 .. code:: bash
 
     pipenv run python setup.py test
 
+
+Debugging
+----------
+
+In order to debug the module, you can create a file called ``debug.py`` next to ``__main__.py`` (with same code content)
+and create a debug profile in PyCharm like this:
+
+.. image:: _static/debug_config_pycharm.png
+
+
 Releasing
 ----------
-- To release a new pip installable package, run ``pipenv run python setup.py publish``.
 - Use `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_:
 
 

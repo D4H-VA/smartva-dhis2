@@ -1,25 +1,42 @@
 Installation
 ------------
 
-It is *highly recommended* to install this on a development/test server before running it in production.
+.. note:: It is *highly recommended* to install this on a development/test server before running it in production.
 
 Use `pipenv <https://docs.pipenv.org>`_ (the recommended wrapper for virtualenvs and pip) to install this package.
-It depends on Python 3.5+ and various packages as described in ``Pipfile``.
+It depends on Python 3.5+ and various packages as described in ``Pipfile`` and DHIS2 2.28 as for now.
+
+Included:
 
 - Briefcase version: 1.10.1 Production (see `ODK Github <https://github.com/opendatakit/briefcase/releases>`_)
 - smartva: SmartVA-Analyze, version 2.0.0-a8
 
-.. code:: bash
+Ubuntu installation (tested with 16.04 LTS)
 
-    pipenv install smartva-dhis2
-
-Then, to run the application, invoke:
 
 .. code:: bash
 
-    smartva-dhis2
+    # apt update
+    # apt install python3
+    # apt install python3-venv python3-pip
 
-Optional but exclusive arguments:
+    Change to a non-root user
+    $ pip3 install pipenv --user
+    $ git clone https://github.com/D4H-VA/smartva-dhis2
+    $ cd smartva-dhis2
+    $ pipenv install --ignore-pipfile
+
+Run
+^^^^
+
+Refer to the :doc:`/configuration` page first before running it.
+
+.. code:: bash
+
+    cd /path/to/repo
+    pipenv run python -m smartvadhis2 [--options]
+
+Options are:
 
 ::
 
@@ -27,11 +44,21 @@ Optional but exclusive arguments:
     --all                 Pull ALL briefcases instead of relative time window
 
 
-If you do not provide any argument, it will attempt to import ODK aggregate records from last week (today minus 7 days).
+**If you do not provide any argument**, it will attempt to import ODK Aggregate records from last week (today minus 7 days).
 e.g. if today is ``2018-04-08`` it attempts to download records for ``2018-04-01:00:00:00`` to ``2018-04-01:23:59:59``.
 
 This is scheduled to run every three hours (leading to messages that the record is already in DHIS2)
 but then it's expected.
+
+
+Tests
+^^^^^^
+
+To run tests:
+
+.. code:: bash
+
+    pipenv run python setup.py test
 
 Deployment
 ^^^^^^^^^^^
@@ -54,10 +81,3 @@ For systemd-based Operating Systems, you can install this service (adjust ``/pat
 
     [Install]
     WantedBy=multi-user.target
-
-
-To run tests:
-
-.. code:: bash
-
-    pipenv run python setup.py test
