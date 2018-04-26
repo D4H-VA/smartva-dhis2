@@ -6,7 +6,7 @@ It is *highly recommended* to install this on a development/test server before r
 Use `pipenv <https://docs.pipenv.org>`_ (the recommended wrapper for virtualenvs and pip) to install this package.
 It depends on Python 3.5+ and various packages as described in ``Pipfile``.
 
-- Briefcase version: 1.9.0 Production (see `here <https://opendatakit.org/downloads/download-info/odk-briefcase>`_)
+- Briefcase version: 1.10.1 Production (see `ODK Github <https://github.com/opendatakit/briefcase/releases>`_)
 - smartva: SmartVA-Analyze, version 2.0.0-a8
 
 .. code:: bash
@@ -17,7 +17,7 @@ Then, to run the application, invoke:
 
 .. code:: bash
 
-    pipenv run smartvadhis2
+    smartva-dhis2
 
 Optional but exclusive arguments:
 
@@ -27,21 +27,18 @@ Optional but exclusive arguments:
     --all                 Pull ALL briefcases instead of relative time window
 
 
-If you do not provide any argument, it will attempt to import ODK aggregate records in a sliding time window, where
+If you do not provide any argument, it will attempt to import ODK aggregate records from last week (today minus 7 days).
+e.g. if today is ``2018-04-08`` it attempts to download records for ``2018-04-01:00:00:00`` to ``2018-04-01:23:59:59``.
 
-::
-
-    start_date = today minus 1 week
-    end_date = start_date + 1 day
-
-e.g. if today is 2018-04-08 it will pass 2018-04-01 -> 2018-04-02 as arguments to ODK Briefcase.
+This is scheduled to run every three hours (leading to messages that the record is already in DHIS2)
+but then it's expected.
 
 Deployment
 ^^^^^^^^^^^
 
 Make sure the script is running even after server reboots. This depends on the Operating System.
 
-For systemd-based Operating Systems, you can install this service:
+For systemd-based Operating Systems, you can install this service (adjust ``/path/to/repo``)
 
 ::
 
@@ -53,7 +50,7 @@ For systemd-based Operating Systems, you can install this service:
     Type=simple
     Restart=always
     WorkingDirectory=/path/to/repo
-    ExecStart=/usr/local/bin/pipenv run smartvadhis2
+    ExecStart=/usr/local/bin/pipenv run python -m smartvadhis2
 
     [Install]
     WantedBy=multi-user.target

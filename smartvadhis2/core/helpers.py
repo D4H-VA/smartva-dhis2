@@ -71,12 +71,9 @@ def is_uid(string):
     return re.compile('^[A-Za-z][A-Za-z0-9]{10}$').match(string)
 
 
-def get_timewindow(weeks=-1, days=1, fmt='%Y/%m/%d'):
+def get_timewindow(weeks=-1, days=0, fmt='%Y/%m/%d'):
     """Return tuple of datetime strings
-    start = today minus 1 week
-    end = start + 1 day
-    e.g. if today is Tuesday, 2018-04-08, return
-    (2018-04-01, 2018-04-02)
+    ODK Briefcase is inclusive: https://github.com/opendatakit/briefcase/issues/159
     """
     now = datetime.datetime.now()
     start = (now + datetime.timedelta(weeks=weeks))

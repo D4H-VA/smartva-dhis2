@@ -64,7 +64,7 @@ def test_get_timewindow(faked_now):
     assert now == FAKE_NOW
     start, end = get_timewindow()
     assert start == '2018/04/09'
-    assert end == '2018/04/10'
+    assert end == '2018/04/09'
 
 
 def test_is_non_zero_file_not_exists():
