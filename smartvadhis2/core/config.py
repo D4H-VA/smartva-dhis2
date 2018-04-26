@@ -1,6 +1,7 @@
 import json
 import os
 import platform
+import subprocess
 import logging  # keep for LoggingConfig.setup()
 import stat
 import sys
@@ -167,6 +168,18 @@ def check_python_version():
         ))
 
 
+def check_java_installed():
+    """Verify java is installed for running ODK Briefcase"""
+    try:
+        subprocess.Popen(['java', '--version'],
+                         bufsize=1,
+                         universal_newlines=True,
+                         stdout=subprocess.PIPE,
+                         stderr=subprocess.STDOUT)
+    except FileNotFoundError:
+        logger.exception("Java installation not found")
+
+
 def check_operating_system():
     """Get the operating system the application is running on"""
     opsys = platform.system()
@@ -181,8 +194,9 @@ def setup():
     """Method to set everything up and return instances of the respective module classes"""
     LoggingConfig().setup()
 
-    check_python_version()
     check_operating_system()
+    check_java_installed()
+    check_python_version()
 
     DatabaseConfig().setup()
     DataDirConfig().setup()
