@@ -1,0 +1,4 @@
+sid,national_id,name,name2,surname,surname2,geography1,geography2,geography3,geography4,geography5,cause34,cause list #,icd10,age,sex,birth_date,death_date,interview_date
+VA_12342215225123456,54,A amin,Darth Vader,Skywalker,,u7T5N81y4aU,bb3Zld3B8z0,MJ0S8In5PIQ,VVS7SuCWYRI,GSGNlW5McFb,Homicide,16,Y09,48 years,1,,,"Mar 26, 2018"
+VA_12342212222123456,20202020,Joan,Of,Ark,,PHa5gf2nadH,TdsPHReXCYD,wrGMB1SnYGR,V1UEigOLUev,HO5HagDSmnY,Diabetes,9,E14,82 years,2,1933-01-01,2016-01-01,"Mar 26, 2018"
+VA_19752212222123456,101010,Han,,Solo,,cKuLAesQuzV,drvOPxQmmSO,UatIDzyz41i,gJ5eerA6za7,PSoRVLwvNbB,Congenital malformation,2,Q89,10 days,1,,,"Mar 26, 2018"

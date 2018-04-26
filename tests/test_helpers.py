@@ -13,6 +13,8 @@ from smartvadhis2.core.helpers import (
     read_csv
 )
 
+from smartvadhis2.core.config import Config
+
 
 def test_sanitize():
     data = {
@@ -67,21 +69,30 @@ def test_get_timewindow(faked_now):
     assert end == '2018/04/09'
 
 
+def file_testdata(filename):
+    return os.path.join(Config.ROOT_DIR, 'tests', 'testdata', filename)
+
+
 def test_is_non_zero_file_not_exists():
     assert is_non_zero_file('notexisting.csv') is False
 
 
-@pytest.fixture
-def briefcase_empty():
-    tmp_briefcase = 'briefcase_test.csv'
-    with open(tmp_briefcase, 'w'):
-        pass
-    yield tmp_briefcase
-    os.remove(tmp_briefcase)
+def test_is_non_zero_file_valid():
+    data = file_testdata('briefcase_valid.csv')
+    assert os.path.exists(data)
+    assert is_non_zero_file(data, csv_file=True) is True
 
 
-def test_is_non_zero_file_exists_but_empty(briefcase_empty):
-    assert is_non_zero_file(briefcase_empty) is False
+def test_is_non_zero_file_exists_but_empty():
+    data = file_testdata('briefcase_empty.csv')
+    assert os.path.exists(data)
+    assert is_non_zero_file(data, csv_file=True) is False
+
+
+def test_is_non_zero_file_exists_headers_only():
+    data = file_testdata('briefcase_headers_only.csv')
+    assert os.path.exists(data)
+    assert is_non_zero_file(data, csv_file=True) is False
 
 
 @pytest.mark.parametrize("years, expected", [
@@ -102,20 +113,10 @@ def test_years_to_days(days, expected):
     assert days_to_years(days) == expected
 
 
-@pytest.fixture
-def test_data():
-    s = '''sid,national_id,name,name2,surname,surname2,geography1,geography2,geography3,geography4,geography5,cause34,cause list #,icd10,age,sex,birth_date,death_date,interview_date
-VA_12342215225123456,54,A amin,Darth Vader,Skywalker,,u7T5N81y4aU,bb3Zld3B8z0,MJ0S8In5PIQ,VVS7SuCWYRI,GSGNlW5McFb,Homicide,16,Y09,48 years,1,,,"Mar 26, 2018"
-VA_12342212222123456,20202020,Joan,Of,Ark,,PHa5gf2nadH,TdsPHReXCYD,wrGMB1SnYGR,V1UEigOLUev,HO5HagDSmnY,Diabetes,9,E14,82 years,2,1933-01-01,2016-01-01,"Mar 26, 2018"
-VA_19752212222123456,101010,Han,,Solo,,cKuLAesQuzV,drvOPxQmmSO,UatIDzyz41i,gJ5eerA6za7,PSoRVLwvNbB,Congenital malformation,2,Q89,10 days,1,,,"Mar 26, 2018"'''
-    tmp_file = 'test_smartva_csv'
-    with open(tmp_file, 'w') as f:
-        f.write(s)
-    yield tmp_file
-    os.remove(tmp_file)
+def test_read_csv():
+    data = file_testdata('smartva_test.csv')
+    assert os.path.exists(data)
 
-
-def test_read_csv(test_data):
     expected = [
         {
             "sid": "VA_12342215225123456",
@@ -181,6 +182,6 @@ def test_read_csv(test_data):
             "interview_date": "Mar 26, 2018"
         }
     ]
-    for i, row in enumerate(read_csv('test_smartva_csv')):
+    for i, row in enumerate(read_csv(data)):
         for key in row.keys():
             assert row.get(key, None) == expected[i][key]
