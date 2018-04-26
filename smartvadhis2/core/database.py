@@ -134,8 +134,6 @@ class Database(object):
     @staticmethod
     def _to_sql_rows(data):
         """Convert data rows to a dict ready for insertion"""
-        import json
-        print(json.dumps(data))
         try:
             d = {
                 mapping.code_name: data[mapping.csv_name]
@@ -146,11 +144,6 @@ class Database(object):
             raise SmartVADHIS2Exception("Mapping is not aligned with CSV rows %s", e)
         else:
             return d
-
-    def query(self, query):
-        Session = sessionmaker(bind=self.engine)
-        session = Session()
-        return session.query(query)
 
 
 # "singleton" for db connection

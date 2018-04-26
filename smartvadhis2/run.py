@@ -10,7 +10,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 from .core.config import setup, access, DatabaseConfig
 from .core.helpers import read_csv, csv_with_content, get_timewindow
 from .core.verbalautopsy import Event, verbal_autopsy_factory
-from .core.exceptions.base import SmartVADHIS2Exception, NoODKDataException
+from .core.exceptions.base import SmartVADHIS2Exception
 from .core.exceptions.errors import ImportException, DuplicateEventImportError
 
 
@@ -68,44 +68,44 @@ def _run(manual, download_all):
     """
     dhis, briefcase, smartva, db = access()
 
-    new_data = False
     if manual:
         smartva_file = smartva.run(manual, manual=True)
-        new_data = True
     else:
         briefcase_file = briefcase.download_briefcases(download_all)
         smartva_file = None
-
         if csv_with_content(briefcase_file):
             smartva_file = smartva.run(briefcase_file)
         else:
             logger.warn("No new ODK records to process for time window {} - {}".format(*get_timewindow()))
 
-    if new_data:
+    if csv_with_content(smartva_file):
+        no_of_records = sum(1 for _ in read_csv(smartva_file))
         for i, record in enumerate(read_csv(smartva_file), 1):
-            logger.info("{0} ROW NUMBER: {1} {0}".format('----------', i))
-            va, exceptions, warnings = verbal_autopsy_factory(record)
+            logger.info("{0} [{1}/{2}] SID: {3} {0}".format('---------', i, no_of_records, record.get('sid')))
+            va, exc, warnings = verbal_autopsy_factory(record)
+            logger.info(record)
 
             if warnings:
-                [logger.warn("{} for record {}".format(warning, record)) for warning in warnings]
+                [logger.warn(w) for w in warnings]
 
-            if not exceptions:
+            if exc:
+                [logger.error(e) for e in exc]
+                db.write_errors(record, exc)
+            else:
                 event = Event(va)
                 try:
                     dhis.is_duplicate(va.sid)
                 except DuplicateEventImportError as e:
-                    logger.exception(e)
+                    logger.exception("Record for ID {} already exists in DHIS2".format(record.get('sid')))
                     db.write_errors(record, e)
                 else:
                     try:
                         dhis.post_event(event.payload)
                     except ImportException as e:
                         logger.exception("{}\nfor payload {}".format(e, event.payload))
-                        db.write_errors(record, [e])
-
-            else:
-                [logger.exception("{} for record {}".format(exception, record)) for exception in exceptions]
-                db.write_errors(record, exceptions)
+                        db.write_errors(record, e)
+                    else:
+                        logger.info("Import successful!")
 
 
 def launch():

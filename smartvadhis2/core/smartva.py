@@ -71,7 +71,7 @@ class SmartVA(object):
         Log output from subprocess, does not log progress bars of smartva
         """
         for line in process.stdout:
-            if re.compile('^Source file \".*\" does not contain data').match(line):
+            if re.compile(r'^Source file \".*\" does not contain data').match(line):
                 raise NoODKDataException
             if not any(stop in line for stop in {'ETA: ', 'Time: '}):
                 logger.info(str(line).replace('\n', ''))

@@ -70,12 +70,17 @@ class ODKBriefcase(object):
     def _log_subprocess_output(process):
         """Log output from subprocess"""
         for line in process.stdout:
-            if re.compile('^\[main] WARN .*$').match(line):
+            if re.compile(r'^Error: Server connection test failure.*').match(line):
+                raise BriefcaseException("Could not connect to server. Check config.ini / dish.json")
+            if re.compile(r'^\[main] WARN .*$').match(line):
                 logger.warn(line)
-            if re.compile('^\[main] ERROR .*$').match(line):
-                logger.exception(line)
+            if re.compile(r'^\[main] ERROR .*$').match(line):
+                logger.error(line)
                 raise BriefcaseException(line)
+
             else:
+                # remove timestamp for better readabilityf
+                line = re.sub(r'^\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2},\d{3}\s', '', line)
                 logger.info(str(line).replace('\n', ''))
 
     def download_briefcases(self, all_briefcases):

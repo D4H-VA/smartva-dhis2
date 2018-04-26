@@ -4,8 +4,6 @@ import hashlib
 import os
 import re
 
-from logzero import logger
-
 from .config import SmartVAConfig
 from .exceptions import FileException
 from .mapping import Mapping

@@ -4,14 +4,20 @@
 # data folder
 data/
 
-# ODK Briefcase
+# unnecessary Briefcase / SmartVA folders
 fontconfig
+intermediate-files
 
 # database
 db/*.db
 
 # open workbooks
 .~lock.*.csv*
+
+# see https://docs.pipenv.org/basics/#general-recommendations-version-control
+Pipfile.lock
+
+debug.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
