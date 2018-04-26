@@ -16,7 +16,9 @@ from .core.exceptions.errors import ImportException, DuplicateEventImportError
 
 def _parse_args(args=sys.argv[1:]):
     """Parse arguments"""
-    parser = argparse.ArgumentParser(usage='%(prog)s', description=u"Run SmartVA and import to DHIS2")
+    description = u"Download briefcases, run SmartVA and import to DHIS2.\n" \
+                  u"If no arguments are provided it is scheduled and run in a sliding time window mode."
+    parser = argparse.ArgumentParser(usage='%(prog)s', description=description)
 
     group = parser.add_mutually_exclusive_group()
 
@@ -69,7 +71,7 @@ def _run(manual, download_all):
     new_data = False
     if manual:
         smartva_file = smartva.run(manual, manual=True)
-
+        new_data = True
     else:
         briefcase_file = briefcase.download_briefcases(download_all)
         smartva_file = None

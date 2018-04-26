@@ -74,7 +74,7 @@ def remove_keys(obj, rubbish):
 def delete_events():
     """Delete ALL Verbal Autopsy Program Events from DHIS2"""
     confirm = input('You are about to {}delete{} ALL Verbal Autopsy DHIS2 Program Events from {}{}. '
-                    'Are you really sure? Type yes / no'.format(Color.RED, Color.BOLD, DhisConfig.baseurl, Color.END))
+                    'Are you really sure? Type yes / no\n'.format(Color.RED, Color.BOLD, DhisConfig.baseurl, Color.END))
     if confirm.lower() == 'yes':
         api = Dhis()
 

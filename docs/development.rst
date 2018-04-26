@@ -5,7 +5,8 @@ Development
 - Install ``pip``
 - Install ``pipenv``
 - Clone repository
-- ``pipenv install --dev``
+- ``pipenv install --dev -e .``
+- ``pipenv run python smartvadhis2`` to run it without installing it from ``pip`` or ``pipenv``
 
 Testing
 --------
