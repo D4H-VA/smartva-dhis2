@@ -21,7 +21,7 @@ class ODKBriefcase(object):
 
     def __init__(self):
 
-        self.jar_filename = "ODK Briefcase v1.9.0 Production.jar"
+        self.jar_filename = "ODK-Briefcase-v1.10.1.jar"
         self.jar_path = os.path.join(ODKConfig.briefcase_executable, self.jar_filename)
 
         self._log_version()
