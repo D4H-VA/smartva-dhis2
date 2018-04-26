@@ -28,9 +28,9 @@ class SmartVA(object):
             self._execute([SmartVAConfig.smartva_executable, '--version'])
             self._execute([SmartVAConfig.smartva_executable,
                            '--country', SmartVAConfig.country,
-                           '--hiv', SmartVAConfig.hiv,
-                           '--malaria', SmartVAConfig.malaria,
-                           '--hce', SmartVAConfig.hce,
+                           '--hiv', '{}'.format(SmartVAConfig.hiv),
+                           '--malaria', '{}'.format(SmartVAConfig.malaria),
+                           '--hce', '{}'.format(SmartVAConfig.hce),
                            input_path,
                            SmartVAConfig.smartva_dir])
             return self._cleanup(input_file)
