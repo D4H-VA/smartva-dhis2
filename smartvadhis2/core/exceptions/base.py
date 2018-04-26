@@ -27,3 +27,8 @@ class BriefcaseException(SmartVADHIS2Exception):
     """Exception for Briefcase output"""
     pass
 
+
+class SmartVAException(SmartVADHIS2Exception):
+    """Exceptions for SmartVA output"""
+    pass
+

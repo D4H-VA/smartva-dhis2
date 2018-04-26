@@ -7,7 +7,7 @@ from logzero import logger
 
 from .config import SmartVAConfig, ODKConfig
 from .helpers import csv_with_content
-from .exceptions import NoODKDataException
+from .exceptions import SmartVAException, NoODKDataException
 
 """
 Module for wrapping smartva
@@ -27,7 +27,7 @@ class SmartVA(object):
             logger.info("Running SmartVA ...")
             self._execute([SmartVAConfig.smartva_executable, '--version'])
             self._execute([SmartVAConfig.smartva_executable,
-                           '--country', SmartVAConfig.country,
+                           '--country', SmartVAConfig.country.upper(),
                            '--hiv', '{}'.format(SmartVAConfig.hiv),
                            '--malaria', '{}'.format(SmartVAConfig.malaria),
                            '--hce', '{}'.format(SmartVAConfig.hce),
@@ -55,6 +55,10 @@ class SmartVA(object):
         target_file = os.path.join(SmartVAConfig.smartva_dir, 'output', 'smartva_{}'.format(os.path.basename(filename).replace('_briefcase', '')))
         try:
             shutil.move(output_file, target_file)
+        except FileNotFoundError:
+            raise SmartVAException("SmartVA could not generate output - file not found: {}".format(output_file))
+
+        try:
             shutil.rmtree(os.path.join(SmartVAConfig.smartva_dir, '1-individual-cause-of-death'))
             shutil.rmtree(os.path.join(SmartVAConfig.smartva_dir, '2-csmf'))
             shutil.rmtree(os.path.join(SmartVAConfig.smartva_dir, '3-graphs-and-tables'))
@@ -68,10 +72,10 @@ class SmartVA(object):
     @staticmethod
     def _log_subprocess_output(process):
         """
-        Log output from subprocess, does not log progress bars of smartva
+        Log output from subprocess, does not log progress bars of smartva or empty messages
         """
         for line in process.stdout:
             if re.compile(r'^Source file \".*\" does not contain data').match(line):
                 raise NoODKDataException
-            if not any(stop in line for stop in {'ETA: ', 'Time: '}):
+            if not any(stop in line for stop in {'ETA: ', 'Time: '}) and line:
                 logger.info(str(line).replace('\n', ''))

@@ -71,7 +71,7 @@ class ODKBriefcase(object):
         """Log output from subprocess"""
         for line in process.stdout:
             if re.compile(r'^Error: Server connection test failure.*').match(line):
-                raise BriefcaseException("Could not connect to server. Check config.ini / dish.json")
+                raise BriefcaseException("Could not connect to ODK server. Check config.ini / dish.json")
             if re.compile(r'^\[main] WARN .*$').match(line):
                 logger.warn(line)
             if re.compile(r'^\[main] ERROR .*$').match(line):
