@@ -8,7 +8,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 
 
 from .core.config import setup, access, DatabaseConfig
-from .core.helpers import read_csv, is_non_zero_file, get_timewindow
+from .core.helpers import read_csv, csv_with_content, get_timewindow
 from .core.verbalautopsy import Event, verbal_autopsy_factory
 from .core.exceptions.base import SmartVADHIS2Exception, NoODKDataException
 from .core.exceptions.errors import ImportException, DuplicateEventImportError
@@ -76,7 +76,7 @@ def _run(manual, download_all):
         briefcase_file = briefcase.download_briefcases(download_all)
         smartva_file = None
 
-        if is_non_zero_file(briefcase_file):
+        if csv_with_content(briefcase_file):
             try:
                 smartva_file = smartva.run(briefcase_file)
             except NoODKDataException:

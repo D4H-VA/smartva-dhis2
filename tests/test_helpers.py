@@ -7,7 +7,7 @@ from smartvadhis2.core.helpers import (
     sanitize,
     is_uid,
     get_timewindow,
-    is_non_zero_file,
+    csv_with_content,
     days_to_years,
     years_to_days,
     read_csv
@@ -73,26 +73,26 @@ def file_testdata(filename):
     return os.path.join(Config.ROOT_DIR, 'tests', 'testdata', filename)
 
 
-def test_is_non_zero_file_not_exists():
-    assert is_non_zero_file('notexisting.csv') is False
+def test_csv_with_content_not_found():
+    assert csv_with_content('notexisting.csv') is False
 
 
-def test_is_non_zero_file_valid():
+def test_csv_with_content_valid():
     data = file_testdata('briefcase_valid.csv')
     assert os.path.exists(data)
-    assert is_non_zero_file(data, csv_file=True) is True
+    assert csv_with_content(data) is True
 
 
-def test_is_non_zero_file_exists_but_empty():
+def test_csv_with_content_exists_but_empty():
     data = file_testdata('briefcase_empty.csv')
     assert os.path.exists(data)
-    assert is_non_zero_file(data, csv_file=True) is False
+    assert csv_with_content(data) is False
 
 
-def test_is_non_zero_file_exists_headers_only():
+def test_csv_with_content_headers_only():
     data = file_testdata('briefcase_headers_only.csv')
     assert os.path.exists(data)
-    assert is_non_zero_file(data, csv_file=True) is False
+    assert csv_with_content(data) is False
 
 
 @pytest.mark.parametrize("years, expected", [

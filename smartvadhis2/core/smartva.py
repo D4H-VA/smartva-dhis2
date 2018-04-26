@@ -6,7 +6,7 @@ import subprocess
 from logzero import logger
 
 from .config import SmartVAConfig, ODKConfig
-from .helpers import is_non_zero_file
+from .helpers import csv_with_content
 from .exceptions import NoODKDataException
 
 """
@@ -21,7 +21,7 @@ class SmartVA(object):
 
     def run(self, input_file, manual=False):
         """Entry method to run smartva"""
-        if is_non_zero_file(input_file):
+        if csv_with_content(input_file):
             input_path = input_file if manual else os.path.join(self.briefcase_dir, input_file)
 
             logger.info("Running SmartVA ...")

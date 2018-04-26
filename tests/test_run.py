@@ -2,20 +2,18 @@ import os
 import pytest
 
 from smartvadhis2.run import _parse_args
-from smartvadhis2.core.helpers import is_non_zero_file
-
-@pytest.fixture
-def briefcase():
-    tmp_briefcase = 'briefcase_test.csv'
-    with open(tmp_briefcase, 'w') as f:
-        f.write("blub")
-    yield tmp_briefcase
-    os.remove(tmp_briefcase)
+from smartvadhis2.core.helpers import csv_with_content
+from smartvadhis2.core.config import Config
 
 
-def test_parse_args_briefcase(briefcase):
-    parser = _parse_args(['--manual', briefcase])
-    assert parser.manual == briefcase
+def file_testdata(filename):
+    return os.path.join(Config.ROOT_DIR, 'tests', 'testdata', filename)
+
+
+def test_parse_args_briefcase():
+    briefcase_file = file_testdata('briefcase_valid.csv')
+    parser = _parse_args(['--manual', briefcase_file])
+    assert parser.manual == briefcase_file
     assert parser.all is False
 
 
@@ -35,5 +33,6 @@ def test_parse_args_no_args():
     assert parser.manual is None
 
 
-def test_is_non_zero_file_exists(briefcase):
-    assert is_non_zero_file(briefcase)
+def test_csv_with_content_exists():
+    briefcase_file = file_testdata('briefcase_valid.csv')
+    assert csv_with_content(briefcase_file)

@@ -49,16 +49,13 @@ def sha256_checksum(filename, block_size=65536):
     return sha256.hexdigest()
 
 
-def is_non_zero_file(fpath, csv_file=False):
+def csv_with_content(fpath):
     """Return true if file is existing AND file has content, false otherwise
     If it's a csv file, open it and count the rows
     """
     if fpath and os.path.exists(fpath):
-        if csv_file:
-            row_count = sum(1 for line in open(fpath))
-            return row_count > 1
-        else:
-            return os.stat(fpath).st_size > 0
+        row_count = sum(1 for line in open(fpath))
+        return row_count > 1
     return False
 
 
