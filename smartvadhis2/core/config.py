@@ -177,7 +177,7 @@ def check_java_installed():
                          stdout=subprocess.PIPE,
                          stderr=subprocess.STDOUT)
     except FileNotFoundError:
-        logger.exception("Java installation not found")
+        raise SmartVADHIS2Exception("Java installation not found")
 
 
 def check_operating_system():
