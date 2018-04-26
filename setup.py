@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
-import sys
-from shutil import rmtree
 
 from setuptools import find_packages, setup, Command
 
@@ -11,39 +9,6 @@ here = os.path.abspath(os.path.dirname(__file__))
 __version__ = ''
 with open(os.path.join('smartvadhis2', '__version__.py')) as f:
     exec(f.read())
-
-
-class PublishCommand(Command):
-    """Support setup.py publish."""
-
-    description = 'Build and publish the package.'
-    user_options = []
-
-    @staticmethod
-    def status(s):
-        """Prints things in bold."""
-        print('\033[1m{0}\033[0m'.format(s))
-
-    def initialize_options(self):
-        pass
-
-    def finalize_options(self):
-        pass
-
-    def run(self):
-        try:
-            self.status('Removing previous builds…')
-            rmtree(os.path.join(here, 'dist'))
-        except (OSError, IOError):
-            pass
-
-        self.status('Building Source and Wheel (universal) distribution…')
-        os.system('{0} setup.py sdist bdist_wheel --universal'.format(sys.executable))
-
-        self.status('Uploading the package to PyPi via Twine…')
-        os.system('twine upload dist/*')
-
-        sys.exit()
 
 
 class TestCommand(Command):
@@ -85,13 +50,7 @@ setup(
         'alembic',
         'apscheduler'
     ],
-    packages=['smartvadhis2'],
-    entry_points={
-        'console_scripts': [
-            'smartva-dhis2 = smartvadhis2.run:launch',
-            'smartva-dhis2-cli = smartvadhis2.cli:main'
-        ]
-    },
+    packages=find_packages(),
     classifiers=[
         # Trove classifiers
         # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -102,7 +61,6 @@ setup(
         'Programming Language :: Python :: 3.6'
     ],
     cmdclass={
-        'publish': PublishCommand,
         'test': TestCommand
     },
 )
