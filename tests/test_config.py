@@ -67,7 +67,7 @@ def test_smartva_config():
     assert os.path.exists(cfg.smartva_executable)
     assert cfg.ignore_columns is not None
     assert cfg.algorithm_version is not None
-    assert isinstance(cfg.country, bool)
+    assert cfg.country is not None
     assert isinstance(cfg.hiv, bool)
     assert isinstance(cfg.malaria, bool)
     assert isinstance(cfg.hce, bool)
