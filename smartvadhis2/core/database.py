@@ -86,7 +86,7 @@ class Database(object):
             session.close()
 
     def write_errors(self, data, errors):
-        """Entry method to write any errors sourced from the application"""
+        """Write person record and add person_failures"""
         if not isinstance(errors, list):
             # we need a list to iterate even if it's just one item
             errors = [errors]
@@ -139,6 +139,7 @@ class Database(object):
                 mapping.code_name: data[mapping.csv_name]
                 for mapping in Mapping.properties()
                 if mapping.csv_name is not None
+                and data[mapping.csv_name] != ''
             }
         except KeyError as e:
             raise SmartVADHIS2Exception("Mapping is not aligned with CSV rows %s", e)

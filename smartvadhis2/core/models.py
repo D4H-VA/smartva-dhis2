@@ -35,7 +35,7 @@ class Person(Base):
 class Failure(Base):
     """Failure model, storing Exception categories, e.g. Import Errors, Validation Errors"""
     __tablename__ = "failure"
-    failureid = Column(Integer, primary_key=True, autoincrement=True)
+    failureid = Column(Integer, primary_key=True)
     failuretype = Column(Integer)
     failuredescription = Column(String)
     created = Column(DateTime, default=datetime.now)
