@@ -6,10 +6,15 @@ Installation
 Use `pipenv <https://docs.pipenv.org>`_ (the recommended wrapper for virtualenvs and pip) to install this package.
 It depends on Python 3.5+ and various packages as described in ``Pipfile`` and DHIS2 2.28 as for now.
 
-Included:
+Libraries included:
 
 - Briefcase version: 1.10.1 Production (see `ODK Github <https://github.com/opendatakit/briefcase/releases>`_)
 - smartva: SmartVA-Analyze, version 2.0.0-a8
+
+System requirements:
+
+- Min. 2GB RAM
+- Min. 2 CPUs
 
 Ubuntu installation (tested with 16.04 LTS)
 
