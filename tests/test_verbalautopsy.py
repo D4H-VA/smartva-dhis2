@@ -143,7 +143,7 @@ class TestInterviewDate(VaAbstractClass):
         assert va.interview_date == '2018-03-26'
 
     def test_va_interview_date_invalid(self, va):
-        with pytest.raises(InterviewDateParseError):
+        with pytest.raises(InterviewDateParseWarning):
             va.interview_date = 'not a date xx'
 
     def test_va_interview_date_missing(self, va):

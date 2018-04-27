@@ -10,7 +10,6 @@ from .exceptions.errors import (
     ValidationError,
     BirthDateParseError,
     DeathDateParseError,
-    InterviewDateParseError,
     AgeParseError,
     AgeOutOfBoundsError,
     Icd10ParseError,
@@ -28,7 +27,8 @@ from .exceptions.warnings import (
     BirthDateMissingWarning,
     FirstNameMissingWarning,
     SurnameMissingWarning,
-    InterviewDateMissingWarning
+    InterviewDateMissingWarning,
+    InterviewDateParseWarning
 )
 from .helpers import sanitize, is_uid, days_to_years, years_to_days, DAYS_IN_YEAR
 from .mapping import Mapping, Sex, AgeCategory, Icd10, cause_of_death_option_code
@@ -245,8 +245,7 @@ class VerbalAutopsy(object):
                     d = datetime.strptime(interview_date, DATE_FMT_2)
                     self._interview_date = d.strftime(DATE_FMT_1)
                 except ValueError:
-                    raise InterviewDateParseError()
-                    #pass
+                    raise InterviewDateParseWarning()
         else:
             raise InterviewDateMissingWarning()
 

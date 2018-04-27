@@ -54,9 +54,18 @@ class SurnameMissingWarning(ValidationWarning):
 
 
 class InterviewDateMissingWarning(ValidationWarning):
-    message = "[interview_date] missing"
     code = 804
     err_type = 'VALIDATION'
+    message = "[interview_date] missing"
+
+    def __init__(self):
+        super(ValidationWarning, self).__init__(self.message, self.code)
+
+
+class InterviewDateParseWarning(ValidationWarning):
+    code = 805
+    err_type = 'VALIDATION'
+    message = "Could not parse [interview_date]"
 
     def __init__(self):
         super(ValidationWarning, self).__init__(self.message, self.code)
@@ -68,5 +77,6 @@ __all__ = [
     'BirthDateMissingWarning',
     'FirstNameMissingWarning',
     'SurnameMissingWarning',
-    'InterviewDateMissingWarning'
+    'InterviewDateMissingWarning',
+    'InterviewDateParseWarning'
 ]

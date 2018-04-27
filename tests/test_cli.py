@@ -615,19 +615,18 @@ def test_print_error_categories(capsys):
                "- ID:600 - Could not parse [birth_date]\n" \
                "- ID:601 - Could not parse [death_date]\n" \
                "- ID:602 - [death_date] missing\n" \
-               "- ID:603 - Could not parse [interview_date]\n" \
-               "- ID:604 - Could not parse [age] as Integer\n" \
-               "- ID:605 - [age] is not between 0 and 120 years\n" \
-               "- ID:606 - [age] is missing\n" \
-               "- ID:607 - [cause34] (cause of death) is missing\n" \
-               "- ID:608 - [icd10] does not match mapping\n" \
-               "- ID:609 - [icd10] missing\n" \
-               "- ID:610 - [sex] is not an Integer in (1, 2, 3, 8, 9)\n" \
-               "- ID:611 - [sex] is missing\n" \
-               "- ID:612 - [sid] does not match regex expression\n" \
-               "- ID:613 - [sid] is missing\n" \
-               "- ID:614 - orgunit is missing\n" \
-               "- ID:615 - orgunit UID is not a valid UID\n" \
+               "- ID:603 - Could not parse [age] as Integer\n" \
+               "- ID:604 - [age] is not between 0 and 120 years\n" \
+               "- ID:605 - [age] is missing\n" \
+               "- ID:606 - [cause34] (cause of death) is missing\n" \
+               "- ID:607 - [icd10] does not match mapping\n" \
+               "- ID:608 - [icd10] missing\n" \
+               "- ID:609 - [sex] is not an Integer in (1, 2, 3, 8, 9)\n" \
+               "- ID:610 - [sex] is missing\n" \
+               "- ID:611 - [sid] does not match regex expression\n" \
+               "- ID:612 - [sid] is missing\n" \
+               "- ID:613 - orgunit is missing\n" \
+               "- ID:614 - orgunit UID is not a valid UID\n" \
                "Import Errors (700-799)\n" \
                "- ID:700 - OrgUnit is not a valid UID\n" \
                "- ID:701 - Program is not a valid program\n" \
@@ -639,7 +638,8 @@ def test_print_error_categories(capsys):
                "- ID:801 - [birth_date] missing\n" \
                "- ID:802 - [first_name] is empty\n" \
                "- ID:803 - [surname] is empty\n" \
-               "- ID:804 - [interview_date] missing\n"
+               "- ID:804 - [interview_date] missing\n" \
+               "- ID:805 - Could not parse [interview_date]\n"
 
     print_error_categories()
     captured = capsys.readouterr()
