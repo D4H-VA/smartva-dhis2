@@ -1,4 +1,5 @@
 import datetime
+import json
 
 import pytest
 
@@ -6,7 +7,7 @@ from smartvadhis2.core.exceptions.errors import *
 from smartvadhis2.core.exceptions.warnings import *
 from smartvadhis2.core.mapping import *
 from smartvadhis2.core.config import ODKConfig, SmartVAConfig
-from smartvadhis2.core.verbalautopsy import VerbalAutopsy, Event, process_row_data, verbal_autopsy_factory, DAYS_IN_YEAR
+from smartvadhis2.core.verbalautopsy import VerbalAutopsy, Event, process_row_data, verbal_autopsy_factory
 
 
 class VaAbstractClass(object):
@@ -17,76 +18,54 @@ class VaAbstractClass(object):
 
 class TestAge(VaAbstractClass):
 
-    def test_va_age_years(self, va):
-        va.age = '22 years'
-        assert va.age_years == 22
-        assert va.age_days == 8035
-        assert va.age is None
+    def test_va_age(self, va):
+        va.age = '0.0273972602739726'
+        assert va.age == 0.03
 
-    def test_va_age_number_without_indicator(self, va):
-        with pytest.raises(AgeParseError):
-            va.age = '22'
+    def test_va_age_inaccurate(self, va):
+        va.age = '0.3'
+        assert va.age == 0.3
 
-    def test_va_age_days(self, va):
-        va.age = '12 days'
-        assert va.age_years == 0
-        assert va.age_days == 12
-        assert va.age is None
+    def test_va_age_int(self, va):
+        va.age = '12'
+        assert va.age == 12
 
     def test_va_age_days_parse_error(self, va):
         with pytest.raises(AgeParseError):
-            va.age = '12 days butrestiswrong'
+            va.age = '0.0273972602739726 butrestiswrong'
 
-    def test_va_age_years_out_of_bounds(self, va):
+    def test_va_age_out_of_bounds(self, va):
         with pytest.raises(AgeOutOfBoundsError):
-            va.age = '140 years'
+            va.age = '140.021'
         with pytest.raises(AgeOutOfBoundsError):
-            va.age = '-10 years'
-
-    def test_va_age_days_out_of_bounds(self, va):
-        with pytest.raises(AgeParseError):
-            va.age = '50000 days'
-        with pytest.raises(AgeParseError):
-            va.age = '-2 days'
-
-    def test_va_age_days_to_years(self, va):
-        va.age = '400 days'
-        assert va.age_years == 1
-        assert va.age_days == 400
-        assert va.age is None
+            va.age = '-10'
 
     def test_va_age_invalid(self, va):
         with pytest.raises(AgeParseError):
             va.age = 'not an age'
 
-        with pytest.raises(AgeParseError):
-            va.age = 'not an age days'
-
-        with pytest.raises(AgeParseError):
-            va.age = 'not an age years'
-
-        with pytest.raises(AgeOutOfBoundsError):
-            va.age = '135 years'
-
+    def test_va_age_missing(self, va):
         with pytest.raises(AgeMissingWarning):
             va.age = ''
 
-    def test_va_age_category_adult(self, va):
-        va.age = '13 years'
-        assert va.age_years == 13
-        assert va.age_days == int(round(13 * DAYS_IN_YEAR))
+    def test_va_age_category_adult_lower(self, va):
+        va.age = '12.0'
+        assert va.age == 12.0
         assert va.age_category == AgeCategory.options['Adult']
 
-    def test_va_age_category_child(self, va):
-        va.age = '10 years'
-        assert va.age_years == 10
-        assert va.age_days == int(round(10 * DAYS_IN_YEAR))
+    def test_va_age_category_child_upper(self, va):
+        va.age = '0.07939930320266672'
+        assert va.age == 0.08
+        assert va.age_category == AgeCategory.options['Child']
+
+    def test_va_age_category_child_lower(self, va):
+        va.age = '11.0111'
+        assert va.age == 11.01
         assert va.age_category == AgeCategory.options['Child']
 
     def test_va_age_category_neonate(self, va):
-        va.age = '12 days'
-        assert va.age_years == 0
-        assert va.age_days == 12
+        va.age = '0.07666139619567822'
+        assert va.age == 0.08
         assert va.age_category == AgeCategory.options['Neonate']
 
 
@@ -105,7 +84,7 @@ class TestCauseOfDeath(VaAbstractClass):
 
     def test_va_cause_of_death(self, va):
         va.icd10 = 'B24'
-        va.age_in_years = 90
+        va.age = 90.34
         va.age_category = 1
         assert va.icd10 == 12
         assert va.age_category == 1
@@ -261,20 +240,29 @@ class TestQuestionnaireVersion(VaAbstractClass):
 class TestVAClassMethods(VaAbstractClass):
 
     def test_getitem(self, va):
-        va.age = '22 years'
-        assert va['age_years'] == 22
+        va.age = '22.0'
+        assert va['age'] == 22.0
 
     def test_setitem(self, va):
-        va['age'] = '22 years'
-        assert va.age_years == 22
+        va['age'] = '22.0'
+        assert va.age == 22.0
 
     def test_getattr(self, va):
         assert va.notexistent is None
 
+    def test_keys(self, va):
+        assert True
+        # TODO
+        #assert va.keys() == list()
+
+    def test_str(self, va):
+        va.sex = '1'
+        assert str(va) == json.dumps({'sex': 1})
+
 
 def test_process_row_data():
     data = {
-        'age': '22 years',
+        'age': '22.999',
         'death_date': '2018-01-01',
         'interview_date': '2018-02-01'
     }
@@ -283,7 +271,7 @@ def test_process_row_data():
 
     from collections import OrderedDict
     exp = OrderedDict(sorted({
-        Age.code_name: '22 years',
+        Age.code_name: '22.999',
         BirthDate.code_name: None,
         FirstName.code_name: None,
         FirstName2nd.code_name: None,
@@ -305,7 +293,7 @@ def test_process_row_data():
 
 def test_verbal_autopsy_factory_full():
     data = {
-        Age.csv_name: '22 years',
+        Age.csv_name: '22.01231',
         BirthDate.csv_name: '1990-01-01',
         CauseCode.csv_name: '23',
         CauseOfDeath.csv_name: '1',
@@ -322,10 +310,8 @@ def test_verbal_autopsy_factory_full():
     }
     va, exc, w = verbal_autopsy_factory(data)
     assert isinstance(va, VerbalAutopsy)
-    assert va.age_years == 22
-    assert va.age_days == 8035
+    assert va.age == 22.01
     assert va.age_category == 1
-    assert va.age is None
     assert va.birth_date == '1990-01-01'
     assert va.cause_of_death == 101
     assert va.first_name == 'Toni'
@@ -370,7 +356,7 @@ class TestEvent(object):
     @pytest.fixture
     def va(self):
         va_instance = VerbalAutopsy()
-        va_instance.age_years = 22
+        va_instance.age = 22.03
         va_instance.age_category = 1
         va_instance.birth_date = '1990-01-01'
         va_instance.icd10 = 'B24'
@@ -394,8 +380,7 @@ class TestEvent(object):
         ev = Event(va)
 
         expected = [
-            {"dataElement": AgeInYears.dhis_uid, "value": 22},
-            {"dataElement": AgeInDays.dhis_uid, "value": 8035},
+            {"dataElement": Age.dhis_uid, "value": 22.03},
             {"dataElement": AgeCategory.dhis_uid, "value": AgeCategory.options["Adult"]},
             {"dataElement": CauseOfDeath.dhis_uid, "value": 101},
             {"dataElement": BirthDate.dhis_uid, "value": "1990-01-01"},

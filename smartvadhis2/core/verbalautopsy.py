@@ -30,7 +30,7 @@ from .exceptions.warnings import (
     InterviewDateMissingWarning,
     InterviewDateParseWarning
 )
-from .helpers import sanitize, is_uid, days_to_years, years_to_days, DAYS_IN_YEAR
+from .helpers import sanitize, is_uid, years_to_days
 from .mapping import Mapping, Sex, AgeCategory, Icd10, cause_of_death_option_code
 from ..__version__ import __version__
 
@@ -127,40 +127,21 @@ class VerbalAutopsy(object):
         lower_limit = 0
         upper_limit = 131
         if value:
-            if 'days' in value:
-                try:
-                    days = int(value.replace('days', '').strip())
-                except ValueError:
-                    raise AgeParseError()
-                else:
-                    if days < 0 or days > years_to_days(upper_limit):
-                        raise AgeParseError()
-                    self._age_days = days
-                    self._age_years = days_to_years(days)
-                    self._age = None
-
-            elif 'years' in value:
-                try:
-                    years = int(value.replace('years', '').strip())
-                except ValueError:
-                    raise AgeParseError()
-                else:
-                    if years not in range(lower_limit, upper_limit):
-                        raise AgeOutOfBoundsError()
-                    else:
-                        self._age_years = years
-                        self._age_days = years_to_days(years)
-                        self._age = None
-            else:
+            try:
+                f = float(value)
+            except ValueError:
                 raise AgeParseError()
-
-            if self._age_days <= 28:
-                self._age_category = AgeCategory.options['Neonate']
-            elif self._age_years <= 12:
-                self._age_category = AgeCategory.options['Child']
             else:
-                self._age_category = AgeCategory.options['Adult']
-
+                if int(f) not in range(lower_limit, upper_limit):
+                    raise AgeOutOfBoundsError()
+                else:
+                    self._age = round(f, 2)
+                    if years_to_days(f) <= 28:
+                        self._age_category = AgeCategory.options['Neonate']
+                    elif int(f) < 12:
+                        self._age_category = AgeCategory.options['Child']
+                    else:
+                        self._age_category = AgeCategory.options['Adult']
         else:
             raise AgeMissingWarning()
 

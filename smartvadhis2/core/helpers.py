@@ -89,4 +89,4 @@ def days_to_years(days):
 
 def years_to_days(years):
     """Convert years to days"""
-    return int(round((years * DAYS_IN_YEAR)))
+    return years * DAYS_IN_YEAR
