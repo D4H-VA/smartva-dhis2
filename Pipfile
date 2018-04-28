@@ -8,6 +8,7 @@ pytest = "*"
 pytest-coverage = "*"
 sphinx = "*"
 sphinx-rtd-theme = "*"
+cprofilev = "*"
 
 [packages]
 requests = "*"
