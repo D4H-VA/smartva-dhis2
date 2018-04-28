@@ -1,7 +1,7 @@
 Development
 ===========
 
-Follow instructions in :doc:`/installation`, but install it with ``--dev -e .`` flag:
+Follow instructions in :doc:`/installation`, but install it with additional ``--dev -e .`` flag:
 
 .. code:: bash
 
@@ -17,6 +17,14 @@ Testing
 
     pipenv run python setup.py test
 
+Profiling
+----------
+
+To run profiles with ``cProfile`` (50.000 ODK records) and ``/usr/bin/time`` (10.000 ODK records), run:
+
+.. code:: bash
+
+    pipenv run python setup.py profile
 
 Debugging
 ----------
