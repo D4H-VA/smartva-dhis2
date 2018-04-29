@@ -61,17 +61,22 @@ class LoggingConfig(Config):
     log_level = eval('logging.{}'.format(__log_level_from_config.upper()))
 
     def setup(self):
-        log_format = '%(color)s[%(asctime)s %(levelname)s]%(end_color)s %(message)s'
+
+        # Default logger
+        log_format = '%(color)s* %(levelname)1s%(end_color)s  %(asctime)s  %(message)s [%(module)s:%(lineno)d]'
         formatter = logzero.LogFormatter(fmt=log_format)
         logzero.setup_default_logger(formatter=formatter)
 
-        # Log rotation of 10 files for 10MB each
-        logzero.logfile(self.log_file, loglevel=self.log_level, maxBytes=int(1e7), backupCount=20)
-        logger.info("smartvadhis2 v.{} - logging to {} with min level {}".format(
-            SMARTVADHIS2_VERSION,
-            self.log_file,
-            self.__log_level_from_config)
-        )
+        logzero.loglevel(self.log_level)
+        logzero.loglevel(self.log_level)
+
+        # Log file
+        log_format_no_color = '* %(levelname)1s  %(asctime)s  %(message)s [%(module)s:%(lineno)d]'
+        formatter_no_color = logzero.LogFormatter(fmt=log_format_no_color)
+        # Log rotation of 20 files for 10MB each
+        logzero.logfile(self.log_file, formatter=formatter_no_color, loglevel=self.log_level, maxBytes=int(1e7), backupCount=20)
+
+        logger.info("smartvadhis2 v.{}".format(__version__))
 
 
 class DataDirConfig(Config):
@@ -86,12 +91,7 @@ class ODKConfig(Config):
     """Class to set up ODK Briefcase"""
     __section__ = 'odk'
     briefcases_dir = os.path.join(Config.ROOT_DIR, 'data', 'briefcases')
-    briefcase_executable = os.path.join(Config.ROOT_DIR, 'smartvadhis2', 'lib')  # download JAR first
-    briefcase_version = "v1.9.0"
-
-    jar_url = "https://s3.amazonaws.com/opendatakit.downloads/ODK Briefcase {} Production.jar".format(briefcase_version)
-    # https://opendatakit.org/wp-content/uploads/sha256_signatures.txt
-    jar_sig = "b9c2259b63ae87ef4cfbb16c752b806fc95acf49ff2cb96171f93a2f39fd5995"
+    briefcase_executable = os.path.join(Config.ROOT_DIR, 'smartvadhis2', 'lib', "ODK-Briefcase-v1.10.1.jar")
 
     form_id = Config._parser.get(__section__, 'form_id')
     sid_regex = Config._parser.get(__section__, 'sid_regex')
@@ -187,7 +187,7 @@ def check_java_installed():
 def check_operating_system():
     """Get the operating system the application is running on"""
     opsys = platform.system()
-    logger.debug("Running on {}".format(opsys))
+    # logger.debug("Running on {}".format(opsys))
     if opsys in {'Linux', 'Windows'}:
         return opsys
     else:

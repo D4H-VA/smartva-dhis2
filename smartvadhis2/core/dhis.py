@@ -89,24 +89,25 @@ class Dhis(object):
         elif not url.startswith('https://'):
             url = 'https://{}'.format(url)
 
-        logger.info("Connecting to DHIS2 on {} ...".format(url))
         self.api_url = '{}/api/{}'.format(url, api_version)
         self.api = requests.Session()
         self.auth = (DhisConfig.username, DhisConfig.password)
         self.headers = {'User-Agent': 'smartvadhis2_v.{}'.format(SMARTVADHIS2_VERSION)}
+        logger.info("Connecting to DHIS2 on {}".format(url))
 
         self.root_orgunit = self.root_orgunit()
+        self.dhis_version = self.dhis_version()
 
     def get(self, endpoint, params=None):
         """DHIS2 HTTP GET, returns requests.Response object"""
         url = '{}/{}.json'.format(self.api_url, endpoint)
-        # logger.debug('GET: {} - Params: {}'.format(url, params))
+        logger.debug('GET: {} - Params: {}'.format(url, params))
         return self.api.get(url, params=params, auth=self.auth, headers=self.headers)
 
     def post(self, endpoint, data, params=None):
         """DHIS2 HTTP POST, returns requests.Response object"""
         url = '{}/{}'.format(self.api_url, endpoint)
-        # logger.debug('POST: {} - Params: {} - Data: {}'.format(url, params, json.dumps(data)))
+        logger.debug('POST: {} - Params: {} - Data: {}'.format(url, params, json.dumps(data)))
         return self.api.post(url, params=params, auth=self.auth, headers=self.headers, json=data)
 
     def delete(self, endpoint):
@@ -118,7 +119,7 @@ class Dhis(object):
         """POST DHIS2 Event"""
         r = self.post(endpoint='events', data=data)
         try:
-            # logger.debug(r.text)
+            logger.debug(r.text)
             RaiseImportFailure(r.json())
             r.raise_for_status()
         except OrgUnitNotAssignedError:
@@ -126,6 +127,22 @@ class Dhis(object):
             self.post(endpoint='events', data=data)
         except requests.RequestException:
             raise DhisApiException("POST failed - {} {}".format(r.url, r.text))
+
+    def dhis_version(self):
+        """
+        :return: DHIS2 Version as Integer (e.g. 28)
+        """
+        response = self.get(endpoint='system/info').json()
+        try:
+            dhis_version = int(response.get('version').split('.')[1])
+        except ValueError:
+            raise DhisApiException("DHIS2 version '{}' not valid".format(response.get('version')))
+        else:
+            if response.get('version') not in {'2.28'}:
+                logger.warning("Not using DHIS2 Version 2.28: {}".format(response.get('version')))
+            else:
+                logger.debug("DHIS2 version: 2.{}".format(dhis_version))
+            return response.get('version')
 
     def is_duplicate(self, sid):
         """Check DHIS2 for a duplicate event by SID across all OrgUnits"""
@@ -144,7 +161,9 @@ class Dhis(object):
             'filter': 'level:eq:1'
         }
         req = self.get(endpoint='organisationUnits', params=params).json()
-        return self._get_root_id(req)
+        root_orgunit_uid = self._get_root_id(req)
+        logger.info("Root org unit to query: {}".format(root_orgunit_uid))
+        return root_orgunit_uid
 
     @staticmethod
     def _get_root_id(response):

@@ -52,8 +52,6 @@ def test_odk_config():
     cfg = ODKConfig()
     assert os.path.exists(cfg.briefcase_executable)
     assert os.path.exists(cfg.briefcases_dir)
-    assert cfg.jar_url is not None
-    assert cfg.jar_sig is not None
     assert cfg.form_id is not None
     assert cfg.sid_regex is not None
     assert cfg.baseurl is not None

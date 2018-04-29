@@ -77,5 +77,5 @@ class SmartVA(object):
         for line in process.stdout:
             if re.compile(r'^Source file \".*\" does not contain data').match(line):
                 raise NoODKDataException
-            if not any(stop in line for stop in {'ETA: ', 'Time: '}) and line:
+            if not any(stop in line for stop in {'ETA: ', 'Time: '}) and line and line.strip() != '':
                 logger.info(str(line).replace('\n', ''))

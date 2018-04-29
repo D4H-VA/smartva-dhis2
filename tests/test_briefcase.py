@@ -1,4 +1,3 @@
-import datetime
 import os
 
 from smartvadhis2.core.briefcase import ODKBriefcase
@@ -6,8 +5,7 @@ from smartvadhis2.core.config import ODKConfig
 
 
 def test_briefcase_jar_exists():
-    briefcase = ODKBriefcase()
-    assert os.path.exists(briefcase.jar_path)
+    assert os.path.exists(ODKConfig.briefcase_executable)
 
 
 def test_briefcase_args_timewindows():
@@ -23,7 +21,7 @@ def test_briefcase_args_all():
     briefcase = ODKBriefcase()
     actual, filename = briefcase._get_arguments(all_briefcases=True)
     expected = [
-        'java', '-jar', briefcase.jar_path,
+        'java', '-jar', ODKConfig.briefcase_executable,
         '--storage_directory', ODKConfig.briefcases_dir,
         '--export_directory', ODKConfig.briefcases_dir,
         '--form_id', ODKConfig.form_id,

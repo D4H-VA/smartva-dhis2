@@ -1,17 +1,15 @@
 import argparse
-import sys
 import os
+import sys
 from datetime import datetime
 
-from logzero import logger
 from apscheduler.schedulers.blocking import BlockingScheduler
-
+from logzero import logger
 
 from .core.config import setup, access, DatabaseConfig
+from .core.exceptions.errors import ImportException, DuplicateEventImportError
 from .core.helpers import read_csv, csv_with_content, get_timewindow
 from .core.verbalautopsy import Event, verbal_autopsy_factory
-from .core.exceptions.base import SmartVADHIS2Exception
-from .core.exceptions.errors import ImportException, DuplicateEventImportError
 
 
 def _parse_args(args=sys.argv[1:]):
@@ -58,7 +56,7 @@ def _schedule():
                       replace_existing=True,
                       id='smartva-dhis2-runner',
                       next_run_time=datetime.now())
-    logger.info("Started scheduling every {} seconds".format(SECONDS))
+    logger.info("Scheduling started")
     scheduler.start()
 
 
@@ -68,24 +66,26 @@ def _run(manual, download_all):
     """
     dhis, briefcase, smartva, db = access()
 
+    # if manual briefcase was provided
     if manual:
         smartva_file = smartva.run(manual, manual=True)
     else:
         briefcase_file = briefcase.download_briefcases(download_all)
         smartva_file = None
-        print(briefcase_file)
+        # check if downloaded briefcase file has content
         if csv_with_content(briefcase_file):
             smartva_file = smartva.run(briefcase_file)
         else:
-            logger.warn("No new ODK records to process for time window {} - {}".format(*get_timewindow()))
+            os.remove(briefcase_file)
 
     success_count, error_count, no_of_records = 0, 0, 0
     if csv_with_content(smartva_file):
         no_of_records = sum(1 for _ in read_csv(smartva_file))
-        for i, record in enumerate(read_csv(smartva_file), 1):
-            logger.info("{0} [{1}/{2}] SID: {3} {0}".format('---------', i, no_of_records, record.get('sid')))
+
+        for index, record in enumerate(read_csv(smartva_file), 1):
+            logger.info("Processing [{0}/{1}] SID: {2}".format(index, no_of_records, record.get('sid')))
             va, exc, warnings = verbal_autopsy_factory(record)
-            logger.info(record)
+            logger.debug(va)
 
             if warnings:
                 [logger.warn(w) for w in warnings]
@@ -99,9 +99,8 @@ def _run(manual, download_all):
                 try:
                     dhis.is_duplicate(va.sid)
                 except DuplicateEventImportError as e:
-                    logger.exception("Record for ID {} already exists in DHIS2".format(record.get('sid')))
+                    logger.warning("Record for ID {} already exists in DHIS2".format(record.get('sid')))
                     db.write_errors(record, e)
-                    error_count += 1
                 else:
                     try:
                         dhis.post_event(event.payload)
@@ -113,7 +112,10 @@ def _run(manual, download_all):
                         logger.info("Import successful!")
                         success_count += 1
 
-    logger.info("SUMMARY: Parsed ODK records: {} | Successful imports: {} | Errors: {}".format(no_of_records, success_count, error_count))
+        logger.info("SUMMARY: Parsed ODK records: {} | Imported: {} | Errors: {}".format(no_of_records, success_count,
+                                                                                         error_count))
+    else:
+        logger.warning("No new ODK records to process for time window {} - {}".format(*get_timewindow()))
 
 
 def launch():

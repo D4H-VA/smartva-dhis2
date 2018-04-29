@@ -108,7 +108,7 @@ class VerbalAutopsy(object):
 
     def __str__(self):
         """Print VerbalAutopsy instance as JSON"""
-        return json.dumps(dict(self))
+        return json.dumps(dict(self), sort_keys=True)
 
     @property
     def age(self):
