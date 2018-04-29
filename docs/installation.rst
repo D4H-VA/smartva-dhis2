@@ -55,6 +55,8 @@ e.g. if today is ``2018-04-08`` it attempts to download records for ``2018-04-01
 This is scheduled to run every three hours (leading to messages that the record is already in DHIS2)
 but then it's expected.
 
+.. note:: This application builds on the fact that *Study ID numbers* (SID) are always unique and never altered in DHIS2.**
+
 
 Tests
 ^^^^^^

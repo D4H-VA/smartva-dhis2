@@ -79,6 +79,7 @@ def _run(manual, download_all):
         else:
             logger.warn("No new ODK records to process for time window {} - {}".format(*get_timewindow()))
 
+    success_count, error_count, no_of_records = 0, 0, 0
     if csv_with_content(smartva_file):
         no_of_records = sum(1 for _ in read_csv(smartva_file))
         for i, record in enumerate(read_csv(smartva_file), 1):
@@ -92,6 +93,7 @@ def _run(manual, download_all):
             if exc:
                 [logger.error(e) for e in exc]
                 db.write_errors(record, exc)
+                error_count += 1
             else:
                 event = Event(va)
                 try:
@@ -99,14 +101,19 @@ def _run(manual, download_all):
                 except DuplicateEventImportError as e:
                     logger.exception("Record for ID {} already exists in DHIS2".format(record.get('sid')))
                     db.write_errors(record, e)
+                    error_count += 1
                 else:
                     try:
                         dhis.post_event(event.payload)
                     except ImportException as e:
                         logger.exception("{}\nfor payload {}".format(e, event.payload))
                         db.write_errors(record, e)
+                        error_count += 1
                     else:
                         logger.info("Import successful!")
+                        success_count += 1
+
+    logger.info("SUMMARY: Parsed ODK records: {} | Successful imports: {} | Errors: {}".format(no_of_records, success_count, error_count))
 
 
 def launch():
