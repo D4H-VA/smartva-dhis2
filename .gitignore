@@ -4,6 +4,9 @@
 # data folder
 data/
 
+# logs
+*.log.*
+
 # unnecessary Briefcase / SmartVA folders
 fontconfig
 intermediate-files

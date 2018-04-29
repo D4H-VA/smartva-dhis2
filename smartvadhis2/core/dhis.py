@@ -118,7 +118,7 @@ class Dhis(object):
         """POST DHIS2 Event"""
         r = self.post(endpoint='events', data=data)
         try:
-            logger.debug(r.text)
+            # logger.debug(r.text)
             RaiseImportFailure(r.json())
             r.raise_for_status()
         except OrgUnitNotAssignedError:
