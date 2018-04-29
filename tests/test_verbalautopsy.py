@@ -249,16 +249,7 @@ class TestVAClassMethods(VaAbstractClass):
 
     def test_getattr(self, va):
         assert va.notexistent is None
-
-    def test_keys(self, va):
-        assert True
-        # TODO
-        #assert va.keys() == list()
-
-    def test_str(self, va):
-        va.sex = '1'
-        assert str(va) == json.dumps({'sex': 1})
-
+        
 
 def test_process_row_data():
     data = {
