@@ -77,17 +77,10 @@ def verbal_autopsy_factory(data):
             exceptions.append(e)
         except ValidationWarning as e:
             warnings.append(e)
-        except Exception as e:
-            logger.exception((e, k, v))
 
     # set attributes not in CSV
-    try:
-        va.algorithm_version = SmartVAConfig.algorithm_version
-        va.questionnaire_version = ODKConfig.form_id
-    except ValidationWarning as e:
-        warnings.append(e)
-    except ValidationError as e:
-        exceptions.append(e)
+    va.algorithm_version = SmartVAConfig.algorithm_version
+    va.questionnaire_version = ODKConfig.form_id
 
     return va, exceptions, warnings
 
@@ -109,10 +102,6 @@ class VerbalAutopsy(object):
     def __getattr__(self, _):
         """Return None if instance attribute does not exist"""
         return None
-
-    def keys(self):
-        """Return keys for attributes that are not 'private' or methods"""
-        return [k for k in dir(self) if not k.startswith('_') and not callable(self[k])]
 
     def __str__(self):
         """Print VerbalAutopsy instance as JSON"""
@@ -382,23 +371,16 @@ class Event(object):
         self.program = DhisConfig.program_uid
         self.orgunit = va.orgunit
         self.datavalues = va
+        self.event_date = va.death_date
 
         self.payload = {
             "program": self.program,
-            "orgUnit": va.orgunit,
-            "eventDate": va.death_date,
+            "orgUnit": self.orgunit,
+            "eventDate": self.event_date,
             "status": "COMPLETED",
             "storedBy": "smartvadhis2_v{}".format(__version__),
             "dataValues": self.datavalues
         }
-
-    @property
-    def program(self):
-        return self._program
-
-    @program.setter
-    def program(self, value):
-        self._program = value
 
     @property
     def datavalues(self):

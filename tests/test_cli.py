@@ -614,19 +614,17 @@ def test_print_error_categories(capsys):
     expected = "Validation Errors (600-699)\n" \
                "- ID:600 - Could not parse [birth_date]\n" \
                "- ID:601 - Could not parse [death_date]\n" \
-               "- ID:602 - [death_date] missing\n" \
-               "- ID:603 - Could not parse [age] as Integer\n" \
-               "- ID:604 - [age] is not between 0 and 120 years\n" \
-               "- ID:605 - [age] is missing\n" \
-               "- ID:606 - [cause34] (cause of death) is missing\n" \
-               "- ID:607 - [icd10] does not match mapping\n" \
-               "- ID:608 - [icd10] missing\n" \
-               "- ID:609 - [sex] is not an Integer in (1, 2, 3, 8, 9)\n" \
-               "- ID:610 - [sex] is missing\n" \
-               "- ID:611 - [sid] does not match regex expression\n" \
-               "- ID:612 - [sid] is missing\n" \
-               "- ID:613 - orgunit is missing\n" \
-               "- ID:614 - orgunit UID is not a valid UID\n" \
+               "- ID:602 - Could not parse [age] as Integer\n" \
+               "- ID:603 - [age] is not between 0 and 120 years\n" \
+               "- ID:604 - [age] is missing\n" \
+               "- ID:605 - [icd10] does not match mapping\n" \
+               "- ID:606 - [icd10] missing\n" \
+               "- ID:607 - [sex] is not an Integer in (1, 2, 3, 8, 9)\n" \
+               "- ID:608 - [sex] is missing\n" \
+               "- ID:609 - [sid] does not match regex expression\n" \
+               "- ID:610 - [sid] is missing\n" \
+               "- ID:611 - orgunit is missing\n" \
+               "- ID:612 - orgunit UID is not a valid UID\n" \
                "Import Errors (700-799)\n" \
                "- ID:700 - OrgUnit is not a valid UID\n" \
                "- ID:701 - Program is not a valid program\n" \

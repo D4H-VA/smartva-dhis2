@@ -73,6 +73,7 @@ def _run(manual, download_all):
     else:
         briefcase_file = briefcase.download_briefcases(download_all)
         smartva_file = None
+        print(briefcase_file)
         if csv_with_content(briefcase_file):
             smartva_file = smartva.run(briefcase_file)
         else:
@@ -123,4 +124,3 @@ def launch():
         logger.warning("Aborted!")
     except Exception as e:
         logger.exception(e)
-        raise SmartVADHIS2Exception(e)

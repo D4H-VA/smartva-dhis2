@@ -33,7 +33,7 @@ class RaiseImportFailure(object):
             self.updated = int(response['response']['updated'])
             self.ignored = int(response['response']['ignored'])
             self.deleted = int(response['response']['deleted'])
-        except (ValueError, KeyError):
+        except (ValueError, KeyError, TypeError):
             logger.debug(response)
             raise GenericImportError("Error parsing response: {}".format(response))
 
@@ -144,11 +144,15 @@ class Dhis(object):
             'filter': 'level:eq:1'
         }
         req = self.get(endpoint='organisationUnits', params=params).json()
-        if len(req['organisationUnits']) > 1:
+        return self._get_root_id(req)
+
+    @staticmethod
+    def _get_root_id(response):
+        if len(response['organisationUnits']) > 1:
             raise DhisApiException("More than one Organisation Units found. Can not proceed.")
-        if len(req['organisationUnits']) == 0:
+        if len(response['organisationUnits']) == 0:
             raise DhisApiException("No Organisation Unit found. Can not proceed.")
-        return req['organisationUnits'][0]['id']
+        return response['organisationUnits'][0]['id']
 
     def assign_orgunit_to_program(self, data):
         """Assign OrgUnit to program"""

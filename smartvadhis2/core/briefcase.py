@@ -26,7 +26,6 @@ class ODKBriefcase(object):
 
         self._log_version()
         self.timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        self.filename = "briefcases.csv"
 
     def _get_arguments(self, all_briefcases):
         """Create the argument list to provide to the Briefcase JAR
@@ -41,13 +40,13 @@ class ODKBriefcase(object):
             '--aggregate_url', ODKConfig.baseurl,
             '--odk_username', ODKConfig.username,
             '--odk_password', ODKConfig.password,
-            '--export_filename', self.filename,
             '--exclude_media_export'
         ]
         logger.info("Connecting to ODK Briefcase on {} ...".format(ODKConfig.baseurl))
 
         if not all_briefcases:
             start, end = get_timewindow()
+            export_filename = "briefcases_from_{}_at_{}.csv".format(start.replace('/', ''), self.timestamp)
             time_window = [
                 '--export_start_date', start,
                 '--export_end_date', end
@@ -56,7 +55,10 @@ class ODKBriefcase(object):
             logger.info("Fetching briefcases from {} to {} ...".format(start, end))
         else:
             logger.info("Fetching ALL briefcases...")
-        return arguments
+            export_filename = "briefcases_all_{}.csv".format(self.timestamp)
+
+        arguments.extend(['--export_filename', export_filename])
+        return arguments, export_filename
 
     def _log_version(self):
         with subprocess.Popen(['java', '-jar', self.jar_path, '-v'],
@@ -79,18 +81,18 @@ class ODKBriefcase(object):
                 raise BriefcaseException(line)
 
             else:
-                # remove timestamp for better readabilityf
+                # remove timestamp for better readability
                 line = re.sub(r'^\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2},\d{3}\s', '', line)
                 logger.info(str(line).replace('\n', ''))
 
     def download_briefcases(self, all_briefcases):
         """Do the actual call to the JAR file and log output messages"""
-        args = self._get_arguments(all_briefcases)
+        args, filename = self._get_arguments(all_briefcases)
         with subprocess.Popen(args,
                               bufsize=1,
                               universal_newlines=True,
                               stdout=subprocess.PIPE,
                               stderr=subprocess.STDOUT) as process:
             self._log_subprocess_output(process)
-        return os.path.join(ODKConfig.briefcases_dir, self.filename)
+        return os.path.join(ODKConfig.briefcases_dir, filename)
 

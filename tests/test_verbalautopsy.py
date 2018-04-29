@@ -1,7 +1,9 @@
 import datetime
+import json
 
 import pytest
 
+from smartvadhis2.__version__ import __version__
 from smartvadhis2.core.exceptions.errors import *
 from smartvadhis2.core.exceptions.warnings import *
 from smartvadhis2.core.mapping import *
@@ -183,6 +185,10 @@ class TestIcd10(VaAbstractClass):
         with pytest.raises(Icd10MissingError):
             va.icd10 = None
 
+    def test_icd10_parse_error(self, va):
+        with pytest.raises(Icd10ParseError):
+            va.icd10 = 'XYZ'
+
 
 class TestOrgunit(VaAbstractClass):
 
@@ -270,6 +276,16 @@ class TestVAClassMethods(VaAbstractClass):
 
     def test_getattr(self, va):
         assert va.notexistent is None
+
+    """
+    TODO
+    def test_str(self, capsys, va):
+        va.age = '22.0'
+        expected = {'age': 22.0}
+        print(va)
+        captured = capsys.readouterr()
+        assert captured.out == expected
+    """
 
 
 def test_process_row_data():
@@ -375,6 +391,7 @@ class TestEvent(object):
         va_instance.birth_date = '1990-01-01'
         va_instance.icd10 = 'B24'
         va_instance.first_name = 'Toni'
+        va_instance.death_date = '2018-01-01'
         va_instance.interview_date = '2018-02-01'
         va_instance.surname = 'König'
         va_instance.sex = 1
@@ -390,6 +407,10 @@ class TestEvent(object):
         ev = Event(va)
         assert ev.orgunit == 'htJeatF5ITk'
 
+    def test_event_date(self, va):
+        ev = Event(va)
+        assert ev.event_date == '2018-01-01'
+
     def test_event_datavalues(self, va):
         ev = Event(va)
 
@@ -399,7 +420,7 @@ class TestEvent(object):
             {"dataElement": AgeCategory.dhis_uid, "value": AgeCategory.options["Adult"]},
             {"dataElement": CauseOfDeath.dhis_uid, "value": 101},
             {"dataElement": BirthDate.dhis_uid, "value": "1990-01-01"},
-            {"dataElement": DeathDate.dhis_uid, "value": "2018-02-01"},
+            {"dataElement": DeathDate.dhis_uid, "value": '2018-01-01'},
             {"dataElement": FirstName.dhis_uid, "value": "Toni"},
             {"dataElement": Surname.dhis_uid, "value": "König"},
             {"dataElement": Icd10.dhis_uid, "value": 12},
@@ -416,3 +437,34 @@ class TestEvent(object):
         va = dict()
         with pytest.raises(ValueError):
             Event(va)
+
+    def test_print_event(self, va, capsys):
+        ev = Event(va)
+
+        expected = {
+            "program": "HPrJOsYuM1K",
+            "orgUnit": "htJeatF5ITk",
+            "eventDate": "2018-01-01",
+            "status": "COMPLETED",
+            "storedBy": "smartvadhis2_v{}".format(__version__),
+            "dataValues": [
+                {"dataElement": AgeInYears.dhis_uid, "value": 22},
+                {"dataElement": AgeInDays.dhis_uid, "value": 8035},
+                {"dataElement": AgeCategory.dhis_uid, "value": AgeCategory.options["Adult"]},
+                {"dataElement": CauseOfDeath.dhis_uid, "value": 101},
+                {"dataElement": BirthDate.dhis_uid, "value": "1990-01-01"},
+                {"dataElement": FirstName.dhis_uid, "value": "Toni"},
+                {"dataElement": Surname.dhis_uid, "value": "König"},
+                {"dataElement": Icd10.dhis_uid, "value": 12},
+                {"dataElement": Sex.dhis_uid, "value": 1},
+                {"dataElement": Sid.dhis_uid, "value": "VA_12345678912345678"},
+                {"dataElement": InterviewDate.dhis_uid, "value": "2018-02-01"},
+                {"dataElement": QuestionnaireVersion.dhis_uid, "value": ODKConfig.form_id},
+                {"dataElement": AlgorithmVersion.dhis_uid, "value": SmartVAConfig.algorithm_version},
+            ]
+        }
+        print(ev)
+        captured = capsys.readouterr()
+        assert all([k in captured.out for k in expected.keys()])
+        pairs = zip(json.loads(captured.out).get('dataValues'), expected['dataValues'])
+        assert any(x != y for x, y in pairs)

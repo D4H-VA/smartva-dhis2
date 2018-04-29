@@ -1,6 +1,5 @@
 import csv
 import datetime
-import hashlib
 import os
 import re
 
@@ -38,19 +37,8 @@ def read_csv(path):
             yield row
 
 
-def sha256_checksum(filename, block_size=65536):
-    """Calculate checksum on file"""
-    sha256 = hashlib.sha256()
-    with open(filename, 'rb') as f:
-        for block in iter(lambda: f.read(block_size), b''):
-            sha256.update(block)
-    return sha256.hexdigest()
-
-
 def csv_with_content(fpath):
-    """Return true if file is existing AND file has content, false otherwise
-    If it's a csv file, open it and count the rows
-    """
+    """Return true if file exists AND file has more than 1 row, false otherwise"""
     if fpath and os.path.exists(fpath):
         row_count = sum(1 for line in open(fpath))
         return row_count > 1

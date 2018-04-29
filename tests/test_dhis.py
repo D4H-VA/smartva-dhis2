@@ -1,7 +1,8 @@
 import pytest
 
-from smartvadhis2.core.dhis import RaiseImportFailure, raise_if_duplicate
+from smartvadhis2.core.dhis import RaiseImportFailure, raise_if_duplicate, Dhis
 from smartvadhis2.core.exceptions.errors import *
+from smartvadhis2.core.exceptions.base import DhisApiException
 
 
 def test_import_orgunit_invalid():
@@ -694,3 +695,53 @@ def test_orgunit_not_assigned():
 
     with pytest.raises(OrgUnitNotAssignedError):
         RaiseImportFailure(response)
+
+
+def test_generic_import_error():
+    response = {
+        "Unknown response"
+    }
+
+    with pytest.raises(GenericImportError):
+        RaiseImportFailure(response)
+
+
+def test_get_root_orgunit():
+    response = {
+        "organisationUnits": [
+            {
+                "id": "ImspTQPwCqd"
+            }
+        ]
+    }
+
+    assert 'ImspTQPwCqd' == Dhis._get_root_id(response)
+
+
+def test_get_root_orgunit_multiple():
+    response = {
+        "organisationUnits": [
+            {
+                "id": "ImspTQPwCqd"
+            },
+            {
+                "id": "lc3eMKXaEfw"
+            }
+        ]
+    }
+    with pytest.raises(DhisApiException):
+        Dhis._get_root_id(response)
+
+
+def test_get_root_orgunit_none():
+    response = {
+        "pager": {
+            "page": 1,
+            "pageCount": 1,
+            "total": 1,
+            "pageSize": 50
+        },
+        "organisationUnits": []
+    }
+    with pytest.raises(DhisApiException):
+        Dhis._get_root_id(response)

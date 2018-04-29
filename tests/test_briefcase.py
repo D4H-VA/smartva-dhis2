@@ -12,16 +12,16 @@ def test_briefcase_jar_exists():
 
 def test_briefcase_args_timewindows():
     briefcase = ODKBriefcase()
-    actual = briefcase._get_arguments(all_briefcases=False)
-    assert actual[18] == '--export_start_date'
-    assert actual[20] == '--export_end_date'
+    actual, filename = briefcase._get_arguments(all_briefcases=False)
+    assert filename
+    assert actual[16] == '--export_start_date'
+    assert actual[18] == '--export_end_date'
     assert len(actual) == 22
 
 
 def test_briefcase_args_all():
-    now = datetime.datetime.now()
     briefcase = ODKBriefcase()
-    actual = briefcase._get_arguments(all_briefcases=True)
+    actual, filename = briefcase._get_arguments(all_briefcases=True)
     expected = [
         'java', '-jar', briefcase.jar_path,
         '--storage_directory', ODKConfig.briefcases_dir,
@@ -30,11 +30,11 @@ def test_briefcase_args_all():
         '--aggregate_url', ODKConfig.baseurl,
         '--odk_username', ODKConfig.username,
         '--odk_password', ODKConfig.password,
-        #'--export_filename', 'briefcase_{}.csv'.format(now.strftime('%Y%m%d_%H%M%S')),
         '--exclude_media_export'
     ]
     for o in expected:
         assert o in actual
 
+    assert filename
     assert '--export_start_date' not in actual
     assert '--export_end_date' not in actual
