@@ -96,21 +96,12 @@ def test_csv_with_content_headers_only():
 
 
 @pytest.mark.parametrize("years, expected", [
-    (1, 365),
-    (10, 3652),
-    (15, 5479)
+    (0.01, 3.652425),
+    (1, 365.2425),
+    (10, 3652.425)
 ])
 def test_years_to_days(years, expected):
     assert years_to_days(years) == expected
-
-
-@pytest.mark.parametrize("days, expected", [
-    (365, 1),
-    (3652, 10),
-    (5479, 15)
-])
-def test_years_to_days(days, expected):
-    assert days_to_years(days) == expected
 
 
 def test_read_csv():
