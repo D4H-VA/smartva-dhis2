@@ -56,7 +56,7 @@ class Config(object):
 
 class LoggingConfig(Config):
     __section__ = 'logging'
-    log_file = Config._parser.get('logging', 'logfile')
+    log_file = os.path.join(Config.ROOT_DIR, 'data', 'logs_smartva_dhis2.log')
     __log_level_from_config = Config._parser.get('logging', 'level')
     log_level = eval('logging.{}'.format(__log_level_from_config.upper()))
 

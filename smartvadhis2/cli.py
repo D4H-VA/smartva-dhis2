@@ -87,18 +87,19 @@ def delete_events():
         }
         events = api.get(endpoint='events', params=params).json()
 
-        no_of_events = len(events['events'])
+        no_of_events = len(events.get('events', 0))
         print("Deleting {}{} events{} for the '{}' program ({})...".format(Color.BOLD, no_of_events, Color.END,
-                                                                           program_name, DhisConfig.program_uid))
-        time.sleep(5)
-        for i, event in enumerate(events['events'], 1):
-            r = api.delete('events/{}'.format(event['event']))
-            try:
-                r.raise_for_status()
-            except requests.HTTPError:
-                print(r.text)
-            else:
-                print("[{}/{}] Deleted {}".format(i, no_of_events, event['event']))
+                                                                      program_name, DhisConfig.program_uid))
+        if no_of_events > 0:
+            time.sleep(5)
+            for i, event in enumerate(events['events'], 1):
+                r = api.delete('events/{}'.format(event['event']))
+                try:
+                    r.raise_for_status()
+                except requests.HTTPError:
+                    print(r.text)
+                else:
+                    print("[{}/{}] Deleted {}".format(i, no_of_events, event['event']))
     else:
         print("Aborted.")
         sys.exit(0)

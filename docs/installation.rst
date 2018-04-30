@@ -31,6 +31,25 @@ Ubuntu installation (tested with 16.04 LTS)
     $ cd smartva-dhis2
     $ pipenv install --ignore-pipfile
 
+
+Docker
+^^^^^^^
+Refer to the :doc:`/configuration` page first before running it.
+
+Requirements: Docker is installed on your machine.
+
+.. code:: bash
+
+    # build it
+    docker build -t smartvadhis2 .
+
+    # run it
+    docker run \
+        --restart=unless-stopped \
+        -v ~/data:/usr/src/app/data \
+        -it smartvadhis2:latest python -m smartvadhis2
+
+
 Run
 ^^^^
 
