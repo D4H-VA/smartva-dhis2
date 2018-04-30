@@ -1,23 +1,6 @@
 {
-    "date": "2018-04-20T09:35:53.376",
+    "date": "2018-04-30T10:46:46.746",
     "programStageDataElements": [
-        {
-            "allowFutureDate": false,
-            "allowProvidedElsewhere": false,
-            "compulsory": false,
-            "created": "2018-04-19T12:05:57.227",
-            "dataElement": {
-                "id": "NsmhGfGhFRO"
-            },
-            "displayInReports": false,
-            "id": "hGHimNEVl0B",
-            "lastUpdated": "2018-04-19T13:38:20.167",
-            "programStage": {
-                "id": "pQ8gaWKD3pi"
-            },
-            "renderOptionsAsRadio": false,
-            "sortOrder": 15
-        },
         {
             "allowFutureDate": false,
             "allowProvidedElsewhere": false,
@@ -28,7 +11,7 @@
             },
             "displayInReports": false,
             "id": "Z06nEMh81QI",
-            "lastUpdated": "2018-04-19T13:38:20.131",
+            "lastUpdated": "2018-04-30T10:45:33.914",
             "programStage": {
                 "id": "pQ8gaWKD3pi"
             },
@@ -45,7 +28,7 @@
             },
             "displayInReports": false,
             "id": "FpqxQM7omwi",
-            "lastUpdated": "2018-04-19T13:38:20.106",
+            "lastUpdated": "2018-04-30T10:45:33.905",
             "programStage": {
                 "id": "pQ8gaWKD3pi"
             },
@@ -62,7 +45,7 @@
             },
             "displayInReports": false,
             "id": "ZpZqAM6auxt",
-            "lastUpdated": "2018-04-19T13:38:20.146",
+            "lastUpdated": "2018-04-30T10:45:33.927",
             "programStage": {
                 "id": "pQ8gaWKD3pi"
             },
@@ -79,7 +62,7 @@
             },
             "displayInReports": false,
             "id": "SJDYOgeOcd0",
-            "lastUpdated": "2018-04-19T13:38:20.143",
+            "lastUpdated": "2018-04-30T10:45:33.924",
             "programStage": {
                 "id": "pQ8gaWKD3pi"
             },
@@ -96,7 +79,7 @@
             },
             "displayInReports": false,
             "id": "n0OuHKb16je",
-            "lastUpdated": "2018-04-19T13:38:20.110",
+            "lastUpdated": "2018-04-30T10:45:33.910",
             "programStage": {
                 "id": "pQ8gaWKD3pi"
             },
@@ -113,7 +96,7 @@
             },
             "displayInReports": false,
             "id": "hdVaTMJvU7G",
-            "lastUpdated": "2018-04-19T13:38:20.103",
+            "lastUpdated": "2018-04-30T10:45:33.902",
             "programStage": {
                 "id": "pQ8gaWKD3pi"
             },
@@ -130,7 +113,7 @@
             },
             "displayInReports": false,
             "id": "gSwN8WmvLhe",
-            "lastUpdated": "2018-04-19T13:38:20.070",
+            "lastUpdated": "2018-04-30T10:45:33.888",
             "programStage": {
                 "id": "pQ8gaWKD3pi"
             },
@@ -147,7 +130,7 @@
             },
             "displayInReports": false,
             "id": "fhVIqHp8NlC",
-            "lastUpdated": "2018-04-19T13:38:20.092",
+            "lastUpdated": "2018-04-30T10:45:33.895",
             "programStage": {
                 "id": "pQ8gaWKD3pi"
             },
@@ -164,7 +147,7 @@
             },
             "displayInReports": false,
             "id": "Tsmvqpdh9k7",
-            "lastUpdated": "2018-04-19T13:38:20.135",
+            "lastUpdated": "2018-04-30T10:45:33.917",
             "programStage": {
                 "id": "pQ8gaWKD3pi"
             },
@@ -181,7 +164,7 @@
             },
             "displayInReports": false,
             "id": "aSL24bcUgGP",
-            "lastUpdated": "2018-04-19T13:38:20.139",
+            "lastUpdated": "2018-04-30T10:45:33.921",
             "programStage": {
                 "id": "pQ8gaWKD3pi"
             },
@@ -198,7 +181,7 @@
             },
             "displayInReports": false,
             "id": "pO3WWNxU6NN",
-            "lastUpdated": "2018-04-19T13:38:20.096",
+            "lastUpdated": "2018-04-30T10:45:33.898",
             "programStage": {
                 "id": "pQ8gaWKD3pi"
             },
@@ -215,7 +198,7 @@
             },
             "displayInReports": false,
             "id": "mxZzEsvsdcF",
-            "lastUpdated": "2018-04-19T13:38:20.049",
+            "lastUpdated": "2018-04-30T10:45:33.881",
             "programStage": {
                 "id": "pQ8gaWKD3pi"
             },
@@ -232,7 +215,7 @@
             },
             "displayInReports": false,
             "id": "BHsFt3ZEb4K",
-            "lastUpdated": "2018-04-19T13:38:20.074",
+            "lastUpdated": "2018-04-30T10:45:33.891",
             "programStage": {
                 "id": "pQ8gaWKD3pi"
             },
@@ -249,7 +232,7 @@
             },
             "displayInReports": false,
             "id": "kI1px9KVtbz",
-            "lastUpdated": "2018-04-19T13:38:20.042",
+            "lastUpdated": "2018-04-30T10:45:33.874",
             "programStage": {
                 "id": "pQ8gaWKD3pi"
             },
@@ -266,7 +249,7 @@
             },
             "displayInReports": false,
             "id": "rEzXh70gXju",
-            "lastUpdated": "2018-04-19T13:38:20.065",
+            "lastUpdated": "2018-04-30T10:45:33.885",
             "programStage": {
                 "id": "pQ8gaWKD3pi"
             },
@@ -287,7 +270,7 @@
             "generatedByEnrollmentDate": false,
             "hideDueDate": false,
             "id": "pQ8gaWKD3pi",
-            "lastUpdated": "2018-04-19T13:38:20.185",
+            "lastUpdated": "2018-04-30T10:45:33.942",
             "minDaysFromStart": 0,
             "name": "Verbal Autopsy",
             "notificationTemplates": [],
@@ -309,7 +292,7 @@
                     "displayInReports": false,
                     "externalAccess": false,
                     "id": "kI1px9KVtbz",
-                    "lastUpdated": "2018-04-19T13:38:20.042",
+                    "lastUpdated": "2018-04-30T10:45:33.874",
                     "programStage": {
                         "id": "pQ8gaWKD3pi"
                     },
@@ -331,7 +314,7 @@
                     "displayInReports": false,
                     "externalAccess": false,
                     "id": "mxZzEsvsdcF",
-                    "lastUpdated": "2018-04-19T13:38:20.049",
+                    "lastUpdated": "2018-04-30T10:45:33.881",
                     "programStage": {
                         "id": "pQ8gaWKD3pi"
                     },
@@ -353,7 +336,7 @@
                     "displayInReports": false,
                     "externalAccess": false,
                     "id": "rEzXh70gXju",
-                    "lastUpdated": "2018-04-19T13:38:20.065",
+                    "lastUpdated": "2018-04-30T10:45:33.885",
                     "programStage": {
                         "id": "pQ8gaWKD3pi"
                     },
@@ -375,7 +358,7 @@
                     "displayInReports": false,
                     "externalAccess": false,
                     "id": "gSwN8WmvLhe",
-                    "lastUpdated": "2018-04-19T13:38:20.070",
+                    "lastUpdated": "2018-04-30T10:45:33.888",
                     "programStage": {
                         "id": "pQ8gaWKD3pi"
                     },
@@ -397,7 +380,7 @@
                     "displayInReports": false,
                     "externalAccess": false,
                     "id": "BHsFt3ZEb4K",
-                    "lastUpdated": "2018-04-19T13:38:20.074",
+                    "lastUpdated": "2018-04-30T10:45:33.891",
                     "programStage": {
                         "id": "pQ8gaWKD3pi"
                     },
@@ -419,7 +402,7 @@
                     "displayInReports": false,
                     "externalAccess": false,
                     "id": "fhVIqHp8NlC",
-                    "lastUpdated": "2018-04-19T13:38:20.092",
+                    "lastUpdated": "2018-04-30T10:45:33.895",
                     "programStage": {
                         "id": "pQ8gaWKD3pi"
                     },
@@ -441,7 +424,7 @@
                     "displayInReports": false,
                     "externalAccess": false,
                     "id": "pO3WWNxU6NN",
-                    "lastUpdated": "2018-04-19T13:38:20.096",
+                    "lastUpdated": "2018-04-30T10:45:33.898",
                     "programStage": {
                         "id": "pQ8gaWKD3pi"
                     },
@@ -463,7 +446,7 @@
                     "displayInReports": false,
                     "externalAccess": false,
                     "id": "hdVaTMJvU7G",
-                    "lastUpdated": "2018-04-19T13:38:20.103",
+                    "lastUpdated": "2018-04-30T10:45:33.902",
                     "programStage": {
                         "id": "pQ8gaWKD3pi"
                     },
@@ -485,7 +468,7 @@
                     "displayInReports": false,
                     "externalAccess": false,
                     "id": "FpqxQM7omwi",
-                    "lastUpdated": "2018-04-19T13:38:20.106",
+                    "lastUpdated": "2018-04-30T10:45:33.905",
                     "programStage": {
                         "id": "pQ8gaWKD3pi"
                     },
@@ -507,7 +490,7 @@
                     "displayInReports": false,
                     "externalAccess": false,
                     "id": "n0OuHKb16je",
-                    "lastUpdated": "2018-04-19T13:38:20.110",
+                    "lastUpdated": "2018-04-30T10:45:33.910",
                     "programStage": {
                         "id": "pQ8gaWKD3pi"
                     },
@@ -529,7 +512,7 @@
                     "displayInReports": false,
                     "externalAccess": false,
                     "id": "Z06nEMh81QI",
-                    "lastUpdated": "2018-04-19T13:38:20.131",
+                    "lastUpdated": "2018-04-30T10:45:33.914",
                     "programStage": {
                         "id": "pQ8gaWKD3pi"
                     },
@@ -551,7 +534,7 @@
                     "displayInReports": false,
                     "externalAccess": false,
                     "id": "Tsmvqpdh9k7",
-                    "lastUpdated": "2018-04-19T13:38:20.135",
+                    "lastUpdated": "2018-04-30T10:45:33.917",
                     "programStage": {
                         "id": "pQ8gaWKD3pi"
                     },
@@ -573,7 +556,7 @@
                     "displayInReports": false,
                     "externalAccess": false,
                     "id": "aSL24bcUgGP",
-                    "lastUpdated": "2018-04-19T13:38:20.139",
+                    "lastUpdated": "2018-04-30T10:45:33.921",
                     "programStage": {
                         "id": "pQ8gaWKD3pi"
                     },
@@ -595,7 +578,7 @@
                     "displayInReports": false,
                     "externalAccess": false,
                     "id": "SJDYOgeOcd0",
-                    "lastUpdated": "2018-04-19T13:38:20.143",
+                    "lastUpdated": "2018-04-30T10:45:33.924",
                     "programStage": {
                         "id": "pQ8gaWKD3pi"
                     },
@@ -617,34 +600,12 @@
                     "displayInReports": false,
                     "externalAccess": false,
                     "id": "ZpZqAM6auxt",
-                    "lastUpdated": "2018-04-19T13:38:20.146",
+                    "lastUpdated": "2018-04-30T10:45:33.927",
                     "programStage": {
                         "id": "pQ8gaWKD3pi"
                     },
                     "renderOptionsAsRadio": false,
                     "sortOrder": 14,
-                    "translations": [],
-                    "userAccesses": [],
-                    "userGroupAccesses": []
-                },
-                {
-                    "allowFutureDate": false,
-                    "allowProvidedElsewhere": false,
-                    "attributeValues": [],
-                    "compulsory": false,
-                    "created": "2018-04-19T12:05:57.227",
-                    "dataElement": {
-                        "id": "NsmhGfGhFRO"
-                    },
-                    "displayInReports": false,
-                    "externalAccess": false,
-                    "id": "hGHimNEVl0B",
-                    "lastUpdated": "2018-04-19T13:38:20.167",
-                    "programStage": {
-                        "id": "pQ8gaWKD3pi"
-                    },
-                    "renderOptionsAsRadio": false,
-                    "sortOrder": 15,
                     "translations": [],
                     "userAccesses": [],
                     "userGroupAccesses": []
@@ -670,7 +631,7 @@
             "expiryDays": 0,
             "id": "HPrJOsYuM1K",
             "ignoreOverdueEvents": false,
-            "lastUpdated": "2018-04-19T13:20:49.440",
+            "lastUpdated": "2018-04-24T09:29:41.680",
             "name": "Verbal Autopsy",
             "notificationTemplates": [],
             "onlyEnrollOnce": false,
@@ -683,6 +644,7 @@
             "programTrackedEntityAttributes": [],
             "programType": "WITHOUT_REGISTRATION",
             "publicAccess": "rw------",
+            "relationshipFromA": false,
             "selectEnrollmentDatesInFuture": false,
             "selectIncidentDatesInFuture": false,
             "shortName": "VA",

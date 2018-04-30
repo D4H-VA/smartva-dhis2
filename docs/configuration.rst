@@ -28,6 +28,7 @@ Probably it is a good idea to create a dedicated ``verbal-autopsy-bot`` user acc
 - User Role authority to access the program (read and write)
 - User Role *read* authority for all imported metadata
 
+This has the advantage that the dedicated username shows up in DHIS 2 log files.
 
 Application
 ------------
@@ -69,6 +70,7 @@ form_id
 sid_regex
 	Regular Expression that matches a to Verbal Autopsy Study ID number, e.g. ``^VA_[0-9]{17}$``.
 	Check regex with online tools, e.g. `regex101.com <https://regex101.com>`_.
+    If you want to allow any SID format (*not recommended*, you can put ``sid_regex = .*``.
 
 [smartva]
 ^^^^^^^^^

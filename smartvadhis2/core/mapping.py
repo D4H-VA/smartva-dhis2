@@ -35,21 +35,7 @@ class Age(Mapping):
     set_order = 0
     csv_name = 'age'
     code_name = 'age'
-    dhis_uid = None
-
-
-class AgeInYears(Mapping):
-    set_order = 0
-    csv_name = None
-    code_name = 'age_years'
     dhis_uid = 'C2OT4YktNGX'
-
-
-class AgeInDays(Mapping):
-    set_order = 0
-    csv_name = None
-    code_name = 'age_days'
-    dhis_uid = 'NsmhGfGhFRO'
 
 
 class AgeCategory(Mapping):

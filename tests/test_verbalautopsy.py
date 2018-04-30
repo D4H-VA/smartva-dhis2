@@ -91,6 +91,19 @@ class TestCauseOfDeath(VaAbstractClass):
         assert va.age_category == 1
         assert va.cause_of_death == 101
 
+    def test_va_cause_of_death_throws(self, va):
+        with pytest.raises(Icd10ParseError):
+            va.icd10 = 'XYZ'
+            assert va.cause_of_death
+
+    def test_va_cause_of_death_invalid_age_to_icd10_map(self, va):
+        with pytest.raises(Exception):
+            # this should throw an error because age_category should be 3
+            va.icd10 = 'P36'
+            va.age = '0.07671232876712329'
+            va.age_category = 2
+            assert va.cause_of_death
+
 
 class TestDeathDate(VaAbstractClass):
 
@@ -427,8 +440,7 @@ class TestEvent(object):
             "status": "COMPLETED",
             "storedBy": "smartvadhis2_v{}".format(__version__),
             "dataValues": [
-                {"dataElement": AgeInYears.dhis_uid, "value": 22},
-                {"dataElement": AgeInDays.dhis_uid, "value": 8035},
+                {"dataElement": Age.dhis_uid, "value": 22},
                 {"dataElement": AgeCategory.dhis_uid, "value": AgeCategory.options["Adult"]},
                 {"dataElement": CauseOfDeath.dhis_uid, "value": 101},
                 {"dataElement": BirthDate.dhis_uid, "value": "1990-01-01"},

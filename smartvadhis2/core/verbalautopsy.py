@@ -73,14 +73,12 @@ def verbal_autopsy_factory(data):
     for k, v in row_data.items():
         try:
             setattr(va, k, v)
+            va.algorithm_version = SmartVAConfig.algorithm_version
+            va.questionnaire_version = ODKConfig.form_id
         except ValidationError as e:
             exceptions.append(e)
         except ValidationWarning as e:
             warnings.append(e)
-
-    # set attributes not in CSV
-    va.algorithm_version = SmartVAConfig.algorithm_version
-    va.questionnaire_version = ODKConfig.form_id
 
     return va, exceptions, warnings
 
@@ -128,7 +126,7 @@ class VerbalAutopsy(object):
                     raise AgeOutOfBoundsError()
                 else:
                     self._age = round(f, 2)
-                    if years_to_days(f) <= 28:
+                    if years_to_days(f) < 29:
                         self._age_category = AgeCategory.options['Neonate']
                     elif int(f) < 12:
                         self._age_category = AgeCategory.options['Child']
@@ -136,22 +134,6 @@ class VerbalAutopsy(object):
                         self._age_category = AgeCategory.options['Adult']
         else:
             raise AgeMissingWarning()
-
-    @property
-    def age_years(self):
-        return self._age_years
-
-    @age_years.setter
-    def age_years(self, value):
-        self._age_years = value
-
-    @property
-    def age_days(self):
-        return self._age_days
-
-    @age_days.setter
-    def age_days(self, value):
-        self._age_days = value
 
     @property
     def age_category(self):
@@ -163,7 +145,10 @@ class VerbalAutopsy(object):
 
     @property
     def cause_of_death(self):
-        return cause_of_death_option_code(self._age_category, self._icd10)
+        try:
+            return cause_of_death_option_code(self._age_category, self._icd10)
+        except KeyError:
+            raise Exception("Bug detected: Age category was not calculated correctly")
 
     @property
     def birth_date(self):

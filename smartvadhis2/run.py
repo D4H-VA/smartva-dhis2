@@ -78,14 +78,15 @@ def _run(manual, download_all):
         else:
             os.remove(briefcase_file)
 
-    success_count, error_count, no_of_records = 0, 0, 0
+    success_count, error_count, duplicate_count, no_of_records = 0, 0, 0, 0
     if csv_with_content(smartva_file):
         no_of_records = sum(1 for _ in read_csv(smartva_file))
 
         for index, record in enumerate(read_csv(smartva_file), 1):
-            logger.info("Processing [{0}/{1}] SID: {2}".format(index, no_of_records, record.get('sid')))
+            logger.info("[{0}/{1}] SID: {2}".format(index, no_of_records, record.get('sid')))
+            logger.debug("Parsed from CSV: {}".format(record))
             va, exc, warnings = verbal_autopsy_factory(record)
-            logger.debug(va)
+            logger.debug("VA data: {}".format(va))
 
             if warnings:
                 [logger.warn(w) for w in warnings]
@@ -101,6 +102,7 @@ def _run(manual, download_all):
                 except DuplicateEventImportError as e:
                     logger.warning("Record for ID {} already exists in DHIS2".format(record.get('sid')))
                     db.write_errors(record, e)
+                    duplicate_count += 1
                 else:
                     try:
                         dhis.post_event(event.payload)
@@ -112,8 +114,14 @@ def _run(manual, download_all):
                         logger.info("Import successful!")
                         success_count += 1
 
-        logger.info("SUMMARY: Parsed ODK records: {} | Imported: {} | Errors: {}".format(no_of_records, success_count,
-                                                                                         error_count))
+        logger.info("SUMMARY: Parsed ODK records: {} | "
+                    "Imported: {} | "
+                    "Duplicates: {} | "
+                    "Errors: {}".format(
+                        no_of_records,
+                        success_count,
+                        duplicate_count,
+                        error_count))
     else:
         logger.warning("No new ODK records to process for time window {} - {}".format(*get_timewindow()))
 

@@ -1,17 +1,16 @@
-Name,UID,Code,Shortname,Description,Formname,Domaintype,Valuetype,Aggregationtype,CategorycombinationUID,Zeroissignificant,Optionset
-VA- Study ID Number,L370gG5pb3P,sid,SID,Deceased Name ID,Study ID number,TRACKER,TEXT,NONE,,FALSE,
-VA- Surname of Deceased,NM9CFZmYq9S,gen_5_0a,Surname,Surname of deceased,Surname of Deceased,TRACKER,TEXT,NONE,,FALSE,
-VA- Second Surname,VEGzj76HCEN,gen_5_0b,Surname 2,Second surname,Second Surname,TRACKER,TEXT,NONE,,FALSE,
-VA- First Name of Deceased,uWGd9pUSgBK,gen_5_0c,First Name,First Name of deceased,First Name of Deceased,TRACKER,TEXT,NONE,,FALSE,
-VA- Other Name of Deceased,d52GkmmpLMM,gen_5_0d,Other Name,Other Name of deceased,Other Name of Deceased (if relevant) ,TRACKER,TEXT,NONE,,FALSE,
-VA- Cause of Death,EGuQ4jmbsjc,,CoD,Cause of Death,Cause of Death,TRACKER,INTEGER_POSITIVE,COUNT,,FALSE,tMkHCKkuxpD
-VA- ICD10,TSljgUq6Xfd,,ICD10,ICD10,ICD10,TRACKER,INTEGER_POSITIVE,COUNT,,FALSE,wDtKd3KEEeR
-VA- Age in years,C2OT4YktNGX,,Age in years,Age in years,Age in years,TRACKER,INTEGER_ZERO_OR_POSITIVE,AVERAGE,,FALSE,
-VA- Age in days,NsmhGfGhFRO,,Age in days,Age in days,Age in days,TRACKER,INTEGER_ZERO_OR_POSITIVE,AVERAGE,,FALSE,
-VA- Age category,lFKqfDj9Rhk,,Age category,Age category,Age category,TRACKER,INTEGER_POSITIVE,COUNT,,FALSE,AXlVIlSE9zB
-VA- Sex,GVVDthqI2Sz,,Sex,Sex,Sex,TRACKER,INTEGER_POSITIVE,COUNT,,FALSE,fXYBfOoLXgh
-VA- Date of Birth,ih4W8j2jDAS,birthDate,Birth_Date,Date of Birth,Date of Birth,TRACKER,DATE,NONE,,FALSE,
-VA- Interview Date,t6O2A1gou0g,interviewdate,Interview_Date,Interview Date,Interview Date,TRACKER,DATE,NONE,,FALSE,
-VA- Algorithm version,ePYyHl0VfmB,,Algorithm,Algorithm version,Algorithm version,TRACKER,TEXT,NONE,,FALSE,
-VA- National ID,iJzYZN4MIjD,,National ID,National Identifier,National ID,TRACKER,TEXT,NONE,,FALSE,
-VA- Questionnaire version,qQuck3LgWeY,,Questionnaire,Questionnaire version,Questionnaire version,TRACKER,TEXT,NONE,,FALSE,
+Name,UID,Code,Short name,Description,Form name,Domain type,Value type,Aggregation operator,Category combination UID,Url,Zero is significant,Option set
+VA- Study ID Number,L370gG5pb3P,sid,SID,Deceased Name ID,Study ID number,TRACKER,TEXT,NONE,,,false,
+VA- Surname of Deceased,NM9CFZmYq9S,gen_5_0a,Surname,Surname of deceased,Surname of Deceased,TRACKER,TEXT,NONE,,,false,
+VA- Second Surname,VEGzj76HCEN,gen_5_0b,Surname 2,Second surname,Second Surname,TRACKER,TEXT,NONE,,,false,
+VA- First Name of Deceased,uWGd9pUSgBK,gen_5_0c,First Name,First Name of deceased,First Name of Deceased,TRACKER,TEXT,NONE,,,false,
+VA- Other Name of Deceased,d52GkmmpLMM,gen_5_0d,Other Name,Other Name of deceased,Other Name of Deceased (if relevant) ,TRACKER,TEXT,NONE,,,false,
+VA- Cause of Death,EGuQ4jmbsjc,,CoD,Cause of Death,Cause of Death,TRACKER,INTEGER_POSITIVE,COUNT,,,false,tMkHCKkuxpD
+VA- ICD10,TSljgUq6Xfd,,ICD10,ICD10,ICD10,TRACKER,INTEGER_POSITIVE,COUNT,,,false,wDtKd3KEEeR
+VA- Age in years,C2OT4YktNGX,,Age in years,Age in years,Age in years,TRACKER,NUMBER,AVERAGE,,,false,
+VA- Age category,lFKqfDj9Rhk,,Age category,Age category,Age category,TRACKER,INTEGER_POSITIVE,COUNT,,,false,AXlVIlSE9zB
+VA- Sex,GVVDthqI2Sz,,Sex,Sex,Sex,TRACKER,INTEGER_POSITIVE,COUNT,,,false,fXYBfOoLXgh
+VA- Date of Birth,ih4W8j2jDAS,birthDate,Birth_Date,Date of Birth,Date of Birth,TRACKER,DATE,NONE,,,false,
+VA- Interview Date,t6O2A1gou0g,interviewdate,Interview_Date,Interview Date,Interview Date,TRACKER,DATE,NONE,,,false,
+VA- Algorithm version,ePYyHl0VfmB,,Algorithm,Algorithm version,Algorithm version,TRACKER,TEXT,NONE,,,false,
+VA- National ID,iJzYZN4MIjD,,National ID,National Identifier,National ID,TRACKER,TEXT,NONE,,,false,
+VA- Questionnaire version,qQuck3LgWeY,,Questionnaire,Questionnaire version,Questionnaire version,TRACKER,TEXT,NONE,,,false,

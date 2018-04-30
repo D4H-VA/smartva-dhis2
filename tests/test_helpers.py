@@ -8,7 +8,6 @@ from smartvadhis2.core.helpers import (
     is_uid,
     get_timewindow,
     csv_with_content,
-    days_to_years,
     years_to_days,
     read_csv
 )

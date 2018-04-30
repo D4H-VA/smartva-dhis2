@@ -49,7 +49,7 @@ class ProfileCommand(Command):
         status('Profiling with cProfile: running with ~50.000 briefcase records (this may take a while)')
         test_file = os.path.join('tests', 'testdata', 'load_test_51800_odk_records.csv')
         cprofile_output = 'smartva_dhis2_profile_output'
-        os.system('python -m cProfile -o {} smartvadhis2 --manual {}'.format(cprofile_output, test_file))
+        os.system('python -m cProfile -o {} smartvadhis2/__main__.py --manual {}'.format(cprofile_output, test_file))
 
         status('Profiling with /usr/bin/time: running with ~10.000 briefcase records')
         test_file = os.path.join('tests', 'testdata', 'load_test_1000_odk_records.csv')

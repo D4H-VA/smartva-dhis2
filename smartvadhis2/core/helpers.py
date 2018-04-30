@@ -70,11 +70,6 @@ def get_timewindow(weeks=-1, days=0, fmt='%Y/%m/%d'):
 DAYS_IN_YEAR = 365.2425
 
 
-def days_to_years(days):
-    """Convert days to years"""
-    return int(round((days / DAYS_IN_YEAR)))
-
-
 def years_to_days(years):
     """Convert years to days"""
     return years * DAYS_IN_YEAR
