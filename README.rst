@@ -1,7 +1,7 @@
 smartva-dhis2
 =============
 
-|Build| |BuildWin| |PyVersion| |Coverage|
+|Build| |PyVersion| |Coverage|
 
 A Python package for the integration of Verbal Autopsy data into DHIS2.
 
@@ -16,7 +16,7 @@ which can be queried via the command line and exported to various formats.
 It also checks DHIS2 for duplicate events (by Study ID Number) and auto-assigns organisation units to the program.
 
 Licence
---------
+^^^^^^^^
 
 MIT
 
@@ -26,9 +26,6 @@ See `here <http://www.healthdata.org/verbal-autopsy/tools>`_ for more details.
 
 .. |Build| image:: https://travis-ci.org/D4H-VA/smartva-dhis2.svg?branch=master
    :target: https://travis-ci.org/D4H-VA/smartva-dhis2
-
-.. |BuildWin| image:: https://ci.appveyor.com/api/projects/status/jn7ydwsd7ndq4e57/branch/master?svg=true
-   :target: https://ci.appveyor.com/project/d4h-va/smartva-dhis2
 
 .. |PyVersion| image:: https://img.shields.io/pypi/pyversions/smartva-dhis2.svg
    :target: https://pypi.org/project/smartva-dhis2

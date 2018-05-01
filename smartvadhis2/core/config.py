@@ -54,9 +54,17 @@ class Config(object):
                 logger.info("Created folder {}".format(created_message))
 
 
+class DataDirConfig(Config):
+    """Class to set up the `data` directory containing both Briefcases and SmartVA files"""
+    data_dir = os.path.join(Config.ROOT_DIR, 'data')
+
+    def setup(self):
+        self.create_dir(self.data_dir)
+
+
 class LoggingConfig(Config):
     __section__ = 'logging'
-    log_file = os.path.join(Config.ROOT_DIR, 'data', 'logs_smartva_dhis2.log')
+    log_file = os.path.join(DataDirConfig.data_dir, 'logs_smartva_dhis2.log')
     __log_level_from_config = Config._parser.get('logging', 'level')
     log_level = eval('logging.{}'.format(__log_level_from_config.upper()))
 
@@ -77,14 +85,7 @@ class LoggingConfig(Config):
         logzero.logfile(self.log_file, formatter=formatter_no_color, loglevel=self.log_level, maxBytes=int(1e7), backupCount=20)
 
         logger.info("smartvadhis2 v.{}".format(__version__))
-
-
-class DataDirConfig(Config):
-    """Class to set up the `data` directory containing both Briefcases and SmartVA files"""
-    data_dir = os.path.join(Config.ROOT_DIR, 'data')
-
-    def setup(self):
-        self.create_dir(self.data_dir)
+        logger.info("logging to {}".format(self.log_file))
 
 
 class ODKConfig(Config):

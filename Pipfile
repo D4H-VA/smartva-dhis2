@@ -15,7 +15,6 @@ requests = "*"
 records = "*"
 logzero = "*"
 alembic = "*"
-colorama = {markers = "sys_platform == 'win32'"}
 apscheduler = "*"
 
 [requires]

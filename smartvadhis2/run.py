@@ -45,7 +45,7 @@ def _schedule():
     """
     Background scheduler that runs forever, schedules to (other) SQLite database
     """
-    scheduler = BlockingScheduler()
+    scheduler = BlockingScheduler(timezone='UTC')
     url = r'sqlite:///{}'.format(os.path.join(DatabaseConfig.database_dir, 'scheduling.db'))
     scheduler.add_jobstore('sqlalchemy', url=url)
     SECONDS = 30

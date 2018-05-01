@@ -4,6 +4,7 @@ import os
 import time
 
 from setuptools import find_packages, setup, Command
+from smartvadhis2.core.config import DataDirConfig
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -48,12 +49,12 @@ class ProfileCommand(Command):
     def run():
         status('Profiling with cProfile: running with ~50.000 briefcase records (this may take a while)')
         test_file = os.path.join('tests', 'testdata', 'load_test_51800_odk_records.csv')
-        cprofile_output = 'smartva_dhis2_profile_output'
+        cprofile_output = os.path.join(DataDirConfig.data_dir, 'smartva_dhis2_profile_output')
         os.system('python -m cProfile -o {} smartvadhis2/__main__.py --manual {}'.format(cprofile_output, test_file))
 
         status('Profiling with /usr/bin/time: running with ~10.000 briefcase records')
         test_file = os.path.join('tests', 'testdata', 'load_test_1000_odk_records.csv')
-        os.system('/usr/bin/time -v python -m smartvadhis2 --manual {}'.format(test_file))
+        os.system('time -v python -m smartvadhis2 --manual {}'.format(test_file))
 
         status('Profiling file written to {}. Open http://localhost:4000'.format(cprofile_output))
         os.system('cprofilev -f smartva_dhis2_profile_output')

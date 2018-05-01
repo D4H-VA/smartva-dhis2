@@ -36,18 +36,41 @@ Docker
 ^^^^^^^
 Refer to the :doc:`/configuration` page first before running it.
 
-Requirements: Docker is installed on your machine.
+Requirements: `Docker <https://docs.docker.com/install>`_ is installed on your machine.
+
+It is recommended to use Docker client as a non-root user, possibly with your current non-root user.
 
 .. code:: bash
+
+    # create docker group if it doesn't exist
+    sudo groupadd docker
+
+    # add current user to the "docker" group
+    sudo gpasswd -a $USER docker
+
+    # reload to activate changes to groups
+    newgrp docker
+
+    # get the code
+    git clone https://github.com/D4H-VA/smartva-dhis2
+    cd smartva-dhis2
 
     # build it
     docker build -t smartvadhis2 .
 
     # run it
-    docker run \
-        --restart=unless-stopped \
-        -v ~/data:/usr/src/app/data \
-        -it smartvadhis2:latest python -m smartvadhis2
+    docker run --restart on-failure -v $(pwd)/data:/app/data -it smartvadhis2:latest python -m smartvadhis2
+
+    # stop it (stops all Docker containers)
+    docker stop $(docker ps -a -q)
+
+
+Explanation of the run command:
+
+- ``--restart``: https://docs.docker.com/engine/reference/run/#restart-policies---restart
+- ``-v``: mount ``data`` folder as a volume so that it's accessible to both host and container
+- ``-it``: interactive & a tty shell for running the smartvadhis2 image in it's latest build
+- ``python -m smartvadhis2`` run the python module.
 
 
 Run
