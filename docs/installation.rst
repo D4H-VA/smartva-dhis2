@@ -37,8 +37,9 @@ Docker
 Refer to the :doc:`/configuration` page first before running it.
 
 Requirements: `Docker <https://docs.docker.com/install>`_ is installed on your machine.
-
-It is recommended to use Docker client as a non-root user, possibly with your current non-root user.
+If you deploy this container next to a DHIS2 installation,
+make sure you have at least one additional CPU plus 2 GB of RAM available (additionally to whatever DHIS2 requires
+to run).
 
 .. code:: bash
 
@@ -59,7 +60,9 @@ It is recommended to use Docker client as a non-root user, possibly with your cu
     docker build -t smartvadhis2 .
 
     # run it
-    docker run --restart on-failure -v $(pwd)/data:/app/data -it smartvadhis2:latest python -m smartvadhis2
+    docker run --restart on-failure \
+    -v $(pwd)/data:/app/data \
+    -it smartvadhis2:latest python -m smartvadhis2
 
     # stop it (stops all Docker containers)
     docker stop $(docker ps -a -q)
