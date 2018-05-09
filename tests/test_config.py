@@ -29,13 +29,12 @@ def test_create_file(tmpdir):
 
 def test_load_auth():
     dish = load_auth(alt_path='dish.json')
-    assert dish['dhis']['baseurl'] == 'https://play.dhis2.org/2.28'
-    assert dish['dhis']['username'] == 'admin'
-    assert dish['dhis']['password'] == 'district'
-
-    assert dish['odk']['baseurl'] == 'https://odk-aggregate-server.org'
-    assert dish['odk']['username'] == 'user'
-    assert dish['odk']['password'] == 'pass'
+    assert dish['dhis']['baseurl'] is not None
+    assert dish['dhis']['username'] is not None
+    assert dish['dhis']['password'] is not None
+    assert dish['odk']['baseurl'] is not None
+    assert dish['odk']['username'] is not None
+    assert dish['odk']['password'] is not None
 
 
 def test_load_auth_fails():
