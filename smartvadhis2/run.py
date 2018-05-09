@@ -48,10 +48,11 @@ def _schedule():
     scheduler = BlockingScheduler()
     url = r'sqlite:///{}'.format(os.path.join(DatabaseConfig.database_dir, 'scheduling.db'))
     scheduler.add_jobstore('sqlalchemy', url=url)
-    SECONDS = 30
+    # run every 3 hours
+    HOURS = 3
     scheduler.add_job(_run,
                       'interval',
-                      seconds=SECONDS,
+                      hours=HOURS,
                       args=[False, False],
                       replace_existing=True,
                       id='smartva-dhis2-runner',
