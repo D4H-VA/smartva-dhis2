@@ -25,8 +25,9 @@ and auto-assigns organisation units to the program.
    :maxdepth: 2
    :caption: Contents
 
+   DHIS2 configuration <config_dhis2>
    Installation <installation>
-   Configuration <configuration>
+   App configuration <config_application>
    Local database <local_database>
    Components <components>
    Development <development>

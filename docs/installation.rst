@@ -21,11 +21,11 @@ Ubuntu installation (tested with 16.04 LTS)
 
 .. code:: bash
 
-    # apt update
-    # apt install python3
-    # apt install python3-venv python3-pip
+    sudo apt update
+    sudo apt install python3
+    sudo apt install python3-venv python3-pip
 
-    Change to a non-root user
+    (As a non-root user)
     $ pip3 install pipenv --user
     $ git clone --depth=1 https://github.com/D4H-VA/smartva-dhis2
     $ cd smartva-dhis2
@@ -38,7 +38,7 @@ Refer to the :doc:`/configuration` page first before running it.
 
 .. code:: bash
 
-    cd /path/to/repo
+    cd ~/smartva-dhis2 (adjust to path where you cloned the repository)
     pipenv run python -m smartvadhis2 [--options]
 
 Options are:
@@ -73,9 +73,10 @@ Deployment
 Make sure the script is running even after server reboots - how this is achieved depends on the Operating System.
 For systemd-based Operating Systems, you can install the following service.
 
- - Adjust ``/home/ubuntu/smartva-dhis2`` to where you've installed the repository
+ - Adjust ``~/smartva-dhis2`` to where you've installed the repository
  - Adjust the path to ``pipenv`` - you can find out the path by calling ``which pipenv``.
  - Adjust the ``ubuntu`` user to the user that runs the script
+ - ``~`` means "expanding to the home folder of the user as specified in ``User``".
 
 ::
 
@@ -87,13 +88,13 @@ For systemd-based Operating Systems, you can install the following service.
     Type=simple
     Restart=always
     User=ubuntu
-    WorkingDirectory=/home/ubuntu/smartva-dhis2
-    ExecStart=/home/ubuntu/.local/bin/pipenv run python -m smartvadhis2
+    WorkingDirectory=~/smartva-dhis2
+    ExecStart=~/.local/bin/pipenv run python -m smartvadhis2
 
     [Install]
     WantedBy=multi-user.target
 
-Installation on Ubuntu
+Systemd service installation on Ubuntu
 
 .. code:: bash
 
