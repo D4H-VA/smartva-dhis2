@@ -16,8 +16,10 @@ which can be queried via the command line and exported to various formats.
 It also checks DHIS2 for duplicate events (by Study ID Number) before posting
 and auto-assigns organisation units to the program.
 
------------------------
+
 Licence: MIT
+
+-----
 
 The library that creates the most probable Cause of Death based from Briefcase records (``smartvadhis2/lib/smartva``) is
 a closed-source binary packaged by *The Institute for Health Metrics and Evaluation (IHME)* and is **excluded** from above licence.
