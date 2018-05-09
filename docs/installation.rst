@@ -27,9 +27,9 @@ Ubuntu installation (tested with 16.04 LTS)
 
     Change to a non-root user
     $ pip3 install pipenv --user
-    $ git clone https://github.com/D4H-VA/smartva-dhis2
+    $ git clone --depth=1 https://github.com/D4H-VA/smartva-dhis2
     $ cd smartva-dhis2
-    $ pipenv install --ignore-pipfile
+    $ pipenv install --ignore-pipfile --deploy
 
 Run
 ^^^^
@@ -70,9 +70,12 @@ To run tests:
 Deployment
 ^^^^^^^^^^^
 
-Make sure the script is running even after server reboots. This depends on the Operating System.
+Make sure the script is running even after server reboots - how this is achieved depends on the Operating System.
+For systemd-based Operating Systems, you can install the following service.
 
-For systemd-based Operating Systems, you can install this service (adjust ``/path/to/repo``)
+ - Adjust ``/home/ubuntu/smartva-dhis2`` to where you've installed the repository
+ - Adjust the path to ``pipenv`` - you can find out the path by calling ``which pipenv``.
+ - Adjust the ``ubuntu`` user to the user that runs the script
 
 ::
 
@@ -83,8 +86,24 @@ For systemd-based Operating Systems, you can install this service (adjust ``/pat
     [Service]
     Type=simple
     Restart=always
-    WorkingDirectory=/path/to/repo
-    ExecStart=/usr/local/bin/pipenv run python -m smartvadhis2
+    User=ubuntu
+    WorkingDirectory=/home/ubuntu/smartva-dhis2
+    ExecStart=/home/ubuntu/.local/bin/pipenv run python -m smartvadhis2
 
     [Install]
     WantedBy=multi-user.target
+
+Installation on Ubuntu
+
+.. code:: bash
+
+    sudo nano /etc/systemd/system/smartva-dhis2.service
+    (adjust and paste above config)
+    sudo systemctl enable smartva-dhis2.service
+    sudo systemctl start smartva-dhis2.service
+
+    (to see the status of the service:)
+    sudo systemctl start smartva-dhis2.service
+
+    (check log files:)
+    tail -f smartva_dhis2.log

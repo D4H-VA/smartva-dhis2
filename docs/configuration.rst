@@ -70,7 +70,7 @@ form_id
 sid_regex
 	Regular Expression that matches a to Verbal Autopsy Study ID number, e.g. ``^VA_[0-9]{17}$``.
 	Check regex with online tools, e.g. `regex101.com <https://regex101.com>`_.
-    If you want to allow any SID format (*not recommended*, you can put ``sid_regex = .*``.
+    If you want to allow any SID format (*not recommended*), you can put ``sid_regex = .*``.
 
 [smartva]
 ^^^^^^^^^
@@ -84,11 +84,13 @@ algorithm_version
 
 country
     Data origin country abbreviation. See below for full list.
+
 hiv
     Data is from an HIV region
 
 malaria
     Data is from a Malaria region.
+
 hce
     Use Health Care Experience (HCE) variables.
 

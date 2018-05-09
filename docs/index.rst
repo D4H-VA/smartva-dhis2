@@ -14,7 +14,8 @@ transforms it to a DHIS2-compatible Program Event and posts it to DHIS2.
 Any data validation errors or DHIS2 import errors are written to a local SQLite database
 which can be queried via the command line and exported to various formats.
 
-It also checks DHIS2 for duplicate events (by Study ID Number) and auto-assigns organisation units to the program.
+It also checks DHIS2 for duplicate events (by Study ID Number) before posting
+and auto-assigns organisation units to the program.
 
 - Documentation: `smartva-dhis2.readthedocs.io <https://smartva-dhis2.readthedocs.io>`_
 - Github: `github.com/D4H-VA/smartva-dhis2 <https://github.com/D4H-VA/smartva-dhis2>`_
