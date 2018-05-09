@@ -49,11 +49,23 @@ Get the different error code count since a certain date:
 
 .. code:: sql
 
-    select count(pf.failureid), f.failuredescription from person_failure pf
-    join failure f
-    on f.failureid = pf.failureid
-    where pf.created >= '2018-04-24'
-    group by pf.failureid;
+    SELECT count(pf.failureid), f.failuredescription
+    FROM person_failure pf
+    JOIN failure f
+    ON f.failureid = pf.failureid
+    WHERE pf.created >= '2018-04-24'
+    GROUP BY pf.failureid;
+
+
+Get the names and SIDs of attempted imports but were already in DHIS2 (duplicates):
+
+.. code:: sql
+
+    SELECT p.first_name, p.first_name_2nd, p.surname, p.sid
+    FROM person p
+    JOIN person_failure pf
+    ON pf.personid = p.personid
+    WHERE pf.failureid = 704;
 
 
 Supported export formats
