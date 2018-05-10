@@ -6,15 +6,13 @@ config.ini
 
 All configuration is defined in ``config.ini``. Note that there are no apostrophes (``"`` or ``'``) in this file.
 
-[auth]
-^^^^^^
+**[auth]**
 
 auth_file
 	A file path to where authentication details for DHIS2 and ODK Aggregate are stored - see ``dish.json`` for structure of the file.
 	Keep it on a secure place and refer to its file path.
 
-[logging]
-^^^^^^^^^^
+**[logging]**
 
 logfile
 	Where the application should log to, e.g. ``/var/log/smartvadhis2.log``
@@ -23,8 +21,7 @@ level
 	Minimum Log level - e.g. ``INFO`` logs all info messages, warnings, errors.
 	Must be one of: ``DEBUG``, ``INFO``, ``WARNINGS``
 
-[database]
-^^^^^^^^^^
+**[database]**
 
 db_queries_log
 	Whether to log all local database queries as well. Either ``true`` or ``false``.
@@ -32,8 +29,7 @@ db_queries_log
 db_name
 	Name of the local database file, e.g. ``smartva-dhis2.db``
 
-[odk]
-^^^^^^
+**[odk]**
 
 form_id
 	Verbal Autopsy ODK Form ID, e.g. ``SmartVA_Bangla_v7``
@@ -41,10 +37,9 @@ form_id
 sid_regex
 	Regular Expression that matches a to Verbal Autopsy Study ID number, e.g. ``^VA_[0-9]{17}$``.
 	Check regex with online tools, e.g. `regex101.com <https://regex101.com>`_.
-    If you want to allow any SID format (*not recommended*), you can put ``sid_regex = .*``.
+	If you want to allow any SID format (*not recommended*), you can put ``sid_regex = .*``.
 
-[smartva]
-^^^^^^^^^
+**[smartva]**
 
 ignore_columns
 	Which CSV columns in the SmartVA CSV output to ignore for further processing.
@@ -70,8 +65,8 @@ For more information about SmartVA options refer to the SmartVA Help:
 `PDF <http://www.healthdata.org/sites/default/files/files/Tools/SmartVA_Help.pdf>`_.
 
 
-[dhis]
-^^^^^^
+**[dhis]**
+
 program
 	The Unique Identifier (UID) of the Verbal Autopsy DHIS2 program.
 

@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+**v0.2.1**
+
+- moving on from demo schedules (every 30 seconds) to production schedules (every 3 hours)
+
 **v0.2.0**
 
 - added scheduling
