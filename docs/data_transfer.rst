@@ -7,6 +7,9 @@ To migrate DHIS2 events from one instance to another DHIS2 instance, use the scr
 Same as with the main application, it auto-assigns Organisation Units and avoids importing duplicates
 by assuring that no event exists already with the same Study ID number (see ``study_id`` below).
 
+.. note:: This application builds on the fact that *Study ID numbers* (SID) are **always unique** and **not modified
+ in DHIS2 after the import**.
+
 DHIS2 configuration
 --------------------
 
@@ -80,7 +83,15 @@ Options are:
 
 **If you do not provide any optional argument**, it will attempt to import **yesterday's** events.
 
-.. note:: This application builds on the fact that *Study ID numbers* (SID) are **always unique** and **not modified
- in DHIS2 after the import**.
+Cron job
+^^^^^^^^^
+
+This can be installed in a cron job - e.g. every day on 23:15 / 11:15 PM:
+
+.. code:: bash
+
+  15 23 * * * cd /home/ubuntu/smartva-dhis2-data-transfer && /home/ubuntu/.local/bin/pipenv run python -m datatransfer --log=/var/log/verbal_autopsies_import.log
+
+
 
 
