@@ -56,7 +56,7 @@ attribute_category_option
     If no special requirements are in place, it should be the ``default`` UID -
     get the UID via ``<target-dhis2.org>/api/categoryOptions?filter=name:eq:default``.
 
-attribute_option_combo = HllvX50cXC0
+attribute_option_combo
     The Unique Identifier (UID) of the Category Option Combination that holds above Category Option -
     get the UID via ``<target-dhis2.org>/api/categoryOptionCombos?filter=name:eq:default``.
 
