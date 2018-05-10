@@ -70,7 +70,7 @@ Run
 .. code:: bash
 
     cd ~/smartva-dhis2-data-transfer   (adjust to path where you cloned the repository)
-    pipenv run python -m datatransfer --log=/path/to/logfile.log [--options]
+    pipenv run data-transfer --log=/path/to/logfile.log [--options]
 
 Options are:
 
@@ -90,7 +90,7 @@ This can be installed in a cron job - e.g. every day on 23:15 / 11:15 PM:
 
 .. code:: bash
 
-  15 23 * * * cd /home/ubuntu/smartva-dhis2-data-transfer && /home/ubuntu/.local/bin/pipenv run python -m datatransfer --log=/var/log/verbal_autopsies_import.log
+  15 23 * * * cd /home/ubuntu/smartva-dhis2-data-transfer && /home/ubuntu/.local/bin/pipenv run data-transfer --log=/var/log/verbal_autopsies_import.log
 
 
 
