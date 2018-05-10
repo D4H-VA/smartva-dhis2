@@ -56,7 +56,7 @@ Commandline interface
 
 ::
 
-    pipenv run python smartvadhis2/cli.py --help
+    pipenv run smartva-dhis2-cli --help
     usage:
 
     --delete_events       Delete all events

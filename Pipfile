@@ -20,3 +20,7 @@ apscheduler = "*"
 
 [requires]
 python_version = "3.5"
+
+[scripts]
+smartva-dhis2 = "python -m smartvadhis2"
+smartva-dhis2-cli = "python smartvadhis2/cli.py"

@@ -43,7 +43,7 @@ Refer to the configuration pages first before running it:
 .. code:: bash
 
     cd ~/smartva-dhis2   (adjust to path where you cloned the repository)
-    pipenv run python -m smartvadhis2 [--options]
+    pipenv run smartva-dhis2 [--options]
 
 Options are:
 
@@ -90,7 +90,7 @@ For systemd-based Operating Systems, you can install the following service.
     Restart=always
     User=ubuntu
     WorkingDirectory=~/smartva-dhis2
-    ExecStart=~/.local/bin/pipenv run python -m smartvadhis2
+    ExecStart=~/.local/bin/pipenv run smartva-dhis2
 
     [Install]
     WantedBy=multi-user.target
