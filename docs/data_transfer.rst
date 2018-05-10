@@ -2,7 +2,7 @@ DHIS2 to DHIS2 Event data transfer
 ===================================
 
 To migrate DHIS2 events from one instance to another DHIS2 instance, use the script located at
-`github.com/D4H-VA/smartva-dhis2-data-transfer <github.com/D4H-VA/smartva-dhis2-data-transfer>`_.
+`github.com/D4H-VA/smartva-dhis2-data-transfer <https://github.com/D4H-VA/smartva-dhis2-data-transfer>`_.
 
 Same as with the main application, it auto-assigns Organisation Units and avoids importing duplicates
 by assuring that no event exists already with the same Study ID number (see ``study_id`` below).

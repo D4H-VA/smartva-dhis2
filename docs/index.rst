@@ -20,7 +20,7 @@ and auto-assigns organisation units to the program.
 - Documentation: `smartva-dhis2.readthedocs.io <https://smartva-dhis2.readthedocs.io>`_
 - Github: `github.com/D4H-VA/smartva-dhis2 <https://github.com/D4H-VA/smartva-dhis2>`_
 
-To transfer events to a target DHIS2 (e.g. a Ministry of Health DHIS2), see :doc:`/data_transfer`
+To transfer events to a target DHIS2 (e.g. a Ministry of Health DHIS2), see :doc:`/data_transfer`.
 
 .. toctree::
    :maxdepth: 2
