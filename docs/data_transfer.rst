@@ -65,8 +65,23 @@ attribute_option_combo
 
 retain_event_uid
     Remove the Event UID before posting to the target DHIS2.
-    if ``true``: keep Event UID in order to skip (the required) permanent deletion of events (via DHIS2 Data Administration > Maintenance)
+    if ``true``: keep Event UID in order to skip (the required) permanent deletion of events (see below)
     if ``false``: delete Event UID and let the target DHIS2 assign a new Event UID for the import
+
+
+Permanently delete soft deleted events
+---------------------------------------
+
+If ``retain_event_uid`` is configured to be ``true`` (see above), you may run into ``HTTP 500 Server Errors``
+when trying to re-import events (to a DHIS2 instance running **2.26** or later)
+that already were imported earlier but then deleted. To permanently remove those events,
+you can go to Apps > Data Administration > Maintenance and tick the following box:
+
+.. image:: _static/permanently_delete_soft_deleted_events.png
+
+Click "Perform maintenance".
+This removes deleted events from the database (while before they were just marked as "deleted" but not really deleted).
+
 
 Run
 ----
