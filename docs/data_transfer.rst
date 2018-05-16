@@ -63,6 +63,10 @@ attribute_option_combo
     The Unique Identifier (UID) of the Category Option Combination that holds above Category Option -
     get the UID via ``<target-dhis2.org>/api/categoryOptionCombos?filter=name:eq:default``.
 
+retain_event_uid
+    Remove the Event UID before posting to the target DHIS2.
+    if ``true``: keep Event UID in order to skip (the required) permanent deletion of events (via DHIS2 Data Administration > Maintenance)
+    if ``false``: delete Event UID and let the target DHIS2 assign a new Event UID for the import
 
 Run
 ----
