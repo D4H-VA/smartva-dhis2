@@ -32,7 +32,7 @@ See `here <http://www.healthdata.org/verbal-autopsy/tools>`_ for more details.
    :target: https://ci.appveyor.com/project/d4h-va/smartva-dhis2
 
 .. |PyVersion| image:: https://img.shields.io/pypi/pyversions/smartva-dhis2.svg
-   :target: https://pypi.org/project/smartva-dhis2
+   :target: https://smartva-dhis2.readthedocs.io
 
 .. |Coverage| image:: https://coveralls.io/repos/github/D4H-VA/smartva-dhis2/badge.svg?branch=master
    :target: https://coveralls.io/github/D4H-VA/smartva-dhis2?branch=master
