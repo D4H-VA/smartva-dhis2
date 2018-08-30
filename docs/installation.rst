@@ -24,7 +24,14 @@ Ubuntu installation (tested with 16.04 LTS)
 
     sudo apt update
     sudo apt install python3
-    sudo apt install python3-venv python3-pip
+
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    sudo python3 get-pip.py
+
+See here for further details
+https://pip.pypa.io/en/stable/installing/
+
+.. code:: bash
 
     (As a non-root user)
     pip3 install pipenv --user
