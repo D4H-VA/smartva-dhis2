@@ -19,7 +19,7 @@ and auto-assigns organisation units to the program.
 
 - Documentation: `smartva-dhis2.readthedocs.io <https://smartva-dhis2.readthedocs.io>`_
 - Github: `github.com/D4H-VA/smartva-dhis2 <https://github.com/D4H-VA/smartva-dhis2>`_
-- Virtual Machine Demo: `Ubuntu 16.04 image <https://drive.google.com/file/d/1fuYLobncdWuGyG29DX1w_htRLiiuL7To/view>`_
+- Virtual Machine Demo: `Ubuntu 16.04 LTS image <https://drive.google.com/file/d/1fuYLobncdWuGyG29DX1w_htRLiiuL7To/view>`_
 
 
 To transfer events to a target DHIS2 (e.g. a Ministry of Health DHIS2), see :doc:`/data_transfer`.
