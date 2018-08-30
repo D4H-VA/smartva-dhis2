@@ -1,7 +1,7 @@
 smartva-dhis2
 =============
 
-|Build| |BuildWin| |PyVersion| |Coverage|
+|Build| |BuildWin| |Coverage|
 
 A Python package for the integration of Verbal Autopsy data into DHIS2.
 
@@ -30,9 +30,6 @@ See `here <http://www.healthdata.org/verbal-autopsy/tools>`_ for more details.
 
 .. |BuildWin| image:: https://ci.appveyor.com/api/projects/status/jn7ydwsd7ndq4e57/branch/master?svg=true
    :target: https://ci.appveyor.com/project/d4h-va/smartva-dhis2
-
-.. |PyVersion| image:: https://img.shields.io/pypi/pyversions/smartva-dhis2.svg
-   :target: https://smartva-dhis2.readthedocs.io
 
 .. |Coverage| image:: https://coveralls.io/repos/github/D4H-VA/smartva-dhis2/badge.svg?branch=master
    :target: https://coveralls.io/github/D4H-VA/smartva-dhis2?branch=master
