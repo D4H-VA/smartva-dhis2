@@ -9,7 +9,6 @@ pytest-coverage = "*"
 sphinx = "*"
 sphinx-rtd-theme = "*"
 cprofilev = "*"
-"smartva-dhis2" = {editable = true, path = "."}
 
 [packages]
 requests = "*"
