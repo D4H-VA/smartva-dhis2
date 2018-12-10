@@ -44,6 +44,8 @@ Links
 - `CRVS Knowledge Gateway <https://crvsgateway.info>`_
 - `DHIS 2 <https://www.dhis2.org>`_
 - `IHME / SmartVA <http://www.healthdata.org/verbal-autopsy/tools>`_
+- `SmartVA-Analyze <https://github.com/ihmeuw/SmartVA-Analyze>`_
+
 
 
 .. |Build| image:: https://travis-ci.org/D4H-VA/smartva-dhis2.svg?branch=master

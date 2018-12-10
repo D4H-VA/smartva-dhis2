@@ -18,14 +18,9 @@ which can be queried via the command line and exported to various formats.
 It also checks DHIS2 for duplicate events (by Study ID Number) before posting
 and auto-assigns organisation units to the program.
 
+SmartVA Source Code: https://github.com/ihmeuw/SmartVA-Analyze
 
 Licence: MIT
-
------
-
-The library that creates the most probable Cause of Death based from Briefcase records (``smartvadhis2/lib/smartva``) is
-a closed-source binary packaged by *The Institute for Health Metrics and Evaluation (IHME)* and is **excluded** from above licence.
-See `here <http://www.healthdata.org/verbal-autopsy/tools>`_ for more details.
 
 .. |Build| image:: https://travis-ci.org/D4H-VA/smartva-dhis2.svg?branch=master
    :target: https://travis-ci.org/D4H-VA/smartva-dhis2

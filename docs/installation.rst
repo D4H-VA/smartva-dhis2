@@ -10,7 +10,7 @@ It depends on Python 3.5+ and various packages as described in ``Pipfile`` and D
 Libraries included:
 
 - Briefcase version: 1.10.1 Production (see `ODK Github <https://github.com/opendatakit/briefcase/releases>`_)
-- smartva: SmartVA-Analyze, version 2.0.0-a8
+- smartva: SmartVA-Analyze, version 2.0.0
 
 System requirements:
 
@@ -24,7 +24,16 @@ Ubuntu installation (tested with 16.04 LTS)
 
     sudo apt update
     sudo apt install python3
-    sudo apt install python3-venv python3-pip
+
+.. code:: bash
+
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    sudo python3 get-pip.py
+
+See here for further details
+https://pip.pypa.io/en/stable/installing/
+
+.. code:: bash
 
     (As a non-root user)
     pip3 install pipenv --user
